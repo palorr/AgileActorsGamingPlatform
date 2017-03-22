@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+
+    <property name="localeLanguage" value="en"/>
+    <property name="charset" value="UTF-8"/>
+    <property name="fileExtensions" value="java"/>
+
+    <module name="Header">
+        <property name="header" value="/*\n * txt\n * txt\n */"/>
+        <property name="ignoreLines" value="2, 3"/>
+
+    </module>
+
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="false"/>
+        <message key="containsTab" value="Line contains a tab character. Configure your editor to replace tabs with spaces."/>
+        <message key="file.containsTab" value="File contains tab characters (this is the first instance). Configure your editor to replace tabs with spaces."/>
+    </module>
+
+    <module name="NewlineAtEndOfFile">
+        <property name="lineSeparator" value="lf" />
+    </module>
+
+    <!-- =========================================================================== -->
+    <!--                   TREEWALKER BEGINS HERE                                    -->
+    <!-- =========================================================================== -->
+
+    <module name="TreeWalker">
+        <property name="tabWidth" value="4"/>
+
+        <!-- =========================================================================== -->
+        <!-- Naming conventions                                                          -->
+        <!-- http://checkstyle.sourceforge.net/config_naming.html                        -->
+        <!-- =========================================================================== -->
+
+        <module name="AbbreviationAsWordInName">
+            <property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF, PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF"/>
+            <property name="allowedAbbreviationLength" value="1"/>
+        </module>
+
+        <module name="ClassTypeParameterName">
+            <property name="format" value="(^(([A-Z]([a-zA-Z0-9]*))?)Type$)|(^[A-Z]$)"/>
+            <message key="name.invalidPattern" value="Class type name ''{0}'' must match pattern ''{1}''."/>
+        </module>
+
+        <module name="ConstantName"/>
+
+        <module name="InterfaceTypeParameterName">
+            <property name="format" value="(^(([A-Z]([a-zA-Z0-9]*))?)Type$)|(^[A-Z]$)"/>
+            <message key="name.invalidPattern" value="Interface type name ''{0}'' must match pattern ''{1}''."/>
+        </module>
+
+        <module name="LocalFinalVariableName"/>
+
+        <module name="LocalVariableName"/>
+
+        <module name="MemberName"/>
+
+        <module name="MethodName"/>
+
+        <module name="MethodTypeParameterName">
+            <property name="format" value="(^(([A-Z]([a-zA-Z0-9]*))?)Type$)|(^[A-Z]$)"/>
+            <message key="name.invalidPattern" value="Method type name ''{0}'' must match pattern ''{1}''."/>
+        </module>
+
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z0-9]*)*$"/>
+        </module>
+
+        <module name="ParameterName"/>
+
+        <module name="StaticVariableName"/>
+
+        <module name="TypeName"/>
+
+        <!-- =========================================================================== -->
+        <!-- Annotation conventions                                                      -->
+        <!-- http://checkstyle.sourceforge.net/config_annotation.html                    -->
+        <!-- =========================================================================== -->
+
+        <module name="AnnotationLocation">
+            <property name="allowSamelineMultipleAnnotations" value="false"/>
+            <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
+            <property name="allowSamelineParameterizedAnnotation" value="false"/>
+        </module>
+
+        <module name="MissingDeprecated"/>
+
+        <module name="MissingOverride"/>
+
+        <!-- =========================================================================== -->
+        <!-- Miscellaneous conventions                                                   -->
+        <!-- http://checkstyle.sourceforge.net/config_misc.html                          -->
+        <!-- =========================================================================== -->
+
+        <module name="ArrayTypeStyle"/>
+
+        <module name="CommentsIndentation"/>
+
+        <module name="Indentation"/>
+
+        <module name="OuterTypeFilename"/>
+
+        <module name="UpperEll"/>
+
+        <!-- =========================================================================== -->
+        <!-- Import conventions                                                          -->
+        <!-- http://checkstyle.sourceforge.net/config_imports.html                       -->
+        <!-- =========================================================================== -->
+
+        <module name="AvoidStarImport"/>
+
+        <module name="IllegalImport"/>
+
+        <module name="RedundantImport"/>
+
+        <module name="UnusedImports"/>
+
+        <!-- =========================================================================== -->
+        <!-- Coding conventions                                                          -->
+        <!-- http://checkstyle.sourceforge.net/config_coding.html                        -->
+        <!-- =========================================================================== -->
+
+        <module name="CovariantEquals"/>
+
+        <module name="DeclarationOrder"/>
+
+        <module name="DefaultComesLast"/>
+
+        <module name="DesignForExtension"/>
+
+        <module name="EmptyStatement"/>
+
+        <module name="EqualsHashCode"/>
+
+        <module name="ExplicitInitialization"/>
+
+        <module name="FallThrough"/>
+
+        <module name="IllegalThrows">
+            <property name="illegalClassNames" value="AnnotationTypeMismatchException, ArithmeticException, ArrayStoreException, BufferOverflowException, BufferUnderflowException, CannotRedoException, CannotUndoException, ClassCastException, CMMException, ConcurrentModificationException, DataBindingException, DOMException, EmptyStackException, EnumConstantNotPresentException, EventException, FileSystemAlreadyExistsException, FileSystemNotFoundException, IllegalArgumentException, IllegalMonitorStateException, IllegalPathStateException, IllegalStateException, IllformedLocaleException, ImagingOpException, IncompleteAnnotationException, IndexOutOfBoundsException, JMRuntimeException, LSException, MalformedParameterizedTypeException, MirroredTypesException, MissingResourceException, NegativeArraySizeException, NoSuchElementException, NoSuchMechanismException, NullPointerException, ProfileDataException, ProviderException, ProviderNotFoundException, RasterFormatException, RejectedExecutionException, SecurityException, SystemException, TypeConstraintException, TypeNotPresentException, UndeclaredThrowableException, UnknownEntityException, UnmodifiableSetException, UnsupportedOperationException, WebServiceException, WrongMethodTypeException"/>
+        </module>
+
+        <module name="MissingSwitchDefault"/>
+
+        <module name="OneStatementPerLine"/>
+
+        <module name="PackageDeclaration"/>
+
+        <module name="ParameterAssignment"/>
+
+        <module name="StringLiteralEquality"/>
+
+        <module name="SuperClone"/>
+
+        <module name="SuperFinalize"/>
+
+        <!-- =========================================================================== -->
+        <!-- Block conventions                                                           -->
+        <!-- http://checkstyle.sourceforge.net/config_blocks.html                        -->
+        <!-- =========================================================================== -->
+
+        <module name="EmptyBlock">
+            <property name="option" value="text"/>
+        </module>
+
+        <module name="LeftCurly"/>
+
+        <module name="RightCurly">
+            <property name="option" value="alone"/>
+            <property name="tokens" value="LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO"/>
+        </module>
+
+        <!-- =========================================================================== -->
+        <!-- Whitespace conventions                                                      -->
+        <!-- http://checkstyle.sourceforge.net/config_whitespace.html                    -->
+        <!-- =========================================================================== -->
+
+        <module name="EmptyForInitializerPad"/>
+
+        <module name="EmptyForIteratorPad"/>
+
+        <module name="EmptyLineSeparator">
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <property name="allowMultipleEmptyLines" value="false"/>
+        </module>
+
+        <module name="GenericWhitespace"/>
+
+        <module name="MethodParamPad"/>
+
+        <module name="NoLineWrap"/>
+
+        <module name="NoWhitespaceAfter">
+            <property name="tokens" value="ARRAY_INIT, BNOT, DEC, DOT, INC, LNOT, UNARY_MINUS, UNARY_PLUS, TYPECAST, ARRAY_DECLARATOR"/>
+        </module>
+
+        <module name="NoWhitespaceBefore">
+            <property name="tokens" value="COMMA, SEMI, POST_INC, POST_DEC, DOT, GENERIC_END"/>
+            <property name="allowLineBreaks" value="true"/>
+        </module>
+
+        <module name="OperatorWrap">
+            <property name="option" value="eol"/>
+        </module>
+
+        <module name="ParenPad"/>
+
+        <module name="TypecastParenPad"/>
+
+        <module name="WhitespaceAfter">
+            <property name="tokens" value="COMMA, SEMI"/>
+        </module>
+
+        <module name="WhitespaceAround">
+            <property name="allowEmptyConstructors" value="true"/>
+            <property name="allowEmptyMethods" value="true"/>
+            <property name="allowEmptyTypes" value="true"/>
+            <property name="allowEmptyLoops" value="true"/>
+        </module>
+
+        <!-- =========================================================================== -->
+        <!-- Design conventions                                                          -->
+        <!-- http://checkstyle.sourceforge.net/config_design.html                        -->
+        <!-- =========================================================================== -->
+
+        <module name="FinalClass"/>
+
+        <module name="HideUtilityClassConstructor"
+
+        />
+
+        <module name="InterfaceIsType"/>
+
+        <module name="MutableException"/>
+
+        <!-- =========================================================================== -->
+        <!-- Size conventions                                                            -->
+        <!-- http://checkstyle.sourceforge.net/config_sizes.html                         -->
+        <!-- =========================================================================== -->
+
+        <module name="LineLength">
+            <property name="max" value="100"/>
+            <property name="ignorePattern" value="^package.*|^import.*"/>
+        </module>
+
+        <!-- =========================================================================== -->
+        <!-- Javadoc conventions                                                         -->
+        <!-- http://checkstyle.sourceforge.net/config_javadoc.html                       -->
+        <!-- =========================================================================== -->
+
+        <module name="NonEmptyAtclauseDescription"/>
+
+        <!-- =========================================================================== -->
+        <!-- Modifier conventions                                                        -->
+        <!-- http://checkstyle.sourceforge.net/config_modifier.html                      -->
+        <!-- =========================================================================== -->
+
+        <module name="ModifierOrder"/>
+
+    </module>
+
+</module>

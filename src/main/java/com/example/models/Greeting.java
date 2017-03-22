@@ -1,3 +1,8 @@
+/*
+ * Some description
+ * goes here
+ */
+
 package com.example.models;
 
 public class Greeting {
@@ -10,11 +15,11 @@ public class Greeting {
         this.content = content;
     }
 
-    public long getId() {
+    public final long getId() {
         return id;
     }
 
-    public String getContent() {
+    public final String getContent() {
         return content;
     }
 }
