@@ -1,5 +1,12 @@
 <#include "base.ftl">
 
+<#macro side_menu>
+    <ul class="nav nav-sidebar">
+        <li class="active"><a href="/users/">Users</a></li>
+        <li><a href="/games/">Games</a></li>
+    </ul>
+</#macro>
+
 <#macro page_body>
     <h2>Users</h2>
     <p>Showing all database users</p>
