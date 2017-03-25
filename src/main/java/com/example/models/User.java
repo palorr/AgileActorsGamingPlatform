@@ -1,15 +1,21 @@
 package com.example.models;
 
-import com.sun.xml.internal.bind.v2.TODO;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
-
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private int roles_id;
     private String name;
     private String surname;
     private String username;
     private String password;
+
+    protected User() {}
 
     public User(int id, int roles_id, String name, String surname, String username, String password) {
         this.id = id;
@@ -46,10 +52,6 @@ public class User {
     }
 
     // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setRoles_id(int roles_id) {
         this.roles_id = roles_id;
     }
