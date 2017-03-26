@@ -1,8 +1,8 @@
-package com.example.repositories;
+package com.agile.repositories;
 
 import java.util.List;
 
-import com.example.models.User;
+import com.agile.models.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Integer> {

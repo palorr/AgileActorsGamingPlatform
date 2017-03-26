@@ -1,8 +1,8 @@
-package com.example.repositories;
+package com.agile.repositories;
 
 import java.util.List;
 
-import com.example.models.Game;
+import com.agile.models.Game;
 import org.springframework.data.repository.CrudRepository;
 
 public interface GameRepository extends CrudRepository<Game, Integer> {

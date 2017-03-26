@@ -1,7 +1,7 @@
-package com.example.controllers;
+package com.agile.controllers;
 
 
-import com.example.models.Greeting;
+import com.agile.models.Greeting;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

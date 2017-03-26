@@ -1,7 +1,7 @@
-package com.example.controllers;
+package com.agile.controllers;
 
-import com.example.models.User;
-import com.example.repositories.UserRepository;
+import com.agile.models.User;
+import com.agile.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

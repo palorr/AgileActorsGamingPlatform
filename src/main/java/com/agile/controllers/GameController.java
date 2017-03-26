@@ -1,7 +1,7 @@
-package com.example.controllers;
+package com.agile.controllers;
 
-import com.example.models.Game;
-import com.example.repositories.GameRepository;
+import com.agile.models.Game;
+import com.agile.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
