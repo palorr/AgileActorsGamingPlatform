@@ -2,10 +2,11 @@ package com.agile.repositories;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.agile.models.Game;
-import org.springframework.data.repository.CrudRepository;
 
-public interface GameRepository extends CrudRepository<Game, Integer> {
+public interface GameRepository extends JpaRepository<Game, Integer> {
 
-    List<Game> findByName(String name);
+    Game findByName(String name);
+
 }
