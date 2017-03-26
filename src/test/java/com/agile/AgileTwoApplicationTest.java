@@ -1,4 +1,4 @@
-package com.example;
+package com.agile;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AgileTwoApplicationTests {
+public class AgileTwoApplicationTest {
 
 	@Test
 	public void contextLoads() {
