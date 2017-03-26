@@ -15,8 +15,8 @@
 
 <#macro side_menu>
     <ul class="nav nav-sidebar">
-        <li><a href="/users/">Users</a></li>
-        <li><a href="/games/">Games</a></li>
+        <li><a href="/admin/users/">Users</a></li>
+        <li><a href="/admin/games/">Games</a></li>
     </ul>
 </#macro>
 
@@ -41,8 +41,8 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/users/">Users</a></li>
-                        <li><a href="/games/">Games</a></li>
+                        <li><a href="/admin/users/">Users</a></li>
+                        <li><a href="/admin/games/">Games</a></li>
                     </ul>
                 </div>
             </div>

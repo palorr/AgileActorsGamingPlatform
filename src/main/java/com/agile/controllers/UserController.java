@@ -17,14 +17,14 @@ public class UserController {
     private static final String USERS_DATA= "users";
     private static final String USER_DATA= "user";
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/users", method = RequestMethod.GET)
     public String users(ModelMap model) {
         Iterable<User> users = userRepository.findAll();
         model.addAttribute(USERS_DATA, users);
         return "users";
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/users/{id}", method = RequestMethod.GET)
     public String user_details(@PathVariable(value="id") Integer id, ModelMap model) {
         User user = userRepository.findOne(id);
         model.addAttribute(USER_DATA, user);

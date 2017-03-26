@@ -2,8 +2,8 @@
 
 <#macro side_menu>
     <ul class="nav nav-sidebar">
-        <li class="active"><a href="/users/">Users</a></li>
-        <li><a href="/games/">Games</a></li>
+        <li class="active"><a href="/admin/users/">Users</a></li>
+        <li><a href="/admin/games/">Games</a></li>
     </ul>
 </#macro>
 
@@ -18,7 +18,7 @@
         <li class="list-group-item"><strong>Password: </strong>${user.getPassword()}</li>
         <li class="list-group-item"><strong>Role: </strong>${user.role()}</li>
     </ul>
-    <a type="button" class="btn btn-primary" href="/users">Back</a>
+    <a type="button" class="btn btn-primary" href="/admin/users">Back</a>
 </#macro>
 
 <@display_page/>

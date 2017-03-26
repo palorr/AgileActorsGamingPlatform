@@ -17,14 +17,14 @@ public class GameController {
     private static final String GAMES_DATA= "games";
     private static final String GAME_DATA= "game";
 
-    @RequestMapping(value = "/games", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/games", method = RequestMethod.GET)
     public String games(ModelMap model) {
         Iterable<Game> games = gameRepository.findAll();
         model.addAttribute(GAMES_DATA, games);
         return "games";
     }
 
-    @RequestMapping(value = "/games/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/games/{id}", method = RequestMethod.GET)
     public String game_details(@PathVariable(value="id") Integer id, ModelMap model) {
         Game game = gameRepository.findOne(id);
         model.addAttribute(GAME_DATA, game);

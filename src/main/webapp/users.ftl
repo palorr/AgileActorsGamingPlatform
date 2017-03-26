@@ -2,8 +2,8 @@
 
 <#macro side_menu>
     <ul class="nav nav-sidebar">
-        <li class="active"><a href="/users/">Users</a></li>
-        <li><a href="/games/">Games</a></li>
+        <li class="active"><a href="/admin/users/">Users</a></li>
+        <li><a href="/admin/games/">Games</a></li>
     </ul>
 </#macro>
 
@@ -31,7 +31,7 @@
                 <td>${user.getUsername()}</td>
                 <td>${user.getPassword()}</td>
                 <td>${user.role()}</td>
-                <td><a type="button" class=" btn btn-xs btn-primary" href="/users/${user.getId()}">Details</a></td>
+                <td><a type="button" class=" btn btn-xs btn-primary" href="/admin/users/${user.getId()}">Details</a></td>
             </tr>
             </#list>
         </tbody>

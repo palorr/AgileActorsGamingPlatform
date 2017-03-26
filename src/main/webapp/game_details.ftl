@@ -2,8 +2,8 @@
 
 <#macro side_menu>
     <ul class="nav nav-sidebar">
-        <li><a href="/users/">Users</a></li>
-        <li class="active"><a href="/games/">Games</a></li>
+        <li><a href="/admin/users/">Users</a></li>
+        <li class="active"><a href="/admin/games/">Games</a></li>
     </ul>
 </#macro>
 
@@ -18,7 +18,7 @@
         <li class="list-group-item"><strong>Win Credits: </strong>${game.getWin_credits()}</li>
         <li class="list-group-item"><strong>Yield: </strong>${game.getYield()}</li>
     </ul>
-    <a type="button" class="btn btn-primary" href="/games">Back</a>
+    <a type="button" class="btn btn-primary" href="/admin/games">Back</a>
 </#macro>
 
 <@display_page/>
