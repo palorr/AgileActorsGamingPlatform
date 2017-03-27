@@ -18,8 +18,14 @@ public class UserGameBuyOperation {
 	private int user_id;
 	private int game_id;
 	private Date date;
-	
-	public int getId() {
+
+    public UserGameBuyOperation(int user_id, int game_id, Date date) {
+        this.user_id = user_id;
+        this.game_id = game_id;
+        this.date = date;
+    }
+
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {

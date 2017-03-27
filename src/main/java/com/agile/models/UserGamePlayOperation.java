@@ -21,8 +21,17 @@ public class UserGamePlayOperation {
 	private Boolean is_try;
 	private Boolean is_win;
 	private Date date;
-	
-	public int getId() {
+
+    public UserGamePlayOperation(int user_id, int game_id, int win_credits, Boolean is_try, Boolean is_win, Date date) {
+        this.user_id = user_id;
+        this.game_id = game_id;
+        this.win_credits = win_credits;
+        this.is_try = is_try;
+        this.is_win = is_win;
+        this.date = date;
+    }
+
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {

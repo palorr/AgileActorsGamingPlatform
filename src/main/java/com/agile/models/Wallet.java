@@ -15,8 +15,13 @@ public class Wallet {
 	private int id;
 	private int user_id;
 	private int credits;
-	
-	public int getId() {
+
+    public Wallet(int user_id, int credits) {
+        this.user_id = user_id;
+        this.credits = credits;
+    }
+
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {

@@ -18,7 +18,14 @@ public class AdminViewOperation {
 	private int user_id;
 	private String user;
 	private Date date;
-	public int getId() {
+
+    public AdminViewOperation(int user_id, String user, Date date) {
+        this.user_id = user_id;
+        this.user = user;
+        this.date = date;
+    }
+
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {

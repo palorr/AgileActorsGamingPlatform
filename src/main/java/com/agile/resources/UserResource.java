@@ -20,18 +20,6 @@ public class UserResource {
 	}
 	
 	
-//	public String role() {
-//        // #TODO get role ids from database through role model
-//        if (this.getRoles_id() == 1) {
-//            return "User";
-//        }
-//        else if (this.getRoles_id() == 2) {
-//            return "Admin";
-//        }
-//        else {
-//            return "Undefined";
-//        }
-//	}
 
 	public int getId() {
 		return id;

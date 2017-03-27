@@ -15,6 +15,14 @@ public class Game {
     private String name;
     private String description;
 
+    public Game(int buy_credits, int win_credits, Double yield, String name, String description) {
+        this.buy_credits = buy_credits;
+        this.win_credits = win_credits;
+        this.yield = yield;
+        this.name = name;
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }

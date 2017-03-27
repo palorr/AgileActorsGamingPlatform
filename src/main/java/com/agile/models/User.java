@@ -15,6 +15,27 @@ public class User {
     private String username;
     private String password;
 
+    public User(int roles_id, String name, String surname, String username, String password) {
+        this.roles_id = roles_id;
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.password = password;
+    }
+
+    public String role() {
+        // #TODO get role ids from database through role model
+        if (this.getRoles_id() == 1) {
+            return "User";
+        }
+        else if (this.getRoles_id() == 2) {
+            return "Admin";
+        }
+        else {
+            return "Undefined";
+        }
+    }
+
     public int getId() {
         return id;
     }
