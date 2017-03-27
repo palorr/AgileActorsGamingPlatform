@@ -15,6 +15,8 @@ public class Game {
     private String name;
     private String description;
 
+    protected Game() {}
+
     public Game(int buy_credits, int win_credits, Double yield, String name, String description) {
         this.buy_credits = buy_credits;
         this.win_credits = win_credits;

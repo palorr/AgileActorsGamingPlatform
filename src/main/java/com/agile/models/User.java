@@ -15,6 +15,8 @@ public class User {
     private String username;
     private String password;
 
+    protected User() {}
+
     public User(int roles_id, String name, String surname, String username, String password) {
         this.roles_id = roles_id;
         this.name = name;

@@ -16,6 +16,8 @@ public class Wallet {
 	private int user_id;
 	private int credits;
 
+	protected Wallet() {}
+
     public Wallet(int user_id, int credits) {
         this.user_id = user_id;
         this.credits = credits;

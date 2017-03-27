@@ -15,6 +15,8 @@ public class Roles {
 	private int id;
 	private String name;
 
+	protected  Roles() {}
+
     public Roles(String name) {
         this.name = name;
     }

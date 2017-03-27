@@ -19,6 +19,8 @@ public class UserGameBuyOperation {
 	private int game_id;
 	private Date date;
 
+	protected UserGameBuyOperation() {}
+
     public UserGameBuyOperation(int user_id, int game_id, Date date) {
         this.user_id = user_id;
         this.game_id = game_id;

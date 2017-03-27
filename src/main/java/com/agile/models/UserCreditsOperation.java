@@ -21,6 +21,8 @@ public class UserCreditsOperation {
 	private String operation;
 	private Date date;
 
+	protected UserCreditsOperation() {}
+
     public UserCreditsOperation(int user_id, int transaction_id, int credits_added_removed, String operation, Date date) {
         this.user_id = user_id;
         this.transaction_id = transaction_id;

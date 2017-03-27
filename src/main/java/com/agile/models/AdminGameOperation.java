@@ -20,6 +20,8 @@ public class AdminGameOperation {
 	private String operation;
 	private Date date;
 
+	protected AdminGameOperation() {}
+
     public AdminGameOperation(int user_id, int game_id, String operation, Date date) {
         this.user_id = user_id;
         this.game_id = game_id;

@@ -22,6 +22,8 @@ public class UserGamePlayOperation {
 	private Boolean is_win;
 	private Date date;
 
+	protected UserGamePlayOperation() {}
+	
     public UserGamePlayOperation(int user_id, int game_id, int win_credits, Boolean is_try, Boolean is_win, Date date) {
         this.user_id = user_id;
         this.game_id = game_id;

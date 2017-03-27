@@ -19,6 +19,8 @@ public class UpdatedGames {
 	private int user_id;
 	private Date update_date;
 
+	protected UpdatedGames() {}
+
     public UpdatedGames(int game_id, int user_id, Date update_date) {
         this.game_id = game_id;
         this.user_id = user_id;

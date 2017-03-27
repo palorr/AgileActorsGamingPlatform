@@ -19,6 +19,8 @@ public class AdminViewOperation {
 	private String user;
 	private Date date;
 
+	protected AdminViewOperation() {}
+
     public AdminViewOperation(int user_id, String user, Date date) {
         this.user_id = user_id;
         this.user = user;
