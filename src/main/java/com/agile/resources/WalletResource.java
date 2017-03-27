@@ -5,13 +5,8 @@ public class WalletResource {
 	private int id;
 	private int user_id;
 	private int credits;
-	
-	public WalletResource(int id, int user_id, int credits) {
-		super();
-		this.id = id;
-		this.user_id = user_id;
-		this.credits = credits;
-	}
+
+
 	public int getId() {
 		return id;
 	}

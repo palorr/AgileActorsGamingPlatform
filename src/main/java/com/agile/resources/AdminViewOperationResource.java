@@ -9,13 +9,7 @@ public class AdminViewOperationResource {
 	private String user;
 	private Date date;
 	
-	public AdminViewOperationResource(int id, int user_id, String user, Date date) {
-		super();
-		this.id = id;
-		this.user_id = user_id;
-		this.user = user;
-		this.date = date;
-	}
+
 	public int getId() {
 		return id;
 	}

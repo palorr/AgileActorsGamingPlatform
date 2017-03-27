@@ -9,17 +9,6 @@ public class UserResource {
     private String username;
     private String password;
     
-	public UserResource(int id, int roles_id, String name, String surname, String username, String password) {
-		super();
-		this.id = id;
-		this.roles_id = roles_id;
-		this.name = name;
-		this.surname = surname;
-		this.username = username;
-		this.password = password;
-	}
-	
-	
 
 	public int getId() {
 		return id;

@@ -9,15 +9,7 @@ public class AdminGameOperationsResource {
 	private int game_id;
 	private String operation;
 	private Date date;
-	
-	public AdminGameOperationsResource(int id, int user_id, int game_id, String operation, Date date) {
-		super();
-		this.id = id;
-		this.user_id = user_id;
-		this.game_id = game_id;
-		this.operation = operation;
-		this.date = date;
-	}
+
 	
 	public int getId() {
 		return id;

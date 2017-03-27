@@ -8,14 +8,8 @@ public class UserGameBuyOperationResource {
 	private int user_id;
 	private int game_id;
 	private Date date;
-	
-	public UserGameBuyOperationResource(int id, int user_id, int game_id, Date date) {
-		super();
-		this.id = id;
-		this.user_id = user_id;
-		this.game_id = game_id;
-		this.date = date;
-	}
+
+
 	public int getId() {
 		return id;
 	}

@@ -8,15 +8,7 @@ public class GameResource {
     private Double yield;
     private String name;
     private String description;
-	
-	public GameResource(int id, int buy_credits, int win_credits, String name, String description, Double yield) {
-        this.id = id;
-        this.buy_credits = buy_credits;
-        this.win_credits = win_credits;
-        this.name = name;
-        this.description = description;
-        this.yield = yield;
-    }
+
 
 	public int getId() {
 		return id;

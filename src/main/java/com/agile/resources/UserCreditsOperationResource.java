@@ -11,16 +11,7 @@ public class UserCreditsOperationResource {
 	private String operation;
 	private Date date;
 	
-	public UserCreditsOperationResource(int id, int user_id, int transaction_id, int credits_added_removed,
-			String operation, Date date) {
-		super();
-		this.id = id;
-		this.user_id = user_id;
-		this.transaction_id = transaction_id;
-		this.credits_added_removed = credits_added_removed;
-		this.operation = operation;
-		this.date = date;
-	}
+
 	public int getId() {
 		return id;
 	}

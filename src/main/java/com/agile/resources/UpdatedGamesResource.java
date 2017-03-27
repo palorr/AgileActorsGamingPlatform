@@ -8,14 +8,8 @@ public class UpdatedGamesResource {
 	private int game_id;
 	private int user_id;
 	private Date update_date;
-	
-	public UpdatedGamesResource(int id, int game_id, int user_id, Date update_date) {
-		super();
-		this.id = id;
-		this.game_id = game_id;
-		this.user_id = user_id;
-		this.update_date = update_date;
-	}
+
+
 	public int getId() {
 		return id;
 	}
