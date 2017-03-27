@@ -10,6 +10,7 @@
 <#macro page_body>
     <h2>Games</h2>
     <p>Showing all database games</p>
+    <a href="/admin/games/create" class="btn btn-primary pull-right">Create Game</a>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -31,7 +32,10 @@
                 <td>${game.getBuy_credits()}</td>
                 <td>${game.getWin_credits()}</td>
                 <td>${game.getYield()}</td>
-                <td><a type="button" class=" btn btn-xs btn-primary" href="/admin/games/${game.getId()}">Details</a></td>
+                <td>
+                    <a type="button" class=" btn btn-xs btn-primary" href="/admin/games/${game.getId()}">Details</a>
+                    <a type="button" class=" btn btn-xs btn-danger" href="/admin/games/${game.getId()}/delete"><i class="fa fa-trash"></i> Delete</a>
+                </td>
             </tr>
             </#list>
         </tbody>
