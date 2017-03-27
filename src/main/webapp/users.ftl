@@ -10,6 +10,7 @@
 <#macro page_body>
     <h2>Users</h2>
     <p>Showing all database users</p>
+    <a href="/admin/users/create" class="btn btn-primary pull-right">Create User</a>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -31,7 +32,10 @@
                 <td>${user.getUsername()}</td>
                 <td>${user.getPassword()}</td>
                 <td>${user.role()}</td>
-                <td><a type="button" class=" btn btn-xs btn-primary" href="/admin/users/${user.getId()}">Details</a></td>
+                <td>
+                    <a type="button" class=" btn btn-xs btn-primary" href="/admin/users/${user.getId()}">Details</a>
+                    <a type="button" class=" btn btn-xs btn-danger" href="/admin/users/${user.getId()}/delete"><i class="fa fa-trash"></i> Delete</a>
+                </td>
             </tr>
             </#list>
         </tbody>
