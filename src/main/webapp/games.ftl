@@ -34,7 +34,8 @@
                 <td>${game.getYield()}</td>
                 <td>
                     <a type="button" class=" btn btn-xs btn-primary" href="/admin/games/${game.getId()}">Details</a>
-                    <a type="button" class=" btn btn-xs btn-danger" href="/admin/games/${game.getId()}/delete"><i class="fa fa-trash"></i> Delete</a>
+                    <a type="button" class=" btn btn-xs btn-default" href="/admin/games/${game.getId()}/edit"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                    <a type="button" class=" btn btn-xs btn-danger" href="/admin/games/${game.getId()}/delete"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                 </td>
             </tr>
             </#list>
