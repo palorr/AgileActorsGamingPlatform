@@ -34,7 +34,8 @@
                 <td>${user.role()}</td>
                 <td>
                     <a type="button" class=" btn btn-xs btn-primary" href="/admin/users/${user.getId()}">Details</a>
-                    <a type="button" class=" btn btn-xs btn-danger" href="/admin/users/${user.getId()}/delete"><i class="fa fa-trash"></i> Delete</a>
+                    <a type="button" class=" btn btn-xs btn-default" href="/admin/users/${user.getId()}/edit"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                    <a type="button" class=" btn btn-xs btn-danger" href="/admin/users/${user.getId()}/delete"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                 </td>
             </tr>
             </#list>
