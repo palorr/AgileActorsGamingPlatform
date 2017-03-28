@@ -2,8 +2,9 @@
 
 <#macro side_menu>
     <ul class="nav nav-sidebar">
+        <li><a href="/admin/">Dashboard</a></li>
         <li><a href="/admin/users/">Users</a></li>
-        <li class="active"><a href="/admin/games/">Games</a></li>
+        <li class="active"><a href="#">Games</a></li>
     </ul>
 </#macro>
 
