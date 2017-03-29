@@ -2,11 +2,7 @@ package com.agile.models;
 
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="updated_games")
@@ -15,47 +11,55 @@ public class UpdatedGames {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private int game_id;
-	private int user_id;
-	private Date update_date;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "game_id", nullable = false)
+	private Game game;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
+
+	@Column(name = "update_date")
+	private Date updateDate;
 
 	protected UpdatedGames() {}
-
-    public UpdatedGames(int game_id, int user_id, Date update_date) {
-        this.game_id = game_id;
-        this.user_id = user_id;
-        this.update_date = update_date;
-    }
 
     public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getGame_id() {
-		return game_id;
+
+	public Game getGame() {
+		return game;
 	}
-	public void setGame_id(int game_id) {
-		this.game_id = game_id;
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
-	public int getUser_id() {
-		return user_id;
+
+	public User getUser() {
+		return user;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public Date getUpdate_date() {
-		return update_date;
+
+	public Date getUpdateDate() {
+		return updateDate;
 	}
-	public void setUpdate_date(Date update_date) {
-		this.update_date = update_date;
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
+
 	@Override
 	public String toString() {
-		return "UpdatedGames [id=" + id + ", game_id=" + game_id + ", user_id=" + user_id + ", update_date="
-				+ update_date + "]";
+		return "UpdatedGames [id=" + id + ", game_id=" + game + ", user_id=" + user + ", update_date="
+				+ updateDate + "]";
 	}
-	
-	
 }

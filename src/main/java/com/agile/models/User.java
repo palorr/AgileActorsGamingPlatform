@@ -1,42 +1,33 @@
 package com.agile.models;
 
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
-    private int roles_id;
     private String name;
     private String surname;
     private String username;
     private String password;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "roles_id", nullable = false)
+    private Role role;
+
     protected User() {}
 
-    public User(int roles_id, String name, String surname, String username, String password) {
-        this.roles_id = roles_id;
+    /*public User(Role role, String name, String surname, String username, String password) {
+        this.role = role;
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
-    }
+    }*/
 
-    public String role() {
-        // #TODO get role ids from database through role model
-        if (this.getRoles_id() == 1) {
-            return "User";
-        }
-        else if (this.getRoles_id() == 2) {
-            return "Admin";
-        }
-        else {
-            return "Undefined";
-        }
-    }
 
     public int getId() {
         return id;
@@ -46,12 +37,12 @@ public class User {
         this.id = id;
     }
 
-    public int getRoles_id() {
-        return roles_id;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles_id(int roles_id) {
-        this.roles_id = roles_id;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getName() {
@@ -88,7 +79,7 @@ public class User {
 
     @Override
 	public String toString() {
-		return "User [id=" + id + ", roles_id=" + roles_id + ", name=" + name + ", surname=" + surname + ", username="
+		return "User [id=" + id + ", roles_id=" + role + ", name=" + name + ", surname=" + surname + ", username="
 				+ username + ", password=" + password + "]";
 	}
 
