@@ -6,10 +6,7 @@ import com.agile.repositories.UpdatedGamesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +16,7 @@ public class UpdatedGamesController {
     @Autowired
     private UpdatedGamesRepository updatedGamesRepository;
 
-    @RequestMapping(value = "/updated_games", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/updatedGames")
     public List<UpdatedGames> getUpdatedGames() {
         List<UpdatedGames> updatedGames = updatedGamesRepository.findAll();
         return updatedGames;
