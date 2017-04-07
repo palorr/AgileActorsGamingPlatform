@@ -1,6 +1,6 @@
-package com.agile.controllers;
+package com.agile.controllers.users;
 
-import com.agile.models.Wallet;
+import com.agile.model.Wallet;
 import com.agile.repositories.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

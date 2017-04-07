@@ -1,6 +1,6 @@
 package com.agile.repositories;
 
-import com.agile.models.Wallet;
+import com.agile.model.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

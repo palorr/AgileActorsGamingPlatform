@@ -1,11 +1,8 @@
-package com.agile.controllers;
+package com.agile.controllers.users;
 
-import com.agile.models.UpdatedGames;
-import com.agile.models.User;
+import com.agile.model.UpdatedGames;
 import com.agile.repositories.UpdatedGamesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

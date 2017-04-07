@@ -1,6 +1,6 @@
-package com.agile.models;
+package com.agile.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.*;
 
@@ -12,18 +12,22 @@ public class UpdatedGames {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "game_id", nullable = false)
+	@ManyToOne(optional = false)
 	private Game game;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", nullable = false)
+	@ManyToOne(optional = false)
 	private User user;
 
-	@Column(name = "update_date")
-	private Date updateDate;
+	@Column(name = "update_date", nullable = false)
+	private Timestamp updateDate;
 
 	protected UpdatedGames() {}
+
+	public UpdatedGames(Game game, User user, Timestamp updateDate) {
+		this.game = game;
+		this.user = user;
+		this.updateDate = updateDate;
+	}
 
     public int getId() {
 		return id;
@@ -49,11 +53,11 @@ public class UpdatedGames {
 		this.user = user;
 	}
 
-	public Date getUpdateDate() {
+	public Timestamp getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
 	}
 

@@ -1,4 +1,4 @@
-package com.agile.models;
+package com.agile.model;
 
 import javax.persistence.*;
 
@@ -9,25 +9,39 @@ public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String surname;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "roles_id", nullable = false)
+    @ManyToOne(optional = false)
     private Role role;
+
+    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
+    private Wallet wallet;
 
     protected User() {}
 
-    /*public User(Role role, String name, String surname, String username, String password) {
+    public User(String name, String surname, String username, String password, Role role, Wallet wallet) {
         this.role = role;
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
-    }*/
+        this.wallet = wallet;
+    }
 
+    public Wallet getWallet() { return wallet; }
+
+    public void setWallet(Wallet wallet) { this.wallet = wallet; }
 
     public int getId() {
         return id;
@@ -37,13 +51,9 @@ public class User {
         this.id = id;
     }
 
-    public Role getRole() {
-        return role;
-    }
+    public Role getRole() { return role; }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+    public void setRole(Role role) { this.role = role; }
 
     public String getName() {
         return name;
@@ -79,7 +89,7 @@ public class User {
 
     @Override
 	public String toString() {
-		return "User [id=" + id + ", roles_id=" + role + ", name=" + name + ", surname=" + surname + ", username="
+		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", username="
 				+ username + ", password=" + password + "]";
 	}
 
