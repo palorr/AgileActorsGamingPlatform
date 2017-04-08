@@ -2,9 +2,9 @@
 
 <#macro side_menu>
     <ul class="nav nav-sidebar">
-        <li><a href="/admin/">Dashboard</a></li>
-        <li class="active"><a href="/admin/users/">Users</a></li>
-        <li><a href="/admin/games/">Games</a></li>
+        <li><a href="/admin/"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+        <li class="active"><a href="/admin/users/"><i class="fa fa-users" aria-hidden="true"></i> Users</a></li>
+        <li><a href="/admin/games/"><i class="fa fa-gamepad" aria-hidden="true"></i> Games</a></li>
     </ul>
 </#macro>
 
