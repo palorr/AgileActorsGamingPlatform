@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("userService")
 public class UserService implements UserServiceInterface {
@@ -31,5 +33,18 @@ public class UserService implements UserServiceInterface {
     @Transactional
     public User getUserByUserNameAndPassword(String username, String password) {
         return userRepo.findByUsernameAndPassword(username, password);
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> getUserBasicInfoById(int id){
+        User user =  userRepo.findById(id);
+        Map<String, Object> map = new HashMap<String , Object>();
+
+        map.put("id",user.getId());
+        map.put("name",user.getName());
+        map.put("surname",user.getSurname());
+        map.put("username",user.getUsername());
+        return map ;
     }
 }

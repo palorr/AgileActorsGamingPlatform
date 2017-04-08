@@ -1,6 +1,7 @@
 package com.agile.controllers.users;
 
 import java.util.List;
+import java.util.Map;
 
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class UserController {
 	@GetMapping(value = "/users")
 	public List<User> getUsers() {
 		return userService.fetchUsers();
+	}
+
+	@GetMapping(value = "/users/{id}")
+	public Map<String, Object> getUserBaseInfoById(@PathVariable(value = "id") int id){
+		return userService.getUserBasicInfoById(id);
 	}
 
 	@GetMapping(value = "/userByCredentials/{username}/{password}")
