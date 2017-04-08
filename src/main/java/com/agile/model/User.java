@@ -1,42 +1,47 @@
-package com.agile.models;
-
+package com.agile.model;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
-    private int roles_id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String surname;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @ManyToOne(optional = false)
+    private Role role;
+
+    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
+    private Wallet wallet;
 
     protected User() {}
 
-    public User(int roles_id, String name, String surname, String username, String password) {
-        this.roles_id = roles_id;
+    public User(String name, String surname, String username, String password, Role role, Wallet wallet) {
+        this.role = role;
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
+        this.wallet = wallet;
     }
 
-    public String role() {
-        // #TODO get role ids from database through role model
-        if (this.getRoles_id() == 1) {
-            return "User";
-        }
-        else if (this.getRoles_id() == 2) {
-            return "Admin";
-        }
-        else {
-            return "Undefined";
-        }
-    }
+    public Wallet getWallet() { return wallet; }
+
+    public void setWallet(Wallet wallet) { this.wallet = wallet; }
 
     public int getId() {
         return id;
@@ -46,13 +51,9 @@ public class User {
         this.id = id;
     }
 
-    public int getRoles_id() {
-        return roles_id;
-    }
+    public Role getRole() { return role; }
 
-    public void setRoles_id(int roles_id) {
-        this.roles_id = roles_id;
-    }
+    public void setRole(Role role) { this.role = role; }
 
     public String getName() {
         return name;
@@ -88,7 +89,7 @@ public class User {
 
     @Override
 	public String toString() {
-		return "User [id=" + id + ", roles_id=" + roles_id + ", name=" + name + ", surname=" + surname + ", username="
+		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", username="
 				+ username + ", password=" + password + "]";
 	}
 
