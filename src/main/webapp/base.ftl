@@ -6,6 +6,7 @@
     <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/88d2ff8f34.js"></script>
 </#macro>
 
 <#macro page_body>
