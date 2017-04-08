@@ -31,7 +31,7 @@
                 <td>${user.getSurname()}</td>
                 <td>${user.getUsername()}</td>
                 <td>${user.getPassword()}</td>
-                <td>${user.role()}</td>
+                <td>${user.getRole().getName()?lower_case}</td>
                 <td>
                     <a type="button" class=" btn btn-xs btn-primary" href="/admin/users/${user.getId()}">Details</a>
                     <a type="button" class=" btn btn-xs btn-default" href="/admin/users/${user.getId()}/edit"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>

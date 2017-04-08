@@ -1,7 +1,7 @@
 package com.agile.controllers.admin;
 
 
-import com.agile.models.User;
+import com.agile.model.User;
 import com.agile.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

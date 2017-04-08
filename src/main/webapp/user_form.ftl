@@ -28,8 +28,8 @@
             <input <#if user??>value=${user.getPassword()}</#if> class="form-control" id="id_password" name="password" type="password" placeholder="Enter password" /></p>
     </div>
     <div class="form-group">
-        <p class="required"><label for="id_roles_id">Role id:</label>
-            <input <#if user??>value=${user.getRoles_id()}</#if> class="form-control" id="id_roles_id" name="roles_id" type="number" placeholder="Enter role id" /></p>
+        <p class="required"><label for="id_role">Role id:</label>
+            <input <#if user??>value=${user.getRole().getId()}</#if> class="form-control" id="id_role" name="role" type="number" placeholder="Enter role id" /></p>
     </div>
     <a href="/admin/users/" class="btn btn-default">Back</a>
     <button type="submit" class="btn btn-success pull-right">Submit</button>
