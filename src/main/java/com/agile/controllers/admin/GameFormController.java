@@ -1,7 +1,7 @@
 package com.agile.controllers.admin;
 
 
-import com.agile.models.Game;
+import com.agile.model.Game;
 import com.agile.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

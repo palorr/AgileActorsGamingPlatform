@@ -7,13 +7,6 @@
 </ul>
 </#macro>
 
-
-<#--private int buy_credits;-->
-<#--private int win_credits;-->
-<#--private Double yield;-->
-<#--private String name;-->
-<#--private String description-->
-
 <#macro page_body>
     <h2>Game Form</h2>
     <p>Create or edit existing game</p>
@@ -33,10 +26,6 @@
         <div class="form-group">
             <p class="required"><label for="id_win_credits">Win Credits:</label>
                 <input <#if game??>value=${game.getWin_credits()}</#if> class="form-control" id="id_win_credits" name="win_credits" type="number" placeholder="Enter win credits" /></p>
-        </div>
-        <div class="form-group">
-            <p class="required"><label for="id_yield">Yield:</label>
-                <input <#if game??>value=${game.getYield()}</#if> class="form-control" id="id_yield" name="yield" type="number" step="any" placeholder="Enter yield" /></p>
         </div>
         <a href="/admin/games/" class="btn btn-default">Back</a>
         <button type="submit" class="btn btn-success pull-right">Submit</button>
