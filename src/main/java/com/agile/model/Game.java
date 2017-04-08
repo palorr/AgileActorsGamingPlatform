@@ -1,4 +1,4 @@
-package com.agile.models;
+package com.agile.model;
 
 
 import javax.persistence.*;
@@ -9,18 +9,24 @@ public class Game {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+
+    @Column(nullable = false)
     private int buy_credits;
+
+    @Column(nullable = false)
     private int win_credits;
-    private Double yield;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String description;
 
     protected Game() {}
 
-    public Game(int buy_credits, int win_credits, Double yield, String name, String description) {
+    public Game(int buy_credits, int win_credits, String name, String description) {
         this.buy_credits = buy_credits;
         this.win_credits = win_credits;
-        this.yield = yield;
         this.name = name;
         this.description = description;
     }
@@ -49,14 +55,6 @@ public class Game {
         this.win_credits = win_credits;
     }
 
-    public Double getYield() {
-        return yield;
-    }
-
-    public void setYield(Double yield) {
-        this.yield = yield;
-    }
-
     public String getName() {
         return name;
     }
@@ -75,7 +73,7 @@ public class Game {
 
     @Override
 	public String toString() {
-		return "Game [id=" + id + ", buy_credits=" + buy_credits + ", win_credits=" + win_credits + ", yield=" + yield
-				+ ", name=" + name + ", description=" + description + "]";
+		return "Game [id=" + id + ", buy_credits=" + buy_credits + ", win_credits=" + win_credits +
+                ", name=" + name + ", description=" + description + "]";
 	}
 }

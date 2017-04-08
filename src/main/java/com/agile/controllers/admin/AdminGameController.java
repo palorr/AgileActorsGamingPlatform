@@ -1,13 +1,12 @@
 package com.agile.controllers.admin;
 
-import com.agile.models.Game;
+import com.agile.model.Game;
 import com.agile.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -19,14 +18,14 @@ public class AdminGameController {
     private static final String GAMES_DATA= "games";
     private static final String GAME_DATA= "game";
 
-    @RequestMapping(value = "/admin/games", method = RequestMethod.GET)
+    @GetMapping(value = "/admin/games")
     public String games(ModelMap model) {
         List<Game> games = gameRepository.findAll();
         model.addAttribute(GAMES_DATA, games);
         return "games";
     }
 
-    @RequestMapping(value = "/admin/games/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/admin/games/{id}")
     public String game_details(@PathVariable(value="id") Integer id, ModelMap model) {
         Game game = gameRepository.findOne(id);
         model.addAttribute(GAME_DATA, game);
