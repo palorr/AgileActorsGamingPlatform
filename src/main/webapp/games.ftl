@@ -2,13 +2,14 @@
 
 <#macro side_menu>
     <ul class="nav nav-sidebar">
-        <li><a href="/admin/users/">Users</a></li>
-        <li class="active"><a href="/admin/games/">Games</a></li>
+        <li><a href="/admin/"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+        <li><a href="/admin/users/"><i class="fa fa-users" aria-hidden="true"></i> Users</a></li>
+        <li class="active"><a href="#"><i class="fa fa-gamepad" aria-hidden="true"></i> Games</a></li>
     </ul>
 </#macro>
 
 <#macro page_body>
-    <h2>Games</h2>
+    <h2><i class="fa fa-gamepad" aria-hidden="true"></i> Games</h2>
     <p>Showing all database games</p>
     <a href="/admin/games/create" class="btn btn-primary pull-right">Create Game</a>
     <table class="table table-striped">
