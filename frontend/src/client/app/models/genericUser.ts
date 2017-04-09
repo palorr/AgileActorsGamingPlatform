@@ -1,9 +1,8 @@
-export class GenericUser {	
-	Id: number;
-	roles_id: number;
-	Name: string;
-	Surname: string;
-	Username : string ;	
-	Password : string ; 
+export class GenericUser {
+  surname: string;
+  name: string;
+  id: number;
+  avatar: string;
+  username : string ;
 }
 

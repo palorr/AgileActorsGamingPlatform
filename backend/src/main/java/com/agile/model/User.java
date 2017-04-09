@@ -22,6 +22,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String avatar;
+
     @ManyToOne(optional = false)
     private Role role;
 
@@ -36,6 +39,7 @@ public class User {
         this.surname = surname;
         this.username = username;
         this.password = password;
+        this.avatar = "http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png";//default image on register
         this.wallet = wallet;
     }
 
@@ -85,6 +89,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @Override

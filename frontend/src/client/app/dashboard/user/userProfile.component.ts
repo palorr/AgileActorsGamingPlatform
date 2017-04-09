@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { UserService, AlertService } from '../../services/index'
+import { UserService, AlertService } from '../../services/index';
 
 import { GenericUser } from '../../models/index';
 
@@ -13,10 +13,8 @@ import { GenericUser } from '../../models/index';
 })
 
 export class UserProfileComponent implements OnInit {
-	
-	id: number;
+  id: number;
 	user: GenericUser;
-	
 	isRequestorLoggedIn: boolean = false;
 	isRequestorThisUser: boolean = false;
 
@@ -33,12 +31,10 @@ export class UserProfileComponent implements OnInit {
 			this.id = +params['id'];
 
 				this.isRequestorLoggedIn = true;
-				
 			//////////////////////////////
 			this.userService.getUserMainInfo(this.id)
 				.subscribe(
 					(data: GenericUser) => {
-	
 						this.user = data;
 						console.log('User Profile View Data: ', this.user);
 						// if(this.isRequestorLoggedIn)
@@ -48,12 +44,9 @@ export class UserProfileComponent implements OnInit {
 						this.alertService.error('I am sorry, something went wrong. Please try again later!');
 					}
 				);
-			
 
 
 
 		});
-
-
 	}
 }

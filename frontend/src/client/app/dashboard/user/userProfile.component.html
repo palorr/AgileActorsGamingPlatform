@@ -33,7 +33,7 @@
 	<!-- /.row -->
 	<div class="col-lg-12 card card-block bio" *ngIf="user">
 		<div class="col-lg-12">
-			<img [src]="'https://www.americascup.com/assets/img/default_profile.png'" alt="AvatarImage" style="border-radius: 50%; width: 150px; display: block; margin-left: auto; margin-right: auto;">
+			<img [src]="user.avatar" alt="AvatarImage" style="border-radius: 50%; width: 150px; display: block; margin-left: auto; margin-right: auto;">
 			<br/>
 			<h3>{{user.name}} {{user.surname}}</h3>
 			<!--<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | date:'medium'}}</p>-->

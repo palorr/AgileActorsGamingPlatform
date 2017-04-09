@@ -45,6 +45,7 @@ public class UserService implements UserServiceInterface {
         map.put("name",user.getName());
         map.put("surname",user.getSurname());
         map.put("username",user.getUsername());
+        map.put("avatar", user.getAvatar());
         return map ;
     }
 }
