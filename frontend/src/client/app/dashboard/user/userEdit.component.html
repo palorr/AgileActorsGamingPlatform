@@ -34,6 +34,17 @@
                  required [(ngModel)]="user.avatar"
                  #avatar="ngModel">
         </fieldset>
+        <!--username input-->
+        <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !name.valid }">
+          <label for="name">Username (*)</label>
+          <input type="text" class="form-control input-underline input-lg"
+                 name="username" id="username" placeholder="Enter your real name..."
+                 required [(ngModel)]="user.username"
+                 #username="ngModel">
+          <div [hidden]="name.valid || name.pristine" class="error">
+            Surname is required!
+          </div>
+        </fieldset>
         <!--name input-->
         <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !name.valid }">
           <label for="name">Name (*)</label>
@@ -45,15 +56,15 @@
             Name is required!
           </div>
         </fieldset>
-        <!--name input-->
+        <!--surname input-->
         <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !name.valid }">
           <label for="name">Surname (*)</label>
           <input type="text" class="form-control input-underline input-lg"
-                 name="name" id="surname" placeholder="Enter your real surname..."
+                 name="surname" id="surname" placeholder="Enter your real surname..."
                  required [(ngModel)]="user.surname"
-                 #name="ngModel">
+                 #surname="ngModel">
           <div [hidden]="name.valid || name.pristine" class="error">
-            Name is required!
+            Surname is required!
           </div>
         </fieldset>
 
