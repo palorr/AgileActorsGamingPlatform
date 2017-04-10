@@ -43,6 +43,13 @@ public class User {
         this.wallet = wallet;
     }
 
+    @PrePersist
+    public void prePersist() {
+        if(this.avatar == null) {
+            this.avatar = "http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png";
+        }
+    }
+
     public Wallet getWallet() { return wallet; }
 
     public void setWallet(Wallet wallet) { this.wallet = wallet; }
