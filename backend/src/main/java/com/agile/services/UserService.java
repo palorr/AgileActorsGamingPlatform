@@ -48,4 +48,14 @@ public class UserService implements UserServiceInterface {
         map.put("avatar", user.getAvatar());
         return map ;
     }
+
+    @Override
+    @Transactional
+    public void updateUser(String surname , String name , int id , String avatar , String username){
+        User user = userRepo.findById(id);
+        user.setAvatar(avatar);
+        user.setName(name);
+        user.setSurname(surname);
+        userRepo.save(user);
+    }
 }

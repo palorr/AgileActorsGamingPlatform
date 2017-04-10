@@ -14,7 +14,7 @@ export class UserService {
 
     getAllUsers() {
         let allUsersURL = CONFIGURATION.agileUrls.webApi+'users';
-    
+
         let headers = new Headers({
             'Accept': 'application/json',
         });
@@ -29,7 +29,6 @@ export class UserService {
             });
 
     }
-    
     getAllUsersByName(searchTerm: string) {
         let URL = CONFIGURATION.agileUrls.webApi+'users/getAllUsersByName/' + searchTerm;
 
@@ -51,7 +50,7 @@ export class UserService {
     getUserMainInfo(userId: number) {
 
         let userURL = CONFIGURATION.agileUrls.webApi+'users/' + userId;
-        
+
         let headers = new Headers({
             'Accept': 'application/json',
         });
@@ -79,18 +78,15 @@ export class UserService {
                 throw (res.json());
             });
     }
-    
     // isRequestorThisUser(Username: string) {
-        
     //     if (localStorage.getItem('currentUser').includes(Username)) {
     //         return true;
     //     }
-        
     //     return false;
     // }
 
      updateUser(user: GenericUser) {
-         let editUserURL = CONFIGURATION.agileUrls.webApi+'api/users/';
+         let editUserURL = CONFIGURATION.agileUrls.webApi+'users/edit';
 
          let options = CONFIGURATION.jwt();
 

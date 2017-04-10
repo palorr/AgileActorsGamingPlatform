@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
 
 import { UserProfileRoutes } from './userProfile.routes';
-// import { UserEditRoutes } from './userEdit.routes';
+import { UserEditRoutes } from './userEdit.routes';
 // import { UserSearchRoutes } from './userSearch.routes';
 // import { UserListRoutes } from './userList.routes';
-// import { UserCreatedProjectsRoutes } from './userCreatedProjects.routes'; 
+// import { UserCreatedProjectsRoutes } from './userCreatedProjects.routes';
 
 import { UserComponent } from './index';
 
@@ -14,7 +14,7 @@ export const UserRoutes: Route[] = [
     	component: UserComponent,
     	children: [
          ...UserProfileRoutes,
-        // ...UserEditRoutes,
+         ...UserEditRoutes
 		// ...UserSearchRoutes,
 		// ...UserListRoutes,
 		// ...UserCreatedProjectsRoutes

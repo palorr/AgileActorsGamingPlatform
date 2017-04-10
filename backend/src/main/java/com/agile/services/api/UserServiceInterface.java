@@ -11,4 +11,5 @@ public interface UserServiceInterface {
     List<User> fetchUsers();
     User getUserByUserNameAndPassword(String username, String password);
     Map<String, Object> getUserBasicInfoById(int id);
+    void updateUser(String surname , String name , int id , String avatar , String username);
 }
