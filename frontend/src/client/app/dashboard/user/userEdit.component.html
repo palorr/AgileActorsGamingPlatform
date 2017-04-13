@@ -1,0 +1,83 @@
+<div *ngIf="user" class="container-fluid">
+  <!-- Page Heading -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">
+        Edit User Profile
+      </h2>
+      <ol class="breadcrumb">
+        <li>
+          <a href="Javascript:void(0)" routerLink="/dashboard/blankpage"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li>
+          <a href="Javascript:void(0)" routerLink="/dashboard/users/view/{{user.id}}"><i class="fa fa-fw fa-user" aria-hidden="true"></i> User Profile</a>
+        </li>
+        <li class="active">
+          <i class="fa fa-edit"></i> Edit Profile
+        </li>
+      </ol>
+    </div>
+  </div>
+  <!-- /.row -->
+  <div class="row" >  <!--*ngIf="isRequestorThisUser"-->
+    <div class="col-lg-12">
+
+      <form name="form" (ngSubmit)="editUser()" role="form" #editUserForm="ngForm" novalidate>
+
+        <!--avatar image preview-->
+        <img [src]="user.avatar" alt="AvatarImage" style="max-width: 500px; max-height: 500px; display: block; margin-left: auto; margin-right: auto;">
+        <!--avatar image url input-->
+        <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !avatar.valid }">
+          <label for="avatar">Avatar Image</label>
+          <input type="text" class="form-control input-underline input-lg"
+                 name="avatar" id="avatar" placeholder="Enter your Avatar Image URL..."
+                 required [(ngModel)]="user.avatar"
+                 #avatar="ngModel">
+        </fieldset>
+        <!--username input-->
+        <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !name.valid }">
+          <label for="name">Username (*)</label>
+          <input type="text" class="form-control input-underline input-lg"
+                 name="username" id="username" placeholder="Enter your real name..."
+                 required [(ngModel)]="user.username"
+                 #username="ngModel">
+          <div [hidden]="name.valid || name.pristine" class="error">
+            Surname is required!
+          </div>
+        </fieldset>
+        <!--name input-->
+        <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !name.valid }">
+          <label for="name">Name (*)</label>
+          <input type="text" class="form-control input-underline input-lg"
+                 name="name" id="name" placeholder="Enter your real name..."
+                 required [(ngModel)]="user.name"
+                 #name="ngModel">
+          <div [hidden]="name.valid || name.pristine" class="error">
+            Name is required!
+          </div>
+        </fieldset>
+        <!--surname input-->
+        <fieldset class="form-group" [ngClass]="{ 'has-error': editUserForm.submitted && !name.valid }">
+          <label for="name">Surname (*)</label>
+          <input type="text" class="form-control input-underline input-lg"
+                 name="surname" id="surname" placeholder="Enter your real surname..."
+                 required [(ngModel)]="user.surname"
+                 #surname="ngModel">
+          <div [hidden]="name.valid || name.pristine" class="error">
+            Surname is required!
+          </div>
+        </fieldset>
+
+        <!--loading animation-->
+        <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!editUserForm.form.valid">Save</button>
+        <span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Saving changes...
+				</span>
+      </form>
+
+    </div>
+  </div>
+  <br/><br/>
+  <a [routerLink]="['/dashboard/users/view', user.id]">Back to my profile</a>
+  <!-- /.row -->
+</div>
