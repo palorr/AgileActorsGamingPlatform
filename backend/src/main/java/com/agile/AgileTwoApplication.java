@@ -87,8 +87,8 @@ public class AgileTwoApplication implements CommandLineRunner {
 		userService.saveUser(admin1);
 
 
-		Game game1 = new Game(10, 100, "game1Name", "game 1 description");
-		Game game2 = new Game(40, 450, "game2Name", "game 2 description");
+		Game game1 = new Game(10, 100, "game1Name", "game 1 description",0.3);
+		Game game2 = new Game(40, 450, "game2Name", "game 2 description",0.5);
 
 		gameRepository.save(game1);
 		gameRepository.save(game2);

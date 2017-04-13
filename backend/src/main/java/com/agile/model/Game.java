@@ -22,13 +22,21 @@ public class Game {
     @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
+    private double yield;
+
     protected Game() {}
 
-    public Game(int buy_credits, int win_credits, String name, String description) {
+    public Game(int buy_credits, int win_credits, String name, String description, double yield) {
         this.buy_credits = buy_credits;
         this.win_credits = win_credits;
         this.name = name;
         this.description = description;
+
+        if(yield>1.0) //yield cant be over 100% win percentage
+            this.yield = 1;
+        else
+            this.yield = yield;
     }
 
     public int getId() {
@@ -69,6 +77,17 @@ public class Game {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getYield() {
+        return yield;
+    }
+
+    public void setYield(double yield) {
+        if(yield>1.0) //yield cant be over 100% win percentage
+            this.yield = 1;
+        else
+            this.yield = yield;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.agile.services;
 
+import com.agile.model.Game;
 import com.agile.model.User;
 import com.agile.repositories.UserRepository;
 import com.agile.services.api.UserServiceInterface;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +27,26 @@ public class UserService implements UserServiceInterface {
 
     @Override
     @Transactional
-    public List<User> fetchUsers() {
-        return userRepo.findAll();
+    public List<Map<String, Object>> getBasicInfoOfAllUsers() {
+
+        Map<String , Object> map ;
+        List<User> users =  userRepo.findAll() ;
+        List<Map<String , Object>> usersToReturn = new ArrayList<>() ;
+
+        for( User user : users){
+
+            map= new HashMap<>();
+
+            map.put("id",user.getId());
+            map.put("name",user.getName());
+            map.put("surname",user.getSurname());
+            map.put("username",user.getUsername());
+            map.put("avatar", user.getAvatar());
+
+            usersToReturn.add(map);
+        }
+
+        return usersToReturn ;
     }
 
     @Override

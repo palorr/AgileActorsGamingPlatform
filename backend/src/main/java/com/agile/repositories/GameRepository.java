@@ -7,4 +7,5 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
 
     Game findByName(String name);
 
+    Game findById(int id);
 }

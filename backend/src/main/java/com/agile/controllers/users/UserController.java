@@ -16,12 +16,13 @@ public class UserController {
 	private UserServiceInterface userService;
 
 	@GetMapping(value = "/users")
-	public List<User> getUsers() {
-		return userService.fetchUsers();
+	public List<Map<String, Object>> getBasicInfoOfAllUsers() {
+		List<Map<String, Object>> users = userService.getBasicInfoOfAllUsers();
+		return users ;
 	}
 
 	@GetMapping(value = "/users/{id}")
-	public Map<String, Object> getUserBaseInfoById(@PathVariable(value = "id") int id){
+	public Map<String, Object> getUserBasicInfoById(@PathVariable(value = "id") int id){
 		return userService.getUserBasicInfoById(id);
 	}
 

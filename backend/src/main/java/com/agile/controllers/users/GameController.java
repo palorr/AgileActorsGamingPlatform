@@ -1,7 +1,9 @@
 package com.agile.controllers.users;
 
 import java.util.List;
+import java.util.Map;
 
+import com.agile.services.api.GameServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,24 +17,17 @@ import com.agile.repositories.GameRepository;
 public class GameController {
 
 	@Autowired
-	private GameRepository gameRepository;
+	private GameServiceInterface gameService;
 
-	@GetMapping(value = "user/games")
-	public List<Game> games() {
-		List<Game> games = gameRepository.findAll();
+	@GetMapping(value = "games")
+	public List<Map<String, Object>> getBasicInfoOfAllGames() {
+		List<Map<String, Object>> games = gameService.getBasicInfoOfAllGames();
 		return games;
 	}
 
-	@GetMapping(value = "user/games/{id}")
-	public Game gameDetails(@PathVariable(value = "id") Integer id) {
-		Game game = gameRepository.findOne(id);
-		return game;
-	}
-
-	@GetMapping(value = "user/game")
-	public Game gameDetailsByName(@Param(value = "name") String name) {
-		Game game = gameRepository.findByName(name);
-		return game;
+	@GetMapping(value = "games/{id}")
+	public Map<String, Object> getGameBasicInfoById(@PathVariable(value = "id") int id) {
+		return gameService.getGameBasicInfoById(id);
 	}
 
 }
