@@ -5,10 +5,11 @@ import java.util.Map;
 
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
 import com.agile.model.User;
 
-
+@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class UserController {
 
