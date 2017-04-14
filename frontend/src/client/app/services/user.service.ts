@@ -85,9 +85,13 @@ export class UserService {
     //     return false;
     // }
      updateUser(user: GenericUser) {
-         let editUserURL = CONFIGURATION.agileUrls.webApi+'users/edit';
+        let editUserURL = CONFIGURATION.agileUrls.webApi+'users/edit';
 
-         let options = CONFIGURATION.jwt();
+        let headers = new Headers({
+          'Content-Type': 'application/json',
+        });
+
+         let options = new RequestOptions({ headers: headers });
 
          let putRequestBody = JSON.stringify(user);
 

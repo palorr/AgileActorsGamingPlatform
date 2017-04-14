@@ -76,6 +76,7 @@ public class UserService implements UserServiceInterface {
         user.setAvatar(avatar);
         user.setName(name);
         user.setSurname(surname);
+        user.setUsername(username);
         userRepo.save(user);
     }
 }
