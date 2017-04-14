@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
  import { UserProfileComponent } from './userProfile.component';
  import { UserEditComponent } from './userEdit.component';
 // import { UserSearchComponent } from './userSearch.component';
-// import { UserListComponent } from './userList.component'
+import { UserListComponent } from './userList.component';
 import { UserComponent } from './user.component';
 // import { UserCreatedProjectsComponent } from './userCreatedProjects.component'
 import {
@@ -23,9 +23,9 @@ import {
     declarations: [
         UserComponent,
         UserProfileComponent,
-        UserEditComponent
-        // UserSearchComponent,
-        // UserListComponent,
+        UserEditComponent,
+        UserListComponent
+        // UserSearchComponent
         // UserCreatedProjectsComponent
 
     ],

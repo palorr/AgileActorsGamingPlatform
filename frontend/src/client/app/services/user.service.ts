@@ -19,7 +19,7 @@ export class UserService {
             'Accept': 'application/json',
         });
 
-        let options = new RequestOptions({ headers: headers })
+        let options = new RequestOptions({ headers: headers });
 
         return this.http.get(allUsersURL, options)
             .map((response: Response) => response.json())
@@ -84,7 +84,6 @@ export class UserService {
     //     }
     //     return false;
     // }
-
      updateUser(user: GenericUser) {
          let editUserURL = CONFIGURATION.agileUrls.webApi+'users/edit';
 

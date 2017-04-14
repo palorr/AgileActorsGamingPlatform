@@ -62,28 +62,38 @@ public class AgileTwoApplication implements CommandLineRunner {
 		Wallet wallet1 = new Wallet(5000);
 		Wallet wallet2 = new Wallet(3000);
 		Wallet wallet3 = new Wallet(2000);
+		Wallet wallet4 = new Wallet(6000);
 
 		walletRepository.save(wallet1);
 		walletRepository.save(wallet2);
 		walletRepository.save(wallet3);
+        walletRepository.save(wallet4);
 
 
-		User user1 = new User("userName1", "userSurname1",
-				"user1", "userpass1", userRole, wallet1);
+		User user1 = new User("Archontellis", "Sotirchellis",
+				"user1", "agiletest", userRole, wallet1);
 
-		User user2 = new User("userName2", "userSurname2",
-				"user2", "userpass2", userRole, wallet2);
+		User user2 = new User("Nikos", "Mastrogiannopoulos",
+				"user2", "agiletest", userRole, wallet2);
 
-		User user3 = new User("userName3", "userSurname3",
-				"user3", "userpass3", userRole, wallet3);
+		User user3 = new User("Stamatis", "Katsaounis",
+				"user3", "agiletest", userRole, wallet3);
+
+		User user4 = new User("Vlasis", "Barousis",
+				"user4", "agiletest", userRole, wallet4);
 
 		User admin1 = new User("adminName1", "adminSurname1",
 				"admin1", "adminpass1", adminRole, null);
+
+		user1.setAvatar("https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAATNAAAAJDdjYmM0NmI0LTViNDMtNDE0Ny04Mjk2LTkzZDI2MmM2MjU3Zg.jpg");
+		user2.setAvatar("https://scontent.fath3-2.fna.fbcdn.net/v/t1.0-9/15826725_10209595825591327_3694477759808677138_n.jpg?oh=ac322b5ce4eb225c856d7953c7c1609c&oe=598E674D");
+		user4.setAvatar("https://scontent.fath3-2.fna.fbcdn.net/v/t1.0-9/9157_10207996918935306_4375061747766220940_n.jpg?oh=9b94a4a84d3dd84cbede66df1d5ae9a3&oe=5998A84F");
 
 
 		userService.saveUser(user1);
 		userService.saveUser(user2);
 		userService.saveUser(user3);
+		userService.saveUser(user4);
 		userService.saveUser(admin1);
 
 
