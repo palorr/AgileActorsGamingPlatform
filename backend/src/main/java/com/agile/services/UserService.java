@@ -31,8 +31,14 @@ public class UserService implements UserServiceInterface {
 
     @Override
     @Transactional
-    public User getUserByUserNameAndPassword(String username, String password) {
+    public User getUserByUsernameAndPassword(String username, String password) {
         return userRepo.findByUsernameAndPassword(username, password);
+    }
+
+    @Override
+    @Transactional
+    public User getUserByUsername(String username) {
+        return userRepo.findByUsername(username);
     }
 
     @Override
