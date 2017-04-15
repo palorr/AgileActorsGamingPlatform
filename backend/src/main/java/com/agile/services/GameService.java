@@ -42,6 +42,7 @@ public class GameService implements GameServiceInterface {
             map.put("id",game.getId());
             map.put("name",game.getName());
             map.put("description",game.getDescription());
+            map.put("avatar",game.getAvatar());
             map.put("buy_credits",game.getBuy_credits());
             map.put("win_credits",game.getWin_credits());
 
@@ -60,6 +61,7 @@ public class GameService implements GameServiceInterface {
         map.put("id",game.getId());
         map.put("name",game.getName());
         map.put("description",game.getDescription());
+        map.put("avatar",game.getAvatar());
         map.put("buy_credits",game.getBuy_credits());
         map.put("win_credits",game.getWin_credits());
         return map ;

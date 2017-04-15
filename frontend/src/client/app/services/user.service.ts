@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
 import { GenericUser } from '../models/index';
 
@@ -16,7 +16,7 @@ export class UserService {
         let allUsersURL = CONFIGURATION.agileUrls.webApi+'users';
 
         let headers = new Headers({
-            'Accept': 'application/json',
+            'Accept': 'application/json'
         });
 
         let options = new RequestOptions({ headers: headers });

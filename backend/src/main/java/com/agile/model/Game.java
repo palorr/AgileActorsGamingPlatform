@@ -23,15 +23,19 @@ public class Game {
     private String description;
 
     @Column(nullable = false)
+    private String avatar;
+
+    @Column(nullable = false)
     private double yield;
 
     protected Game() {}
 
-    public Game(int buy_credits, int win_credits, String name, String description, double yield) {
+    public Game(int buy_credits, int win_credits, String name, String description,String avatar, double yield) {
         this.buy_credits = buy_credits;
         this.win_credits = win_credits;
         this.name = name;
         this.description = description;
+        this.avatar = avatar;
 
         if(yield>1.0) //yield cant be over 100% win percentage
             this.yield = 1;
@@ -77,6 +81,14 @@ public class Game {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public double getYield() {

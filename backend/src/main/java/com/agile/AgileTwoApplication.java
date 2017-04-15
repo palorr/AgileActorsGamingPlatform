@@ -97,9 +97,14 @@ public class AgileTwoApplication implements CommandLineRunner {
 		userService.saveUser(admin1);
 
 
-		Game game1 = new Game(10, 100, "game1Name", "game 1 description",0.3);
-		Game game2 = new Game(40, 450, "game2Name", "game 2 description",0.5);
+		Game game1 = new Game(10, 50, "Roullete", "game 1 description","",0.3);
+		Game game2 = new Game(40, 100, "BlackJack", "game 2 description","",0.5);
 
+		game1.setAvatar("https://68.media.tumblr.com/8220060b6e6c9c2cca312641277e3f12/tumblr_njz885ZeDA1s2wio8o1_500.gif");
+		game2.setAvatar("https://68.media.tumblr.com/78bd456f44ab059cda364aed9812a2f4/tumblr_o1m115Z1Zr1s2wio8o1_500.gif");
+
+		game1.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+		game2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 		gameRepository.save(game1);
 		gameRepository.save(game2);
 
