@@ -1,7 +1,3 @@
-/**
- * Created by Archontellis on 14/4/2017.
- */
-
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

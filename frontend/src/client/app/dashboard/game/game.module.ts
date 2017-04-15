@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { GameComponent } from './game.component';
 
 import {GameProfileComponent} from './gameProfile.component';
+import {GameListComponent} from './gameList.component';
 
 import { TruncateModule }   from '../../pipes/truncate.module';
 
@@ -26,11 +27,13 @@ import {
   ],
   declarations: [
     GameComponent,
-    GameProfileComponent
+    GameProfileComponent,
+    GameListComponent
   ],
   exports: [
     GameComponent,
-    GameProfileComponent
+    GameProfileComponent,
+    GameListComponent
   ]
 })
 

@@ -1,6 +1,3 @@
-/**
- * Created by Archontellis on 14/4/2017.
- */
 import { Route } from '@angular/router';
 
 import { UserListComponent } from './userList.component';
