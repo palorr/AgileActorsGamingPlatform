@@ -3,7 +3,7 @@ package com.agile.controllers.users;
 import java.util.List;
 import java.util.Map;
 
-import com.agile.services.api.UserServiceInterface;
+import com.agile.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import com.agile.model.User;
 public class UserController {
 
 	@Autowired
-	private UserServiceInterface userService;
+	private UserService userService;
 
 	@GetMapping(value = "/users")
 	public List<Map<String, Object>> getBasicInfoOfAllUsers() {

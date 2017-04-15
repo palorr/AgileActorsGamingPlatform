@@ -45,7 +45,7 @@ public class AdminGameOperation {
     public AdminGameOperation(User user, Game game, UserCreditsOperation.OperationEnum operation, Timestamp date) {
         this.user = user;
         this.game = game;
-        this.operation = operation.get();
+        this.operation = operation.getDescription();
         this.date = date;
     }
 

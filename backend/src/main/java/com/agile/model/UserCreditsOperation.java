@@ -28,14 +28,14 @@ public class UserCreditsOperation {
 		ADDED("added"),
 		REMOVED("removed");
 
-		private String url;
+		private String description;
 
-		OperationEnum(String url) {
-			this.url = url;
+		OperationEnum(String description) {
+			this.description = description;
 		}
 
-		public String get() {
-			return url;
+		public String getDescription() {
+			return description;
 		}
 	}
 
@@ -44,7 +44,7 @@ public class UserCreditsOperation {
     public UserCreditsOperation(User user, int creditsAddedRemoved, OperationEnum operation, Timestamp date) {
         this.user = user;
         this.creditsAddedRemoved = creditsAddedRemoved;
-        this.operation = operation.get();
+        this.operation = operation.getDescription();
         this.date = date;
     }
 
@@ -77,7 +77,7 @@ public class UserCreditsOperation {
 	}
 
 	public void setOperation(OperationEnum operation) {
-		this.operation = operation.get();
+		this.operation = operation.getDescription();
 	}
 
 	public Timestamp getDate() {

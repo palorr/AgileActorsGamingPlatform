@@ -2,7 +2,7 @@ package com.agile;
 
 import com.agile.model.*;
 import com.agile.repositories.*;
-import com.agile.services.api.UserServiceInterface;
+import com.agile.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -44,7 +44,7 @@ public class AgileTwoApplication implements CommandLineRunner {
 	private WalletRepository walletRepository;
 
 	@Autowired
-	private UserServiceInterface userService;
+	private UserService userService;
 
 	@Override
 	public void run(String... strings) throws Exception {

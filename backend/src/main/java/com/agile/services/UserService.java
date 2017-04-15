@@ -3,7 +3,6 @@ package com.agile.services;
 import com.agile.model.Game;
 import com.agile.model.User;
 import com.agile.repositories.UserRepository;
-import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +13,16 @@ import java.util.List;
 import java.util.Map;
 
 @Service("userService")
-public class UserService implements UserServiceInterface {
+public class UserService{
 
     @Autowired
     private UserRepository userRepo;
 
-    @Override
     @Transactional
     public void saveUser(User user) {
         userRepo.save(user);
     }
 
-    @Override
     @Transactional
     public List<Map<String, Object>> getBasicInfoOfAllUsers() {
 
@@ -49,13 +46,11 @@ public class UserService implements UserServiceInterface {
         return usersToReturn ;
     }
 
-    @Override
     @Transactional
     public User getUserByUserNameAndPassword(String username, String password) {
         return userRepo.findByUsernameAndPassword(username, password);
     }
 
-    @Override
     @Transactional
     public Map<String, Object> getUserBasicInfoById(int id){
         User user =  userRepo.findById(id);
@@ -69,7 +64,6 @@ public class UserService implements UserServiceInterface {
         return map ;
     }
 
-    @Override
     @Transactional
     public void updateUser(String surname , String name , int id , String avatar , String username){
         User user = userRepo.findById(id);
@@ -78,5 +72,9 @@ public class UserService implements UserServiceInterface {
         user.setSurname(surname);
         user.setUsername(username);
         userRepo.save(user);
+    }
+    
+    public User findUserById(int id){
+    	return userRepo.findById(id);
     }
 }
