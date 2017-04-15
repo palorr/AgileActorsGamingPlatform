@@ -4,6 +4,7 @@ import { GameProfileRoutes } from './gameProfile.routes';
 import { GameListRoutes } from './gameList.routes';
 
 import { GameComponent } from './index';
+import {GameSearchRoutes} from './gameSearch.routes';
 
 export const GameRoutes: Route[] = [
   {
@@ -11,7 +12,8 @@ export const GameRoutes: Route[] = [
     component: GameComponent,
     children: [
       ...GameProfileRoutes,
-      ...GameListRoutes
+      ...GameListRoutes,
+      ...GameSearchRoutes
     ]
   }
 ];

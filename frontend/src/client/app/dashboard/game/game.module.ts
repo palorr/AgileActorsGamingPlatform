@@ -14,6 +14,7 @@ import {
   TabsModule,
   ModalModule
 } from 'ng2-bootstrap/ng2-bootstrap';
+import {GameSearchComponent} from './gameSearch.component';
 
 
 @NgModule({
@@ -28,12 +29,14 @@ import {
   declarations: [
     GameComponent,
     GameProfileComponent,
-    GameListComponent
+    GameListComponent,
+    GameSearchComponent
   ],
   exports: [
     GameComponent,
     GameProfileComponent,
-    GameListComponent
+    GameListComponent,
+    GameSearchComponent
   ]
 })
 

@@ -78,13 +78,8 @@ export class UserService {
                 throw (res.json());
             });
     }
-    // isRequestorThisUser(Username: string) {
-    //     if (localStorage.getItem('currentUser').includes(Username)) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-     updateUser(user: GenericUser) {
+
+    updateUser(user: GenericUser) {
         let editUserURL = CONFIGURATION.agileUrls.webApi+'users/edit';
 
         let headers = new Headers({
@@ -103,4 +98,10 @@ export class UserService {
              });
      }
 
+  // isRequestorThisUser(Username: string) {
+  //     if (localStorage.getItem('currentUser').includes(Username)) {
+  //         return true;
+  //     }
+  //     return false;
+  // }
 }

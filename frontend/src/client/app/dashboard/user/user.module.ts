@@ -5,10 +5,9 @@ import { FormsModule } from '@angular/forms';
 
  import { UserProfileComponent } from './userProfile.component';
  import { UserEditComponent } from './userEdit.component';
-// import { UserSearchComponent } from './userSearch.component';
+ import { UserSearchComponent } from './userSearch.component';
 import { UserListComponent } from './userList.component';
 import { UserComponent } from './user.component';
-// import { UserCreatedProjectsComponent } from './userCreatedProjects.component'
 import {
 		TabsModule,
 	} from 'ng2-bootstrap/ng2-bootstrap';
@@ -24,18 +23,15 @@ import {
         UserComponent,
         UserProfileComponent,
         UserEditComponent,
-        UserListComponent
-        // UserSearchComponent
-        // UserCreatedProjectsComponent
-
+        UserListComponent,
+        UserSearchComponent
     ],
     exports: [
         UserComponent,
         UserProfileComponent,
-        UserEditComponent
-        // UserSearchComponent,
-        // UserListComponent,
-        // UserCreatedProjectsComponent
+        UserEditComponent,
+        UserSearchComponent,
+        UserListComponent
     ]
 })
 

@@ -41,6 +41,22 @@ export class GameService {
         throw (res.json());
       });
   }
+  getAllGamesByName(searchTerm: string) {
+    let URL = CONFIGURATION.agileUrls.webApi+'users/getAllGamesByName/' + searchTerm;
+
+    let headers = new Headers({
+      'Accept': 'application/json',
+    });
+
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(URL, options)
+      .map((response: Response) => response.json())
+      .catch(res => {
+        console.log('CATCH: ', res.json());
+        throw (res.json());
+      });
+  }
 
 
 
