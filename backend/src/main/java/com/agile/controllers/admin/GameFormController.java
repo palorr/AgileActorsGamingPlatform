@@ -1,6 +1,5 @@
 package com.agile.controllers.admin;
 
-
 import com.agile.model.Game;
 import com.agile.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class GameFormController {
     private GameRepository gameRepository;
 
     @RequestMapping(value = "/admin/games/{id}/delete")
-    public String delete(@PathVariable(value="id") Integer id, Model model) {
+    public String delete(@PathVariable(value="id") Integer id) {
         gameRepository.delete(id);
         return "redirect:/admin/games";
     }
@@ -30,7 +29,7 @@ public class GameFormController {
     }
 
     @RequestMapping(value = "/admin/games/create", method = RequestMethod.POST)
-    public String save(Model model, @ModelAttribute("game") Game game) {
+    public String save(@ModelAttribute("game") Game game) {
         gameRepository.save(game);
         return "redirect:/admin/games";
     }

@@ -4,8 +4,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.*;
 
-import static com.agile.handlers.UriPaths.ADMIN_GAMES_PATH;
-import static com.agile.handlers.UriPaths.ADMIN_USERS_PATH;
+import static com.agile.handlers.UriPaths.*;
 
 @Configuration
 public class WebAppConfigHandler {
@@ -13,8 +12,8 @@ public class WebAppConfigHandler {
     private Map<String, String> webAppConfigurationMap;
 
     public enum WebAppConfigAttributes {
-        ADMIN_USERS_URI("adminUsersUri"),
-        ADMIN_GAMES_URI("adminGamesUri");
+        ADMIN_USERS_URI_PARAM("adminUsersUri"),
+        ADMIN_GAMES_URI_PARAM("adminGamesUri");
 
         private String str;
 
@@ -30,10 +29,10 @@ public class WebAppConfigHandler {
     public WebAppConfigHandler() {
         webAppConfigurationMap = new HashMap();
 
-        webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_USERS_URI.getWebConfigParam(),
-                ADMIN_USERS_PATH);
-        webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_GAMES_URI.getWebConfigParam(),
-                ADMIN_GAMES_PATH);
+        webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_USERS_URI_PARAM.getWebConfigParam(),
+                ADMIN_USERS_URI);
+        webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_GAMES_URI_PARAM.getWebConfigParam(),
+                ADMIN_GAMES_URI);
     }
 
     public String getWebAppPath(WebAppConfigAttributes attribute) {

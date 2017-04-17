@@ -1,5 +1,6 @@
 package com.agile.handlers;
 
+import com.agile.model.RolesEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
+import static com.agile.handlers.UriPaths.*;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -24,19 +27,19 @@ class SecurityConfigHandler extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
-                .antMatchers("/admin").hasAuthority("ADMIN")
+                .antMatchers(HOME_ONE_URI, HOME_TWO_URI).permitAll()
+                .antMatchers(ADMIN_URI).hasAuthority(RolesEnum.ADMIN.getValue())
                 .anyRequest().fullyAuthenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage(LOGIN_URI)
                 .successHandler(loginSuccessHandler)
-                .failureUrl("/login?error")
+                //.failureUrl("/login?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .permitAll()
-                .and()
-                .exceptionHandling().accessDeniedPage("/403");
+                .permitAll();
+                //.and()
+                //.exceptionHandling().accessDeniedPage("/403");
     }
 
     @Override
