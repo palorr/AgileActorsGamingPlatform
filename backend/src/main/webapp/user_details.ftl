@@ -19,7 +19,7 @@
         <li class="list-group-item"><strong>Password: </strong>${user.getPassword()}</li>
         <li class="list-group-item"><strong>Role: </strong>${user.getRole().getName()?lower_case}</li>
     </ul>
-    <a type="button" class="btn btn-primary" href="/admin/users">Back</a>
+    <a type="button" class="btn btn-primary" href=${adminUsersUri}>Back</a>
 </#macro>
 
 <@display_page/>

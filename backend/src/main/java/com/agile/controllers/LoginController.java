@@ -20,19 +20,11 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public ModelAndView accesssDenied() {
+    public ModelAndView accesssDenied(@RequestParam Optional<String> error) {
 
         ModelAndView model = new ModelAndView();
-
-        /*if (user != null) {
-            model.addObject("msg", "Hi " + user.getName()
-                    + ", you do not have permission to access this page!");
-        } else {
-            model.addObject("msg",
-                    "You do not have permission to access this page!");
-        }*/
-
-        model.setViewName("403");
+        model.addObject("error", error);
+        model.setViewName("login");
         return model;
 
     }

@@ -1,4 +1,4 @@
-package com.agile.config;
+package com.agile.handlers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -8,51 +8,35 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-class SecurityConfig extends WebSecurityConfigurerAdapter {
+class SecurityConfigHandler extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    LoginSuccessHandler loginSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/", "/home").permitAll()
                 .antMatchers("/admin").hasAuthority("ADMIN")
                 .anyRequest().fullyAuthenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .successHandler(loginSuccessHandler)
                 .failureUrl("/login?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/403");
-
-        /*http.exceptionHandling()
-                .accessDeniedHandler((request, response, accessDeniedException) -> {
-                    //response.sendError(HttpServletResponse.SC_FORBIDDEN);
-                    System.out.println("vlasis denied");
-                })
-                .authenticationEntryPoint((request, response, authException) -> {
-                    //response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                    System.out.println("vlasis unauthourized");
-                });*/
     }
 
     @Override

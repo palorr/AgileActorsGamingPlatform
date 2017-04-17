@@ -5,8 +5,10 @@ import java.util.Map;
 
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import com.agile.model.User;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @RestController
@@ -31,9 +33,16 @@ public class UserController {
 		return userService.getUserByUsernameAndPassword(username, password);
 	}
 
-	@GetMapping(value = "/userByUsername/{username}")
+	/*@GetMapping(value = "/userByUsername/{username}")
 	public User getUserByUsername(@PathVariable(value = "username") String username) {
 		return userService.getUserByUsername(username);
+	}*/
+
+	@GetMapping(value = "/userByUsername/{username}")
+	public ModelAndView getUserByUsername(@PathVariable(value = "username") String username) {
+		User user = userService.getUserByUsername(username);
+		ModelAndView modelAndView = new ModelAndView("user_details", "user", user);
+		return modelAndView;
 	}
 
 

@@ -2,11 +2,11 @@
 
 <html>
   <head>
-    <title>Spring Security Login</title>
+    <title>IWG Login</title>
   </head>
 
   <body onload="document.f.username.focus();">
-    <h1>Spring Security Login (Freemarker)</h1>
+    <h1>IWG Security Login</h1>
 
     <p> Vlasis </P>
     <form name="f" action="/login" method="POST">
