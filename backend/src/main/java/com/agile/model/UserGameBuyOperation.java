@@ -48,7 +48,7 @@ public class UserGameBuyOperation {
 		return game;
 	}
 
-	public void setGame(Game game_id) {
+	public void setGame(Game game) {
 		this.game = game;
 	}
 

@@ -19,33 +19,17 @@ public class AdminGameOperation {
 	private Game game;
 
 	@Column(nullable = false)
-	private String operation;
+	private OperationEnum operation;
 
 	@Column(nullable = false)
 	private Timestamp date;
 
-	public enum OperationEnum {
-		ADDED("added"),
-		MODIFIED("modified"),
-		REMOVED("removed");
-
-		private String url;
-
-		OperationEnum(String url) {
-			this.url = url;
-		}
-
-		public String get() {
-			return url;
-		}
-	}
-
 	protected AdminGameOperation() {}
 
-    public AdminGameOperation(User user, Game game, UserCreditsOperation.OperationEnum operation, Timestamp date) {
+    public AdminGameOperation(User user, Game game, OperationEnum operation, Timestamp date) {
         this.user = user;
         this.game = game;
-        this.operation = operation.get();
+        this.operation = operation;
         this.date = date;
     }
 
@@ -61,7 +45,8 @@ public class AdminGameOperation {
 		return user;
 	}
 
-	public void setUser(User user) { this.user = user; }
+	public void setUser(User user) {
+		this.user = user; }
 
 	public Game getGame() {
 		return game;
@@ -71,11 +56,11 @@ public class AdminGameOperation {
 		this.game = game;
 	}
 
-	public String getOperation() {
+	public OperationEnum getOperation() {
 		return operation;
 	}
 
-	public void setOperation(String operation) {
+	public void setOperation(OperationEnum operation) {
 		this.operation = operation;
 	}
 
@@ -90,6 +75,6 @@ public class AdminGameOperation {
 	@Override
 	public String toString() {
 		return "AdminGameOperation [id=" + id + ", user=" + user + ", game=" + game + ", operation="
-				+ operation + ", date=" + date + "]";
+				+ operation.getDescription() + ", date=" + date + "]";
 	}
 }

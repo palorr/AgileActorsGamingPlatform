@@ -1,35 +1,38 @@
 package com.agile.controllers.users;
 
 import java.util.List;
-import java.util.Map;
-
-import com.agile.services.api.GameServiceInterface;
+import com.agile.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.agile.model.Game;
-import com.agile.repositories.GameRepository;
+import com.agile.resources.GameResource;
+import com.agile.resources.GameResourceAfterPlay;
+import com.agile.resources.GameResourceToPlay;
 
-@CrossOrigin(origins = "http://localhost:5555")
+//@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class GameController {
 
 	@Autowired
-	private GameServiceInterface gameService;
+	private GameService gameService;
 
 	@GetMapping(value = "games")
-	public List<Map<String, Object>> getBasicInfoOfAllGames() {
-		List<Map<String, Object>> games = gameService.getBasicInfoOfAllGames();
-		return games;
+	public List<GameResource> getBasicInfoOfAllGames() {
+		return gameService.getBasicInfoOfAllGames();
 	}
 
 	@GetMapping(value = "games/{id}")
-	public Map<String, Object> getGameBasicInfoById(@PathVariable(value = "id") int id) {
+	public GameResource getGameBasicInfoById(@PathVariable(value = "id") int id) {
 		return gameService.getGameBasicInfoById(id);
+	}
+
+	@PostMapping(value = "games/play")
+	public GameResourceAfterPlay selectGameToPlay(@RequestBody GameResourceToPlay resource) {
+		return gameService.playGame(resource);
 	}
 
 }

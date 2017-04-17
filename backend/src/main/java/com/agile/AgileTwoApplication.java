@@ -2,7 +2,7 @@ package com.agile;
 
 import com.agile.model.*;
 import com.agile.repositories.*;
-import com.agile.services.api.UserServiceInterface;
+import com.agile.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.sql.Timestamp;
 
 @SpringBootApplication
-public class AgileTwoApplication implements CommandLineRunner {
+public class AgileTwoApplication 
+implements CommandLineRunner 
+{
 	public static void main(String[] args) {
 		SpringApplication.run(AgileTwoApplication.class, args);
 	}
@@ -44,7 +46,7 @@ public class AgileTwoApplication implements CommandLineRunner {
 	private WalletRepository walletRepository;
 
 	@Autowired
-	private UserServiceInterface userService;
+	private UserService userService;
 
 	@Override
 	public void run(String... strings) throws Exception {
@@ -117,11 +119,11 @@ public class AgileTwoApplication implements CommandLineRunner {
 		updatedGamesRepository.save(updatedGame3);
 
 		UserCreditsOperation userCreditsOperation1 = new UserCreditsOperation(user1, 400,
-				UserCreditsOperation.OperationEnum.ADDED, transactionTime);
+				OperationEnum.ADDED, transactionTime);
 		UserCreditsOperation userCreditsOperation2 = new UserCreditsOperation(user1, 200,
-				UserCreditsOperation.OperationEnum.REMOVED, transactionTime);
+				OperationEnum.REMOVED, transactionTime);
 		UserCreditsOperation userCreditsOperation3 = new UserCreditsOperation(user2, 124,
-				UserCreditsOperation.OperationEnum.ADDED, transactionTime);
+				OperationEnum.ADDED, transactionTime);
 
 
 		userCreditsOperationsRepository.save(userCreditsOperation1);

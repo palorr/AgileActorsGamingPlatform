@@ -12,7 +12,7 @@ public class Wallet {
 
 	private int credits;
 
-	protected Wallet() {}
+	public Wallet() {}
 
 	public Wallet(int credits) {
 		this.credits = credits;
