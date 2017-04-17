@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.agile.model.User;
 import com.agile.resources.UserResource;
 
-//@CrossOrigin(origins = "http://localhost:5555")
+@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class UserController {
 
@@ -20,19 +20,19 @@ public class UserController {
 		return userService.getBasicInfoOfAllUsers();
 	}
 
-	@GetMapping(value = "/user/{id}")
+	@GetMapping(value = "/users/{id}")
 	public UserResource getUserBasicInfoById(@PathVariable(value = "id") int id){
 		return userService.getUserBasicInfoById(id);
 	}
 
-	// TODO: this error "result returns more than one elements" until we set unique data into database (validate username to be unique)
-	@GetMapping(value = "/user")
-	public User getUserByCredentials(@Param(value = "username") String username,
-									 @Param(value = "password") String password) {
-		return userService.getUserByUserNameAndPassword(username, password);
-	}
+//	// TODO: this error "result returns more than one elements" until we set unique data into database (validate username to be unique)
+//	@GetMapping(value = "/users")
+//	public User getUserByCredentials(@Param(value = "username") String username,
+//									 @Param(value = "password") String password) {
+//		return userService.getUserByUserNameAndPassword(username, password);
+//	}
 
-    @PutMapping(value = "/user/edit")
+    @PutMapping(value = "/users/edit")
     public void updateUser(@RequestBody UserResource userResource) {
 		userService.updateUser(userResource);
     }

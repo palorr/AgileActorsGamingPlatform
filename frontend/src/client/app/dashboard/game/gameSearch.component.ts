@@ -7,7 +7,7 @@ import { GenericGame } from '../../models/index';
 @Component({
   moduleId: module.id,
   selector: 'game-search-cmp',
-  templateUrl: 'userSearch.component.html'
+  templateUrl: 'gameSearch.component.html'
 })
 
 export class GameSearchComponent {

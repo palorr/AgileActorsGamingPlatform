@@ -3,17 +3,13 @@ package com.agile.controllers.users;
 import java.util.List;
 import com.agile.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.agile.resources.GameResource;
 import com.agile.resources.GameResourceAfterPlay;
 import com.agile.resources.GameResourceToPlay;
 
-//@CrossOrigin(origins = "http://localhost:5555")
+@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class GameController {
 
