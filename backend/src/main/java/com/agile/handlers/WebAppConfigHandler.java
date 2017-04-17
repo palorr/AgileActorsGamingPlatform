@@ -13,7 +13,8 @@ public class WebAppConfigHandler {
 
     public enum WebAppConfigAttributes {
         ADMIN_USERS_URI_PARAM("adminUsersUri"),
-        ADMIN_GAMES_URI_PARAM("adminGamesUri");
+        ADMIN_GAMES_URI_PARAM("adminGamesUri"),
+        LOGOUT_URI_PARAM("logoutUri");
 
         private String str;
 
@@ -33,6 +34,8 @@ public class WebAppConfigHandler {
                 ADMIN_USERS_URI);
         webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_GAMES_URI_PARAM.getWebConfigParam(),
                 ADMIN_GAMES_URI);
+        webAppConfigurationMap.put(WebAppConfigAttributes.LOGOUT_URI_PARAM.getWebConfigParam(),
+                LOGOUT_URI);
     }
 
     public String getWebAppPath(WebAppConfigAttributes attribute) {

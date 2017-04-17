@@ -12,6 +12,7 @@ import static com.agile.handlers.UriPaths.ADMIN_GAMES_ID_URI;
 import static com.agile.handlers.UriPaths.ADMIN_GAMES_URI;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_GAMES_URI_PARAM;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_USERS_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
 
 @Controller
 public class AdminGameController {
@@ -27,14 +28,19 @@ public class AdminGameController {
 
     @GetMapping(value = ADMIN_GAMES_URI)
     public ModelAndView loadGames() {
-        return new ModelAndView("games",
-                GAMES_DATA, gameRepository.findAll());
+        ModelAndView modelAndView = new ModelAndView("games");
+        modelAndView.addObject(LOGOUT_URI_PARAM.getWebConfigParam(),
+                webAppConfigHandler.getWebAppPath(LOGOUT_URI_PARAM));
+        modelAndView.addObject(GAMES_DATA, gameRepository.findAll());
+        return modelAndView;
     }
 
     @GetMapping(value = ADMIN_GAMES_ID_URI)
     public ModelAndView loadGameDetails(@PathVariable(value="id") Integer id) {
         ModelAndView modelAndView = new ModelAndView("game_details");
         modelAndView.addObject(GAME_DATA, gameRepository.findOne(id));
+        modelAndView.addObject(LOGOUT_URI_PARAM.getWebConfigParam(),
+                webAppConfigHandler.getWebAppPath(LOGOUT_URI_PARAM));
         modelAndView.addObject(ADMIN_GAMES_URI_PARAM.getWebConfigParam(),
                 webAppConfigHandler.getWebAppPath(ADMIN_GAMES_URI_PARAM));
         return modelAndView;

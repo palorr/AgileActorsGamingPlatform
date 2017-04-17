@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import static com.agile.handlers.UriPaths.*;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_USERS_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
 
 @Controller
 public class AdminUserController {
@@ -25,6 +26,8 @@ public class AdminUserController {
     @GetMapping(value = ADMIN_USERS_URI)
     public ModelAndView loadUsersPage() {
         ModelAndView modelAndView = new ModelAndView("users");
+        modelAndView.addObject(LOGOUT_URI_PARAM.getWebConfigParam(),
+                webAppConfigHandler.getWebAppPath(LOGOUT_URI_PARAM));
         modelAndView.addObject(USERS_DATA, userRepository.findAll());
         return modelAndView;
     }
@@ -33,6 +36,8 @@ public class AdminUserController {
     public ModelAndView loadUserDetailsPage(@PathVariable(value="id") Integer id) {
         ModelAndView modelAndView = new ModelAndView("user_details");
         modelAndView.addObject(USER_DATA, userRepository.findOne(id));
+        modelAndView.addObject(LOGOUT_URI_PARAM.getWebConfigParam(),
+                webAppConfigHandler.getWebAppPath(LOGOUT_URI_PARAM));
         modelAndView.addObject(ADMIN_USERS_URI_PARAM.getWebConfigParam(),
                 webAppConfigHandler.getWebAppPath(ADMIN_USERS_URI_PARAM));
         return modelAndView;
