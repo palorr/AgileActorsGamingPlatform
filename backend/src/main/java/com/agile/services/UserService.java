@@ -22,6 +22,7 @@ public class UserService {
 		userRepository.save(user);
 	}
 
+	@Transactional
 	public List<UserResource> getBasicInfoOfAllUsers() {
 		List<UserResource> usersToReturn = userRepository.findAll().stream().map(user -> {
 
@@ -39,10 +40,27 @@ public class UserService {
 		return usersToReturn;
 	}
 
+	@Transactional
+	public List<UserResource> getBasicInfoOfAllUsersWithNameStartsWith(String searchTerm){
+		List<UserResource> usersWithSearchCriteria = userRepository.findByNameStartingWith(searchTerm).stream().map(user -> {
+
+			UserResource resource = new UserResource();
+			resource.setId(user.getId());
+			resource.setName(user.getName());
+			resource.setUsername(user.getUsername());
+			resource.setSurname(user.getSurname());
+			resource.setAvatar(user.getAvatar());
+			return resource;
+		}).collect(Collectors.toList());
+
+		return usersWithSearchCriteria;
+	}
+
 	public User getUserByUserNameAndPassword(String username, String password) {
 		return userRepository.findByUsernameAndPassword(username, password);
 	}
 
+	@Transactional
 	public UserResource getUserBasicInfoById(int id) {
 		User user = userRepository.findById(id);
 		UserResource resource = new UserResource();

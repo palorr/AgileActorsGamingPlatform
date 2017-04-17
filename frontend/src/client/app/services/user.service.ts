@@ -30,7 +30,7 @@ export class UserService {
 
     }
     getAllUsersByName(searchTerm: string) {
-        let URL = CONFIGURATION.agileUrls.webApi+'users/getAllUsersByName/' + searchTerm;
+        let URL = CONFIGURATION.agileUrls.webApi+'users/search/' + searchTerm;
 
         let headers = new Headers({
             'Accept': 'application/json',

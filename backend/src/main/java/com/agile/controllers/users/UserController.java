@@ -3,9 +3,7 @@ package com.agile.controllers.users;
 import java.util.List;
 import com.agile.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
-import com.agile.model.User;
 import com.agile.resources.UserResource;
 
 @CrossOrigin(origins = "http://localhost:5555")
@@ -36,4 +34,9 @@ public class UserController {
     public void updateUser(@RequestBody UserResource userResource) {
 		userService.updateUser(userResource);
     }
+
+    @GetMapping(value = "/users/search/{searchTerm}")
+	public List<UserResource> searchUser(@PathVariable(value = "searchTerm") String searchTerm){
+		return userService.getBasicInfoOfAllUsersWithNameStartsWith(searchTerm);
+	}
 }
