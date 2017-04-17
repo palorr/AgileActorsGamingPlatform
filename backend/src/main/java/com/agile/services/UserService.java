@@ -1,80 +1,71 @@
 package com.agile.services;
 
-import com.agile.model.Game;
 import com.agile.model.User;
 import com.agile.repositories.UserRepository;
+import com.agile.resources.UserResource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service("userService")
-public class UserService{
+public class UserService {
 
-    @Autowired
-    private UserRepository userRepo;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Transactional
-    public void saveUser(User user) {
-        userRepo.save(user);
-    }
+	@Transactional
+	public void saveUser(User user) {
+		userRepository.save(user);
+	}
 
-    @Transactional
-    public List<Map<String, Object>> getBasicInfoOfAllUsers() {
+	public List<UserResource> getBasicInfoOfAllUsers() {
+		List<UserResource> usersToReturn = userRepository.findAll().stream().map(user -> {
 
-        Map<String , Object> map ;
-        List<User> users =  userRepo.findAll() ;
-        List<Map<String , Object>> usersToReturn = new ArrayList<>() ;
+			UserResource resource = new UserResource();
+			resource.setId(user.getId());
+			resource.setName(user.getName());
+			resource.setUsername(user.getUsername());
+			resource.setSurname(user.getSurname());
+			resource.setAvatar(user.getAvatar());
 
-        for( User user : users){
+			return resource;
 
-            map= new HashMap<>();
+		}).collect(Collectors.toList());
 
-            map.put("id",user.getId());
-            map.put("name",user.getName());
-            map.put("surname",user.getSurname());
-            map.put("username",user.getUsername());
-            map.put("avatar", user.getAvatar());
+		return usersToReturn;
+	}
 
-            usersToReturn.add(map);
-        }
+	public User getUserByUserNameAndPassword(String username, String password) {
+		return userRepository.findByUsernameAndPassword(username, password);
+	}
 
-        return usersToReturn ;
-    }
+	public UserResource getUserBasicInfoById(int id) {
+		User user = userRepository.findById(id);
+		UserResource resource = new UserResource();
+		resource.setId(id);
+		resource.setName(user.getName());
+		resource.setSurname(user.getSurname());
+		resource.setUsername(user.getUsername());
+		resource.setAvatar(user.getAvatar());
 
-    @Transactional
-    public User getUserByUserNameAndPassword(String username, String password) {
-        return userRepo.findByUsernameAndPassword(username, password);
-    }
+		return resource;
+	}
 
-    @Transactional
-    public Map<String, Object> getUserBasicInfoById(int id){
-        User user =  userRepo.findById(id);
-        Map<String, Object> map = new HashMap<String , Object>();
+	@Transactional
+	public void updateUser(UserResource resource) {
+		User user = userRepository.findById(resource.getId());
+		user.setAvatar(resource.getAvatar());
+		user.setName(resource.getName());
+		user.setSurname(resource.getSurname());
+		user.setUsername(resource.getUsername());
+		userRepository.save(user);
+	}
 
-        map.put("id",user.getId());
-        map.put("name",user.getName());
-        map.put("surname",user.getSurname());
-        map.put("username",user.getUsername());
-        map.put("avatar", user.getAvatar());
-        return map ;
-    }
-
-    @Transactional
-    public void updateUser(String surname , String name , int id , String avatar , String username){
-        User user = userRepo.findById(id);
-        user.setAvatar(avatar);
-        user.setName(name);
-        user.setSurname(surname);
-        user.setUsername(username);
-        userRepo.save(user);
-    }
-    
-    public User findUserById(int id){
-    	return userRepo.findById(id);
-    }
+	public User findUserById(int id) {
+		return userRepository.findById(id);
+	}
 }

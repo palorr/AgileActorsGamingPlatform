@@ -1,15 +1,14 @@
 package com.agile.controllers.users;
 
 import java.util.List;
-import java.util.Map;
-
 import com.agile.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import com.agile.model.User;
+import com.agile.resources.UserResource;
 
-@CrossOrigin(origins = "http://localhost:5555")
+//@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class UserController {
 
@@ -17,38 +16,24 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping(value = "/users")
-	public List<Map<String, Object>> getBasicInfoOfAllUsers() {
-		List<Map<String, Object>> users = userService.getBasicInfoOfAllUsers();
-		return users ;
+	public List<UserResource> getBasicInfoOfAllUsers() {
+		return userService.getBasicInfoOfAllUsers();
 	}
 
-	@GetMapping(value = "/users/{id}")
-	public Map<String, Object> getUserBasicInfoById(@PathVariable(value = "id") int id){
+	@GetMapping(value = "/user/{id}")
+	public UserResource getUserBasicInfoById(@PathVariable(value = "id") int id){
 		return userService.getUserBasicInfoById(id);
 	}
 
-	@GetMapping(value = "/userByCredentials/{username}/{password}")
-	public User getUserByCredentials(@PathVariable(value = "username") String username,
-									 @PathVariable(value = "password") String password) {
+	// TODO: this error "result returns more than one elements" until we set unique data into database (validate username to be unique)
+	@GetMapping(value = "/user")
+	public User getUserByCredentials(@Param(value = "username") String username,
+									 @Param(value = "password") String password) {
 		return userService.getUserByUserNameAndPassword(username, password);
 	}
 
-
-    @PutMapping(value = "/users/edit")
-    @ResponseBody
-    public void updateUser(@RequestBody Map<String,Object> user) {
-		String surname = (String) user.get("surname");
-		String name = (String) user.get("name");
-
-		int id = (int) user.get("id");
-
-		String avatar = (String) user.get("avatar");
-		String username = (String) user.get("username");
-
-		userService.updateUser(surname,name,id,avatar,username);
-
+    @PutMapping(value = "/user/edit")
+    public void updateUser(@RequestBody UserResource userResource) {
+		userService.updateUser(userResource);
     }
-
-
-
 }

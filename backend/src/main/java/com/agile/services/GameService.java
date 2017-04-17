@@ -1,22 +1,21 @@
 package com.agile.services;
 
 import com.agile.model.Game;
+import com.agile.model.OperationEnum;
 import com.agile.model.User;
-import com.agile.model.UserCreditsOperation.OperationEnum;
 import com.agile.model.Wallet;
 import com.agile.repositories.GameRepository;
 import com.agile.resources.GameResource;
-import com.agile.resources.GetGameResource;
+import com.agile.resources.GameResourceAfterPlay;
+import com.agile.resources.GameResourceToPlay;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by Archontellis on 13/4/2017.
@@ -43,42 +42,35 @@ public class GameService {
 		gameRepository.save(game);
 	}
 
-	@Transactional
-	public List<Map<String, Object>> getBasicInfoOfAllGames() {
-
-		Map<String, Object> map;
-		List<Game> games = gameRepository.findAll();
-		List<Map<String, Object>> gamesToReturn = new ArrayList<>();
-
-		for (Game game : games) {
-
-			map = new HashMap<>();
-
-			map.put("id", game.getId());
-			map.put("name", game.getName());
-			map.put("description", game.getDescription());
-			map.put("avatar", game.getAvatar());
-			map.put("buy_credits", game.getBuy_credits());
-			map.put("win_credits", game.getWin_credits());
-
-			gamesToReturn.add(map);
-		}
+	public List<GameResource> getBasicInfoOfAllGames() {
+		List<GameResource> gamesToReturn = gameRepository.findAll().stream().map(game -> {
+			
+			GameResource resource = new GameResource();
+			resource.setId(game.getId());
+			resource.setName(game.getName());
+			resource.setDescription(game.getDescription());
+			resource.setAvatar(game.getAvatar());
+			resource.setWinCredits(game.getWin_credits());
+			resource.setBuyCredits(game.getBuy_credits());
+			
+			return resource;
+			
+		}).collect(Collectors.toList());
 
 		return gamesToReturn;
 	}
 
-	@Transactional
-	public Map<String, Object> getGameBasicInfoById(int id) {
+	public GameResource getGameBasicInfoById(int id) {
 		Game game = gameRepository.findById(id);
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("id", game.getId());
-		map.put("name", game.getName());
-		map.put("description", game.getDescription());
-		map.put("avatar", game.getAvatar());
-		map.put("buy_credits", game.getBuy_credits());
-		map.put("win_credits", game.getWin_credits());
-		return map;
+		GameResource resource = new GameResource();
+		resource.setId(id);
+		resource.setName(game.getName());
+		resource.setDescription(game.getDescription());
+		resource.setAvatar(game.getAvatar());
+		resource.setWinCredits(game.getWin_credits());
+		resource.setBuyCredits(game.getBuy_credits());
+		
+		return resource;
 	}
 
 	public Game findGameById(int id) {
@@ -94,7 +86,7 @@ public class GameService {
 	 * @return
 	 */
 	@Transactional
-	public GameResource playGame(GetGameResource resource) {
+	public GameResourceAfterPlay playGame(GameResourceToPlay resource) {
 		boolean win;
 		boolean enoughCredits;
 		int ammount;
@@ -138,7 +130,7 @@ public class GameService {
 			win = false;
 			ammount = 0;
 		}
-		return new GameResource(win, enoughCredits, ammount); 
+		return new GameResourceAfterPlay(win, enoughCredits, ammount); 
 	}
 
 }

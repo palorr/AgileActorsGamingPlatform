@@ -19,32 +19,17 @@ public class UserCreditsOperation {
 	private int creditsAddedRemoved;
 
 	@Column(nullable = false)
-	private String operation;
+	private OperationEnum operation;
 
 	@Column(nullable = false)
 	private Timestamp date;
-
-	public enum OperationEnum {
-		ADDED("added"),
-		REMOVED("removed");
-
-		private String description;
-
-		OperationEnum(String description) {
-			this.description = description;
-		}
-
-		public String getDescription() {
-			return description;
-		}
-	}
 
 	protected UserCreditsOperation() {}
 
     public UserCreditsOperation(User user, int creditsAddedRemoved, OperationEnum operation, Timestamp date) {
         this.user = user;
         this.creditsAddedRemoved = creditsAddedRemoved;
-        this.operation = operation.getDescription();
+        this.operation = operation;
         this.date = date;
     }
 
@@ -72,12 +57,12 @@ public class UserCreditsOperation {
 		this.creditsAddedRemoved = creditsAddedRemoved;
 	}
 
-	public String getOperation() {
+	public OperationEnum getOperation() {
 		return operation;
 	}
 
 	public void setOperation(OperationEnum operation) {
-		this.operation = operation.getDescription();
+		this.operation = operation;
 	}
 
 	public Timestamp getDate() {

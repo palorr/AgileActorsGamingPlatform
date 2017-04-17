@@ -11,7 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.sql.Timestamp;
 
 @SpringBootApplication
-public class AgileTwoApplication implements CommandLineRunner {
+public class AgileTwoApplication 
+implements CommandLineRunner 
+{
 	public static void main(String[] args) {
 		SpringApplication.run(AgileTwoApplication.class, args);
 	}
@@ -117,11 +119,11 @@ public class AgileTwoApplication implements CommandLineRunner {
 		updatedGamesRepository.save(updatedGame3);
 
 		UserCreditsOperation userCreditsOperation1 = new UserCreditsOperation(user1, 400,
-				UserCreditsOperation.OperationEnum.ADDED, transactionTime);
+				OperationEnum.ADDED, transactionTime);
 		UserCreditsOperation userCreditsOperation2 = new UserCreditsOperation(user1, 200,
-				UserCreditsOperation.OperationEnum.REMOVED, transactionTime);
+				OperationEnum.REMOVED, transactionTime);
 		UserCreditsOperation userCreditsOperation3 = new UserCreditsOperation(user2, 124,
-				UserCreditsOperation.OperationEnum.ADDED, transactionTime);
+				OperationEnum.ADDED, transactionTime);
 
 
 		userCreditsOperationsRepository.save(userCreditsOperation1);

@@ -1,6 +1,5 @@
 package com.agile.model;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -10,11 +9,11 @@ public class Game {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false)
-    private int buy_credits;
+    @Column(name = "buy_credits", nullable = false)
+    private int buyCredits;
 
-    @Column(nullable = false)
-    private int win_credits;
+    @Column(name = "win_credits", nullable = false)
+    private int winCredits;
 
     @Column(nullable = false)
     private String name;
@@ -31,8 +30,8 @@ public class Game {
     protected Game() {}
 
     public Game(int buy_credits, int win_credits, String name, String description,String avatar, double yield) {
-        this.buy_credits = buy_credits;
-        this.win_credits = win_credits;
+        this.buyCredits = buy_credits;
+        this.winCredits = win_credits;
         this.name = name;
         this.description = description;
         this.avatar = avatar;
@@ -52,19 +51,19 @@ public class Game {
     }
 
     public int getBuy_credits() {
-        return buy_credits;
+        return buyCredits;
     }
 
-    public void setBuy_credits(int buy_credits) {
-        this.buy_credits = buy_credits;
+    public void setBuy_credits(int buyCredits) {
+        this.buyCredits = buyCredits;
     }
 
     public int getWin_credits() {
-        return win_credits;
+        return winCredits;
     }
 
-    public void setWin_credits(int win_credits) {
-        this.win_credits = win_credits;
+    public void setWin_credits(int winCredits) {
+        this.winCredits = winCredits;
     }
 
     public String getName() {
@@ -104,7 +103,7 @@ public class Game {
 
     @Override
 	public String toString() {
-		return "Game [id=" + id + ", buy_credits=" + buy_credits + ", win_credits=" + win_credits +
+		return "Game [id=" + id + ", buy_credits=" + buyCredits + ", win_credits=" + winCredits +
                 ", name=" + name + ", description=" + description + "]";
 	}
 }

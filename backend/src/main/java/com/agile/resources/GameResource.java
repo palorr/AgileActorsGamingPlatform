@@ -1,50 +1,87 @@
 package com.agile.resources;
 
 /**
- * resource containing the response values
+ * resource containing the information we want to show
  * 
  * @author NikosMas
  *
  */
 public class GameResource {
 
-	private boolean isWin;
-	private boolean hasEnoughCredits;
-	private int ammountWon;
+	private int id;
+	private int buyCredits;
+	private int winCredits;
+	private String name;
+	private String description;
+	private String avatar;
+
+	public GameResource() {
+		super();
+	}
 
 	/**
-	 * @param isWin
-	 * @param hasEnoughCredits
-	 * @param ammountWon
+	 * @param id
+	 * @param buyCredits
+	 * @param winCredits
+	 * @param name
+	 * @param description
+	 * @param avatar
 	 */
-	public GameResource(boolean isWin, boolean hasEnoughCredits, int ammountWon) {
+	public GameResource(int id, int buyCredits, int winCredits, String name, String description, String avatar) {
 		super();
-		this.isWin = isWin;
-		this.hasEnoughCredits = hasEnoughCredits;
-		this.ammountWon = ammountWon;
+		this.id = id;
+		this.buyCredits = buyCredits;
+		this.winCredits = winCredits;
+		this.name = name;
+		this.description = description;
+		this.avatar = avatar;
 	}
 
-	public boolean isWin() {
-		return isWin;
+	public int getId() {
+		return id;
 	}
 
-	public void setWin(boolean isWin) {
-		this.isWin = isWin;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public boolean isHasEnoughCredits() {
-		return hasEnoughCredits;
+	public int getBuyCredits() {
+		return buyCredits;
 	}
 
-	public void setHasEnoughCredits(boolean hasEnoughCredits) {
-		this.hasEnoughCredits = hasEnoughCredits;
+	public void setBuyCredits(int buyCredits) {
+		this.buyCredits = buyCredits;
 	}
 
-	public int getAmmountWon() {
-		return ammountWon;
+	public int getWinCredits() {
+		return winCredits;
 	}
 
-	public void setAmmountWon(int ammountWon) {
-		this.ammountWon = ammountWon;
+	public void setWinCredits(int winCredits) {
+		this.winCredits = winCredits;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 }

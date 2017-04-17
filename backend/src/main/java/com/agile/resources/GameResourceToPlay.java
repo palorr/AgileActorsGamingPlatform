@@ -1,18 +1,17 @@
 package com.agile.resources;
 
-
 /**
  * resource containing the parameters that front-end posts to play game
  * 
  * @author NikosMas
  *
  */
-public class GetGameResource {
+public class GameResourceToPlay {
 
 	private int userId;
 	private int gameId;
 	
-	public GetGameResource() {
+	public GameResourceToPlay() {
 		super();
 	}
 
