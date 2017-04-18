@@ -4,4 +4,5 @@ import com.agile.model.UserGameBuyOperation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserGameBuyOperationRepository extends JpaRepository<UserGameBuyOperation, Integer> {
+    void deleteByUserId(int userId);
 }

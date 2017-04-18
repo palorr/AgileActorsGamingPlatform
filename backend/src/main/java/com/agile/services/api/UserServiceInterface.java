@@ -17,4 +17,5 @@ public interface UserServiceInterface {
     void updateUser(String surname , String name , int id , String avatar , String username);
     User createUser(UserSaveData userData);
     User updateUser(UserSaveData userData);
+    void deleteUser(int id);
 }

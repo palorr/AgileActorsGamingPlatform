@@ -7,7 +7,6 @@ import com.agile.services.api.UserServiceInterface;
 import com.agile.validator.UserCreateFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +20,6 @@ import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGO
 public class UserFormCreateController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private UserServiceInterface userService;
 
     @Autowired
@@ -35,13 +31,6 @@ public class UserFormCreateController {
     @InitBinder("userCreateData")
     public void initBinder(WebDataBinder binder) {
         binder.addValidators(userCreateFormValidator);
-    }
-
-
-    @RequestMapping(value = "/admin/users/{id}/delete")
-    public String delete(@PathVariable(value="id") Integer id, Model model) {
-        userRepository.delete(id);
-        return "redirect:/admin/users";
     }
 
     @GetMapping(value = "/admin/create_user")

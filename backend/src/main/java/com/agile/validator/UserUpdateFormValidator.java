@@ -34,7 +34,7 @@ public class UserUpdateFormValidator implements Validator {
 
     private void validateUsername(Errors errors, UserSaveData userData) {
         if (userService.getUserByUsername(userData.getUsername()) != null) {
-            errors.reject("username.exists", "User with this username already exists");
+            errors.reject("username.exists", "You should also change the username");
         }
     }
 

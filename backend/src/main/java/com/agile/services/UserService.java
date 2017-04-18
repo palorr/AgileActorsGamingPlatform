@@ -3,9 +3,7 @@ package com.agile.services;
 import com.agile.model.User;
 import com.agile.model.UserSaveData;
 import com.agile.model.Wallet;
-import com.agile.repositories.RoleRepository;
-import com.agile.repositories.UserRepository;
-import com.agile.repositories.WalletRepository;
+import com.agile.repositories.*;
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +24,24 @@ public class UserService implements UserServiceInterface {
 
     @Autowired
     private RoleRepository roleRepo;
+
+    @Autowired
+    private UserCreditsOperationsRepository userCreditsOperationsRepo;
+
+    @Autowired
+    private UserGamePlayOperationRepository userGamePlayOperationRepo;
+
+    @Autowired
+    private AdminViewOperationRepository adminViewOperationRepo;
+
+    @Autowired
+    private UserGameBuyOperationRepository userGameBuyOperationRepo;
+
+    @Autowired
+    private UpdatedGamesRepository updatedGamesRepo;
+
+    public UserService() {
+    }
 
     @Override
     @Transactional
@@ -101,5 +117,16 @@ public class UserService implements UserServiceInterface {
         user.setUsername(userData.getUsername());
         user.setRole(roleRepo.findByName(userData.getRole()));
         return userRepo.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(int id) {
+        userCreditsOperationsRepo.deleteByUserId(id);
+        userGamePlayOperationRepo.deleteByUserId(id);
+        adminViewOperationRepo.deleteByUserId(id);
+        userGameBuyOperationRepo.deleteByUserId(id);
+        updatedGamesRepo.deleteByUserId(id);
+        userRepo.delete(id);
     }
 }
