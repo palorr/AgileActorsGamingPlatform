@@ -1,11 +1,12 @@
 package com.agile.services;
 
 import com.agile.model.User;
-import com.agile.model.UserSaveData;
+import com.agile.resources.UserSaveData;
 import com.agile.model.Wallet;
 import com.agile.repositories.*;
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -39,6 +40,8 @@ public class UserService implements UserServiceInterface {
 
     @Autowired
     private UpdatedGamesRepository updatedGamesRepo;
+
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserService() {
     }
@@ -98,7 +101,7 @@ public class UserService implements UserServiceInterface {
         walletRepo.save(wallet);
 
         User user = new User(userData.getName(), userData.getSurname(),
-                userData.getUsername(), userData.getPassword(),
+                userData.getUsername(), passwordEncoder.encode(userData.getPassword()),
                 roleRepo.findByName(userData.getRole()), wallet);
         if (userData.getAvatar() != null) {
             user.setAvatar(userData.getAvatar());

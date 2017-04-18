@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
-import static com.agile.handlers.UriPaths.*;
+import static com.agile.resources.UriPaths.*;
 
 @Controller
 public class HomeController {

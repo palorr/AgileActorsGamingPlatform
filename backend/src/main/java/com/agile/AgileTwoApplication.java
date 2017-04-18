@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Timestamp;
 
@@ -50,6 +51,7 @@ public class AgileTwoApplication implements CommandLineRunner {
 	public void run(String... strings) throws Exception {
 
 		Timestamp transactionTime = new Timestamp(System.currentTimeMillis());
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		System.out.println("Spring Application started.:");
 
@@ -69,16 +71,16 @@ public class AgileTwoApplication implements CommandLineRunner {
 
 
 		User user1 = new User("userName1", "userSurname1",
-				"user1", "userpass1", userRole, wallet1);
+				"user1", passwordEncoder.encode("userpass1"), userRole, wallet1);
 
 		User user2 = new User("userName2", "userSurname2",
-				"user2", "userpass2", userRole, wallet2);
+				"user2", passwordEncoder.encode("userpass2"), userRole, wallet2);
 
 		User user3 = new User("userName3", "userSurname3",
-				"user3", "userpass3", userRole, wallet3);
+				"user3", passwordEncoder.encode("userpass3"), userRole, wallet3);
 
 		User admin1 = new User("adminName1", "adminSurname1",
-				"admin1", "adminpass1", adminRole, null);
+				"admin1", passwordEncoder.encode("adminpass1"), adminRole, null);
 
 
 		userService.saveUser(user1);

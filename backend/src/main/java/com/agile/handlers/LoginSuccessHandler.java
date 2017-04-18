@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.agile.handlers.UriPaths.ADMIN_URI;
-import static com.agile.handlers.UriPaths.HOME_TWO_URI;
+import static com.agile.resources.UriPaths.ADMIN_URI;
+import static com.agile.resources.UriPaths.HOME_TWO_URI;
 
 @Component
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {

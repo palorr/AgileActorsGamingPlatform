@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static com.agile.handlers.UriPaths.LOGOUT_URI;
+import static com.agile.resources.UriPaths.LOGOUT_URI;
 
 @Controller
 public class LogoutController {

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
 
 @Controller
-public class UserFormDeleteController {
+public class UserDeleteController {
 
     @Autowired
     private UserServiceInterface userService;
@@ -23,7 +23,7 @@ public class UserFormDeleteController {
     public ModelAndView handleUserDeleteOperation(@PathVariable(value="id") Integer id) {
         userService.deleteUser(id);
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/users/");
-        modelAndView.addObject(LOGOUT_URI_PARAM.getWebConfigParam(),
+        modelAndView.addObject(LOGOUT_URI_PARAM.getParam(),
                 webAppConfigHandler.getWebAppPath(LOGOUT_URI_PARAM));
 
         return modelAndView;

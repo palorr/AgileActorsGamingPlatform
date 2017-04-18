@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.*;
 
-import static com.agile.handlers.UriPaths.*;
+import static com.agile.resources.UriPaths.*;
 
 @Configuration
 public class WebAppConfigHandler {
@@ -22,7 +22,7 @@ public class WebAppConfigHandler {
             this.str = str;
         }
 
-        public String getWebConfigParam() {
+        public String getParam() {
             return this.str;
         }
     }
@@ -30,16 +30,16 @@ public class WebAppConfigHandler {
     public WebAppConfigHandler() {
         webAppConfigurationMap = new HashMap();
 
-        webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_USERS_URI_PARAM.getWebConfigParam(),
+        webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_USERS_URI_PARAM.getParam(),
                 ADMIN_USERS_URI);
-        webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_GAMES_URI_PARAM.getWebConfigParam(),
+        webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_GAMES_URI_PARAM.getParam(),
                 ADMIN_GAMES_URI);
-        webAppConfigurationMap.put(WebAppConfigAttributes.LOGOUT_URI_PARAM.getWebConfigParam(),
+        webAppConfigurationMap.put(WebAppConfigAttributes.LOGOUT_URI_PARAM.getParam(),
                 LOGOUT_URI);
     }
 
     public String getWebAppPath(WebAppConfigAttributes attribute) {
-        return webAppConfigurationMap.get(attribute.getWebConfigParam());
+        return webAppConfigurationMap.get(attribute.getParam());
     }
 
 }

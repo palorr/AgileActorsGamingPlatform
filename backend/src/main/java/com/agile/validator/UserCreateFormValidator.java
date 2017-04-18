@@ -1,6 +1,6 @@
 package com.agile.validator;
 
-import com.agile.model.UserSaveData;
+import com.agile.resources.UserSaveData;
 import com.agile.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

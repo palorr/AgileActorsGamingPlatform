@@ -3,6 +3,7 @@ package com.agile.controllers.users;
 import java.util.List;
 import java.util.Map;
 
+import com.agile.handlers.WebAppConfigHandler;
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -10,12 +11,18 @@ import org.springframework.web.bind.annotation.*;
 import com.agile.model.User;
 import org.springframework.web.servlet.ModelAndView;
 
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_USERS_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
+
 
 @RestController
 public class UserController {
 
 	@Autowired
 	private UserServiceInterface userService;
+
+	@Autowired
+	private WebAppConfigHandler webConfHandler;
 
 	@GetMapping(value = "/users")
 	public List<User> getUsers() {
@@ -33,15 +40,14 @@ public class UserController {
 		return userService.getUserByUsernameAndPassword(username, password);
 	}
 
-	/*@GetMapping(value = "/userByUsername/{username}")
-	public User getUserByUsername(@PathVariable(value = "username") String username) {
-		return userService.getUserByUsername(username);
-	}*/
-
 	@GetMapping(value = "/userByUsername/{username}")
 	public ModelAndView getUserByUsername(@PathVariable(value = "username") String username) {
 		User user = userService.getUserByUsername(username);
 		ModelAndView modelAndView = new ModelAndView("user_details", "user", user);
+		modelAndView.addObject(ADMIN_USERS_URI_PARAM.getParam(),
+				webConfHandler.getWebAppPath(ADMIN_USERS_URI_PARAM));
+		modelAndView.addObject(LOGOUT_URI_PARAM.getParam(),
+				webConfHandler.getWebAppPath(LOGOUT_URI_PARAM));
 		return modelAndView;
 	}
 

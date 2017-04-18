@@ -10,8 +10,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import static com.agile.handlers.UriPaths.*;
+import static com.agile.resources.UriPaths.*;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -45,7 +46,7 @@ class SecurityConfigHandler extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(userDetailsService);
-                //.passwordEncoder(new BCryptPasswordEncoder());
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 }

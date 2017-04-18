@@ -1,8 +1,7 @@
 package com.agile.controllers.admin;
 
 import com.agile.handlers.WebAppConfigHandler;
-import com.agile.model.UserSaveData;
-import com.agile.repositories.UserRepository;
+import com.agile.resources.UserSaveData;
 import com.agile.services.api.UserServiceInterface;
 import com.agile.validator.UserCreateFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import javax.validation.Valid;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
 
 @Controller
-public class UserFormCreateController {
+public class UserCreateController {
 
     @Autowired
     private UserServiceInterface userService;
@@ -26,7 +25,7 @@ public class UserFormCreateController {
     private UserCreateFormValidator userCreateFormValidator;
 
     @Autowired
-    private WebAppConfigHandler webAppConfigHandler;
+    private WebAppConfigHandler webConfHandler;
 
     @InitBinder("userCreateData")
     public void initBinder(WebDataBinder binder) {
@@ -35,32 +34,30 @@ public class UserFormCreateController {
 
     @GetMapping(value = "/admin/create_user")
     public ModelAndView loadUserCreateForm() {
-        ModelAndView modelAndView = new ModelAndView("user_create_form");
+        ModelAndView modelAndView = getModelAndView("user_create_form");
         modelAndView.addObject("userCreateData", new UserSaveData());
-        modelAndView.addObject(LOGOUT_URI_PARAM.getWebConfigParam(),
-                webAppConfigHandler.getWebAppPath(LOGOUT_URI_PARAM));
         return modelAndView;
     }
 
     @PostMapping(value = "/admin/create_user")
     public ModelAndView handleUserCreateOperation(@Valid @ModelAttribute("userCreateData") UserSaveData userCreateData,
                                              BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView("user_create_form");
-        modelAndView.addObject("userCreateData", new UserSaveData());
-        modelAndView.addObject(LOGOUT_URI_PARAM.getWebConfigParam(),
-                webAppConfigHandler.getWebAppPath(LOGOUT_URI_PARAM));
 
         if (bindingResult.hasErrors()) {
+            ModelAndView modelAndView = getModelAndView("user_create_form");
+            modelAndView.addObject("userCreateData", userCreateData);
             modelAndView.addObject("errors", bindingResult.getAllErrors());
             return modelAndView;
         }
 
         userService.createUser(userCreateData);
+        return getModelAndView("redirect:/admin/users/");
+    }
 
-        modelAndView = new ModelAndView("redirect:/admin/users/");
-        modelAndView.addObject(LOGOUT_URI_PARAM.getWebConfigParam(),
-                webAppConfigHandler.getWebAppPath(LOGOUT_URI_PARAM));
-
+    private ModelAndView getModelAndView(String viewName) {
+        ModelAndView modelAndView = new ModelAndView(viewName);
+        modelAndView.addObject(LOGOUT_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(LOGOUT_URI_PARAM));
         return modelAndView;
     }
 }

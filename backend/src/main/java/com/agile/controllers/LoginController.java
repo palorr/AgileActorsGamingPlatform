@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
-import static com.agile.handlers.UriPaths.LOGIN_URI;
+import static com.agile.resources.UriPaths.LOGIN_URI;
 
 @Controller
 public class LoginController {

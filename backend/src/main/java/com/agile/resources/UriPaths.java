@@ -1,4 +1,4 @@
-package com.agile.handlers;
+package com.agile.resources;
 
 public class UriPaths {
 

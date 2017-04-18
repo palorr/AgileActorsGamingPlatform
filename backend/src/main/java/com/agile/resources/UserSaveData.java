@@ -1,5 +1,6 @@
-package com.agile.model;
+package com.agile.resources;
 
+import com.agile.model.User;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserSaveData {

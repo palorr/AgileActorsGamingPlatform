@@ -1,7 +1,7 @@
 package com.agile.services.api;
 
 import com.agile.model.User;
-import com.agile.model.UserSaveData;
+import com.agile.resources.UserSaveData;
 
 import java.util.List;
 import java.util.Map;

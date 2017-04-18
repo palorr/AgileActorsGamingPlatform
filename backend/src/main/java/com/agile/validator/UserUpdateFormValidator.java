@@ -1,6 +1,6 @@
 package com.agile.validator;
 
-import com.agile.model.UserSaveData;
+import com.agile.resources.UserSaveData;
 import com.agile.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,15 +39,15 @@ public class UserUpdateFormValidator implements Validator {
     }
 
     private void validateAttributes(Errors errors, UserSaveData userData) {
-        if ( !(isUpdatable(userData.getName())     &&
-                isUpdatable(userData.getSurname())  &&
-                isUpdatable(userData.getPassword()) &&
-                isUpdatable(userData.getUsername()) &&
-                isUpdatable(userData.getRole())) )
+        if ( !(isValid(userData.getName())      &&
+                isValid(userData.getSurname())  &&
+                isValid(userData.getPassword()) &&
+                isValid(userData.getUsername()) &&
+                isValid(userData.getRole())) )
             errors.reject("attributes.no_valid", "Some attributes are null or empty");
     }
 
-    private boolean isUpdatable(String attribute){
+    private boolean isValid(String attribute){
         return ((attribute != null) && (!attribute.isEmpty()));
     }
 }
