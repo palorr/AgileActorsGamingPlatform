@@ -47,9 +47,8 @@ public class UserFormUpdateController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/admin/update_user/{id}")
+    @PostMapping(value = "/admin/update_user/")
     public ModelAndView handleUserEditOperation(@Valid @ModelAttribute("userUpdateData") UserSaveData userUpdateData,
-                                                @PathVariable(value="id") Integer id,
                                                 BindingResult bindingResult) {
 
         ModelAndView modelAndView = new ModelAndView("user_update_form");

@@ -22,11 +22,32 @@ public class UserUpdateFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         UserSaveData userData = (UserSaveData) target;
         validatePasswords(errors, userData);
+        validateUsername(errors, userData);
+        validateAttributes(errors, userData);
     }
 
     private void validatePasswords(Errors errors, UserSaveData userData) {
         if (!userData.getPassword().equals(userData.getPasswordRepeated())) {
             errors.reject("password.no_match", "Passwords do not match");
         }
+    }
+
+    private void validateUsername(Errors errors, UserSaveData userData) {
+        if (userService.getUserByUsername(userData.getUsername()) != null) {
+            errors.reject("username.exists", "User with this username already exists");
+        }
+    }
+
+    private void validateAttributes(Errors errors, UserSaveData userData) {
+        if ( !(isUpdatable(userData.getName())     &&
+                isUpdatable(userData.getSurname())  &&
+                isUpdatable(userData.getPassword()) &&
+                isUpdatable(userData.getUsername()) &&
+                isUpdatable(userData.getRole())) )
+            errors.reject("attributes.no_valid", "Some attributes are null or empty");
+    }
+
+    private boolean isUpdatable(String attribute){
+        return ((attribute != null) && (!attribute.isEmpty()));
     }
 }

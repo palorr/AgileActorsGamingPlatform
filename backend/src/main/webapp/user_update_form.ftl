@@ -9,28 +9,29 @@
 
 <#macro page_body>
 <h2>User Form</h2>
-<form action="/admin/update_user/${userUpdateData.getId()}" name="userForm" method="post">
+<form action="/admin/update_user/" name="userForm" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input type="hidden" name="id" id ="id" value="${userUpdateData.getId()}"/>
     <div class="form-group" >
         <p class="required"> <label for="id_name">Name:</label>
-            <input <#if userUpdateData??>value=${userUpdateData.getName()}</#if> type="text" class="form-control" name="name" id="name" maxlength="20" placeholder="Enter name"/> </p>
+            <input <#if userUpdateData??>value="${userUpdateData.getName()}</#if>" type="text" class="form-control" name="name" id="name" maxlength="20" placeholder="Enter name"/> </p>
     </div>
     <div class="form-group">
         <p class="required"><label for="id_surname">Surname:</label>
-            <input <#if userUpdateData??>value=${userUpdateData.getSurname()}</#if> type="text" class="form-control" name="surname" id="surname" placeholder="Enter surname"/> </p>
+            <input <#if userUpdateData??>value="${userUpdateData.getSurname()}</#if>" type="text" class="form-control" name="surname" id="surname" placeholder="Enter surname"/> </p>
     </div>
     <div class="form-group">
         <p class="required"><label for="id_username">Username:</label>
-            <input <#if userUpdateData??>value=${userUpdateData.getUsername()}</#if> type="text" class="form-control" name="username" id="username" placeholder="Enter username"/> </p>
+            <input <#if userUpdateData??>value="${userUpdateData.getUsername()}</#if>" type="text" class="form-control" name="username" id="username" placeholder="Enter username"/> </p>
     </div>
     <div class="form-group">
         <p class="required"><label for="id_password">Password:</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Enter password"/> </p>
+            <input <#if userUpdateData??>value="${userUpdateData.getPassword()}</#if>" type="password" class="form-control" name="password" id="password" placeholder="Enter password"/> </p>
     </div>
     <div class="form-group">
             <p class="required"><label for="id_password">Repeat Password:</label>
-                <input type="password" class="form-control" name="passwordRepeated" id="passwordRepeated" placeholder="Enter password again"/> </p>
-        </div>
+                <input <#if userUpdateData??>value="${userUpdateData.getPassword()}</#if>" type="password" class="form-control" name="passwordRepeated" id="passwordRepeated" placeholder="Enter password again"/> </p>
+    </div>
     <div class="form-group">
         <p class="required"><label for="id_role">Role:</label>
         <select class="form-control" name="role" id="role" required>

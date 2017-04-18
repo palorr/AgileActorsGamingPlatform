@@ -1,6 +1,5 @@
 package com.agile.services;
 
-import com.agile.model.Role;
 import com.agile.model.User;
 import com.agile.model.UserSaveData;
 import com.agile.model.Wallet;
@@ -9,7 +8,6 @@ import com.agile.repositories.UserRepository;
 import com.agile.repositories.WalletRepository;
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -55,21 +53,21 @@ public class UserService implements UserServiceInterface {
 
     @Override
     @Transactional
-    public Map<String, Object> getUserBasicInfoById(int id){
-        User user =  userRepo.findById(id);
-        Map<String, Object> map = new HashMap<String , Object>();
+    public Map<String, Object> getUserBasicInfoById(int id) {
+        User user = userRepo.findById(id);
+        Map<String, Object> map = new HashMap<String, Object>();
 
-        map.put("id",user.getId());
-        map.put("name",user.getName());
-        map.put("surname",user.getSurname());
-        map.put("username",user.getUsername());
+        map.put("id", user.getId());
+        map.put("name", user.getName());
+        map.put("surname", user.getSurname());
+        map.put("username", user.getUsername());
         map.put("avatar", user.getAvatar());
-        return map ;
+        return map;
     }
 
     @Override
     @Transactional
-    public void updateUser(String surname , String name , int id , String avatar , String username){
+    public void updateUser(String surname, String name, int id, String avatar, String username) {
         User user = userRepo.findById(id);
         user.setAvatar(avatar);
         user.setName(name);
@@ -86,7 +84,7 @@ public class UserService implements UserServiceInterface {
         User user = new User(userData.getName(), userData.getSurname(),
                 userData.getUsername(), userData.getPassword(),
                 roleRepo.findByName(userData.getRole()), wallet);
-        if(userData.getAvatar() != null) {
+        if (userData.getAvatar() != null) {
             user.setAvatar(userData.getAvatar());
         }
         return userRepo.save(user);
@@ -96,29 +94,12 @@ public class UserService implements UserServiceInterface {
     @Transactional
     public User updateUser(UserSaveData userData) {
         User user = userRepo.findOne(userData.getId());
-        if( isUpdatable(userData.getAvatar()) )
-            user.setAvatar(userData.getAvatar());
-
-        if( isUpdatable(userData.getName()) )
-            user.setName(userData.getName() );
-
-        if( isUpdatable(userData.getSurname()))
-            user.setSurname(userData.getSurname());
-
-        if( isUpdatable(userData.getPassword()))
-            user.setPassword(userData.getPassword());
-
-        if( isUpdatable(userData.getUsername()))
-            user.setUsername(userData.getUsername());
-
-        if( isUpdatable(userData.getRole()))
-            user.setRole(roleRepo.findByName(userData.getRole()));
-
+        //user.setAvatar(userData.getAvatar());
+        user.setName(userData.getName());
+        user.setSurname(userData.getSurname());
+        user.setPassword(userData.getPassword());
+        user.setUsername(userData.getUsername());
+        user.setRole(roleRepo.findByName(userData.getRole()));
         return userRepo.save(user);
     }
-
-    private boolean isUpdatable(String attribute){
-        return ((attribute != null) && (!attribute.isEmpty()));
-    }
-
 }
