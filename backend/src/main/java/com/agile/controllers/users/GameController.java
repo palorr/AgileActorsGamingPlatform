@@ -31,4 +31,8 @@ public class GameController {
 		return gameService.playGame(resource);
 	}
 
+	@GetMapping(value = "/games/search/{searchTerm}")
+	public List<GameResource> searchUser(@PathVariable(value = "searchTerm") String searchTerm){
+		return gameService.getBasicInfoOfAllGamesWithNameStartsWith(searchTerm);
+	}
 }

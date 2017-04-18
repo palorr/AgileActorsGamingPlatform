@@ -42,6 +42,7 @@ public class GameService {
 		gameRepository.save(game);
 	}
 
+	@Transactional
 	public List<GameResource> getBasicInfoOfAllGames() {
 		List<GameResource> gamesToReturn = gameRepository.findAll().stream().map(game -> {
 			
@@ -60,6 +61,25 @@ public class GameService {
 		return gamesToReturn;
 	}
 
+	@Transactional
+	public List<GameResource> getBasicInfoOfAllGamesWithNameStartsWith(String searchTerm){
+
+		List<GameResource> gamesWithSearchCriteria = gameRepository.findByNameStartingWith(searchTerm).stream().map(game ->{
+
+			GameResource resource = new GameResource();
+			resource.setId(game.getId());
+			resource.setBuyCredits(game.getBuy_credits());
+			resource.setWinCredits(game.getWin_credits());
+			resource.setName(game.getName());
+			resource.setDescription(game.getDescription());
+			resource.setAvatar(game.getAvatar());
+			return resource;
+
+		}).collect(Collectors.toList());
+		return gamesWithSearchCriteria;
+	}
+
+	@Transactional
 	public GameResource getGameBasicInfoById(int id) {
 		Game game = gameRepository.findById(id);
 		GameResource resource = new GameResource();

@@ -42,7 +42,7 @@ export class GameService {
       });
   }
   getAllGamesByName(searchTerm: string) {
-    let URL = CONFIGURATION.agileUrls.webApi+'users/getAllGamesByName/' + searchTerm;
+    let URL = CONFIGURATION.agileUrls.webApi+'games/search/' + searchTerm;
 
     let headers = new Headers({
       'Accept': 'application/json',
