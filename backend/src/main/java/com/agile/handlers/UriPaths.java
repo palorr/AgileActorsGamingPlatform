@@ -11,4 +11,5 @@ public class UriPaths {
     public static final String HOME_TWO_URI ="/home";
     public static final String ADMIN_GAMES_ID_URI = "/admin/games/{id}";
     public static final String LOGOUT_URI = "/logout";
+    public static final String USERS_EDIT_URI = "/users/edit";
 }

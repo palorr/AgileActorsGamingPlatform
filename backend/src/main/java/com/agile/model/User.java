@@ -31,7 +31,7 @@ public class User {
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private Wallet wallet;
 
-    protected User() {}
+    public User() {}
 
     public User(String name, String surname, String username, String password, Role role, Wallet wallet) {
         this.role = role;

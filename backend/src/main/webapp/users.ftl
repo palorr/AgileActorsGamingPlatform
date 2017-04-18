@@ -11,7 +11,7 @@
 <#macro page_body>
     <h2><i class="fa fa-users" aria-hidden="true"></i> Users</h2>
     <p>Showing all database users</p>
-    <a href="/admin/users/create" class="btn btn-primary pull-right">Create User</a>
+    <a href="/admin/create_user" class="btn btn-primary pull-right">Create User</a>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -35,7 +35,7 @@
                 <td>${user.getRole().getName()?lower_case}</td>
                 <td>
                     <a type="button" class=" btn btn-xs btn-primary" href="/admin/users/${user.getId()}">Details</a>
-                    <a type="button" class=" btn btn-xs btn-default" href="/admin/users/${user.getId()}/edit"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                    <a type="button" class=" btn btn-xs btn-default" href="/admin/update_user/${user.getId()}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
                     <a type="button" class=" btn btn-xs btn-danger" href="/admin/users/${user.getId()}/delete"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                 </td>
             </tr>
