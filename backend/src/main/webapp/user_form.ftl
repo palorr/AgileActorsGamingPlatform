@@ -75,7 +75,7 @@
         <p class="required"><label for="id_role">Role:</label>
             <select class="form-control" id="id_role" name="role">
                 <#list roles as role>
-                    <#if role.getId() == user.getRole().getId()>
+                    <#if url != "/admin/users/create" && role.getId() == user.getRole().getId()>
                         <option value="${role.getId()}" selected>${role.getName()?lower_case}</option>
                     <#else>
                         <option value="${role.getId()}">${role.getName()?lower_case}</option>
