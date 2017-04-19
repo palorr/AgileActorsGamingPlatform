@@ -18,8 +18,6 @@
             <th>ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
-            <th>Username</th>
-            <th>Password</th>
             <th>Role</th>
             <th>Actions</th>
         </tr>
@@ -30,13 +28,11 @@
                 <td>${user.getId()}</td>
                 <td>${user.getName()}</td>
                 <td>${user.getSurname()}</td>
-                <td>${user.getUsername()}</td>
-                <td>${user.getPassword()}</td>
                 <td>${user.getRole().getName()?lower_case}</td>
                 <td>
-                    <a type="button" class=" btn btn-xs btn-primary" href="/admin/users/${user.getId()}">Details</a>
-                    <a type="button" class=" btn btn-xs btn-default" href="/admin/update_user/${user.getId()}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
-                    <a type="button" class=" btn btn-xs btn-danger" href="/admin/delete_user/${user.getId()}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                    <a type="button" class=" btn btn-xs btn-primary" href="${adminUsersUri}${user.getId()}">Details</a>
+                    <a type="button" class=" btn btn-xs btn-default" href="${adminUpdateUser}${user.getId()}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                    <a type="button" class=" btn btn-xs btn-danger" href="${adminDeleteUser}${user.getId()}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                 </td>
             </tr>
             </#list>

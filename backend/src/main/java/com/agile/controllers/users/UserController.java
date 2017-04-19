@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.agile.model.User;
 import org.springframework.web.servlet.ModelAndView;
 
-import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_USERS_URI_PARAM;
-import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.*;
 
 
 @RestController
@@ -46,6 +45,10 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView("user_details", "user", user);
 		modelAndView.addObject(ADMIN_USERS_URI_PARAM.getParam(),
 				webConfHandler.getWebAppPath(ADMIN_USERS_URI_PARAM));
+		modelAndView.addObject(ADMIN_URI_PARAM.getParam(),
+				webConfHandler.getWebAppPath(ADMIN_URI_PARAM));
+		modelAndView.addObject(ADMIN_GAMES_URI_PARAM.getParam(),
+				webConfHandler.getWebAppPath(ADMIN_GAMES_URI_PARAM));
 		modelAndView.addObject(LOGOUT_URI_PARAM.getParam(),
 				webConfHandler.getWebAppPath(LOGOUT_URI_PARAM));
 		return modelAndView;

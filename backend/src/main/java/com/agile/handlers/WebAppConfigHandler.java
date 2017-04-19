@@ -9,11 +9,14 @@ import static com.agile.resources.UriPaths.*;
 @Configuration
 public class WebAppConfigHandler {
 
-    private Map<String, String> webAppConfigurationMap;
+    private Map<String, String> webAppConfigMap;
 
     public enum WebAppConfigAttributes {
         ADMIN_USERS_URI_PARAM("adminUsersUri"),
         ADMIN_GAMES_URI_PARAM("adminGamesUri"),
+        ADMIN_UPDATE_USER_URI_PARAM("adminUpdateUser"),
+        ADMIN_DELETE_USER_URI_PARAM("adminDeleteUser"),
+        ADMIN_URI_PARAM("adminUri"),
         LOGOUT_URI_PARAM("logoutUri");
 
         private String str;
@@ -28,18 +31,24 @@ public class WebAppConfigHandler {
     }
 
     public WebAppConfigHandler() {
-        webAppConfigurationMap = new HashMap();
+        webAppConfigMap = new HashMap();
 
-        webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_USERS_URI_PARAM.getParam(),
+        webAppConfigMap.put(WebAppConfigAttributes.ADMIN_USERS_URI_PARAM.getParam(),
                 ADMIN_USERS_URI);
-        webAppConfigurationMap.put(WebAppConfigAttributes.ADMIN_GAMES_URI_PARAM.getParam(),
+        webAppConfigMap.put(WebAppConfigAttributes.ADMIN_GAMES_URI_PARAM.getParam(),
                 ADMIN_GAMES_URI);
-        webAppConfigurationMap.put(WebAppConfigAttributes.LOGOUT_URI_PARAM.getParam(),
+        webAppConfigMap.put(WebAppConfigAttributes.LOGOUT_URI_PARAM.getParam(),
                 LOGOUT_URI);
+        webAppConfigMap.put(WebAppConfigAttributes.ADMIN_UPDATE_USER_URI_PARAM.getParam(),
+                ADMIN_UPDATE_USER_URI);
+        webAppConfigMap.put(WebAppConfigAttributes.ADMIN_DELETE_USER_URI_PARAM.getParam(),
+                ADMIN_DELETE_USER_URI);
+        webAppConfigMap.put(WebAppConfigAttributes.ADMIN_URI_PARAM.getParam(),
+                ADMIN_URI);
     }
 
     public String getWebAppPath(WebAppConfigAttributes attribute) {
-        return webAppConfigurationMap.get(attribute.getParam());
+        return webAppConfigMap.get(attribute.getParam());
     }
 
 }

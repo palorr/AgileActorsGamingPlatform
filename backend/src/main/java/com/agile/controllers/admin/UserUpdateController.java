@@ -4,7 +4,7 @@ import com.agile.handlers.WebAppConfigHandler;
 import com.agile.repositories.UserRepository;
 import com.agile.resources.UserSaveData;
 import com.agile.services.api.UserServiceInterface;
-import com.agile.validator.UserUpdateFormValidator;
+import com.agile.validator.UserFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,7 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_UPDATE_USER_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_USERS_URI_PARAM;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
+import static com.agile.resources.UriPaths.ADMIN_UPDATE_USER_ID_URI;
 
 @Controller
 public class UserUpdateController {
@@ -26,18 +29,18 @@ public class UserUpdateController {
     private UserServiceInterface userService;
 
     @Autowired
-    private UserUpdateFormValidator userUpdateFormValidator;
+    private UserFormValidator userFormValidator;
 
     @Autowired
     private WebAppConfigHandler webConfHandler;
 
     @InitBinder("userUpdateData")
     public void initBinder(WebDataBinder binder) {
-        binder.addValidators(userUpdateFormValidator);
+        binder.addValidators(userFormValidator);
     }
 
 
-    @GetMapping(value = "/admin/update_user/{id}")
+    @GetMapping(value = ADMIN_UPDATE_USER_ID_URI)
     public ModelAndView loadUserEditForm(@PathVariable(value="id") Integer id) {
         UserSaveData userUpdateData = new UserSaveData(userRepository.findOne(id));
         ModelAndView modelAndView = getModelAndView("user_update_form");
@@ -62,6 +65,10 @@ public class UserUpdateController {
 
     private ModelAndView getModelAndView(String viewName) {
         ModelAndView modelAndView = new ModelAndView(viewName);
+        modelAndView.addObject(ADMIN_UPDATE_USER_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_UPDATE_USER_URI_PARAM));
+        modelAndView.addObject(ADMIN_USERS_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_USERS_URI_PARAM));
         modelAndView.addObject(LOGOUT_URI_PARAM.getParam(),
                 webConfHandler.getWebAppPath(LOGOUT_URI_PARAM));
         return modelAndView;

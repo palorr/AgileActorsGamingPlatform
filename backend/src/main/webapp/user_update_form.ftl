@@ -9,7 +9,7 @@
 
 <#macro page_body>
 <h2>User Form</h2>
-<form action="/admin/update_user/" name="userForm" method="post">
+<form action="${adminUpdateUser}" name="userForm" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="hidden" name="id" id ="id" value="${userUpdateData.getId()}"/>
     <div class="form-group" >
@@ -26,11 +26,11 @@
     </div>
     <div class="form-group">
         <p class="required"><label for="id_password">Password:</label>
-            <input <#if userUpdateData??>value="${userUpdateData.getPassword()}</#if>" type="password" class="form-control" name="password" id="password" placeholder="Enter password"/> </p>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Enter password"/> </p>
     </div>
     <div class="form-group">
             <p class="required"><label for="id_password">Repeat Password:</label>
-                <input <#if userUpdateData??>value="${userUpdateData.getPassword()}</#if>" type="password" class="form-control" name="passwordRepeated" id="passwordRepeated" placeholder="Enter password again"/> </p>
+                <input type="password" class="form-control" name="passwordRepeated" id="passwordRepeated" placeholder="Enter password again"/> </p>
     </div>
     <div class="form-group">
         <p class="required"><label for="id_role">Role:</label>
@@ -39,7 +39,7 @@
             <option <#if userUpdateData?? && userUpdateData.getRole() == 'ADMIN'>selected</#if>>ADMIN</option>
         </select>
     </div>
-    <a href="/admin/users/" class="btn btn-default">Back</a>
+    <a href="${adminUsersUri}" class="btn btn-default">Back</a>
     <button type="submit" class="btn btn-success pull-right">Submit</button>
 </form>
 

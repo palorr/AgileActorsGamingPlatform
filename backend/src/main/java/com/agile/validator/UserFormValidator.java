@@ -8,7 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
-public class UserUpdateFormValidator implements Validator {
+public class UserFormValidator implements Validator {
 
     @Autowired
     private UserService userService;
@@ -34,7 +34,7 @@ public class UserUpdateFormValidator implements Validator {
 
     private void validateUsername(Errors errors, UserSaveData userData) {
         if (userService.getUserByUsername(userData.getUsername()) != null) {
-            errors.reject("username.exists", "You should also change the username");
+            errors.reject("username.exists", "Username exists or needs to be updated");
         }
     }
 

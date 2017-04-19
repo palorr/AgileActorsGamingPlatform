@@ -116,7 +116,7 @@ public class UserService implements UserServiceInterface {
         //user.setAvatar(userData.getAvatar());
         user.setName(userData.getName());
         user.setSurname(userData.getSurname());
-        user.setPassword(userData.getPassword());
+        user.setPassword(passwordEncoder.encode(userData.getPassword()));
         user.setUsername(userData.getUsername());
         user.setRole(roleRepo.findByName(userData.getRole()));
         return userRepo.save(user);

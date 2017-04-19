@@ -3,7 +3,7 @@ package com.agile.controllers.admin;
 import com.agile.handlers.WebAppConfigHandler;
 import com.agile.resources.UserSaveData;
 import com.agile.services.api.UserServiceInterface;
-import com.agile.validator.UserCreateFormValidator;
+import com.agile.validator.UserFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
+import static com.agile.resources.UriPaths.ADMIN_CREATE_USER_URI;
+import static com.agile.resources.UriPaths.REDIRECT_ADMIN_USERS_URI;
 
 @Controller
 public class UserCreateController {
@@ -22,24 +24,24 @@ public class UserCreateController {
     private UserServiceInterface userService;
 
     @Autowired
-    private UserCreateFormValidator userCreateFormValidator;
+    private UserFormValidator userFormValidator;
 
     @Autowired
     private WebAppConfigHandler webConfHandler;
 
     @InitBinder("userCreateData")
     public void initBinder(WebDataBinder binder) {
-        binder.addValidators(userCreateFormValidator);
+        binder.addValidators(userFormValidator);
     }
 
-    @GetMapping(value = "/admin/create_user")
+    @GetMapping(value = ADMIN_CREATE_USER_URI)
     public ModelAndView loadUserCreateForm() {
         ModelAndView modelAndView = getModelAndView("user_create_form");
         modelAndView.addObject("userCreateData", new UserSaveData());
         return modelAndView;
     }
 
-    @PostMapping(value = "/admin/create_user")
+    @PostMapping(value = ADMIN_CREATE_USER_URI)
     public ModelAndView handleUserCreateOperation(@Valid @ModelAttribute("userCreateData") UserSaveData userCreateData,
                                              BindingResult bindingResult) {
 
@@ -51,7 +53,7 @@ public class UserCreateController {
         }
 
         userService.createUser(userCreateData);
-        return getModelAndView("redirect:/admin/users/");
+        return getModelAndView(REDIRECT_ADMIN_USERS_URI);
     }
 
     private ModelAndView getModelAndView(String viewName) {
