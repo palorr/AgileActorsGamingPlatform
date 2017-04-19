@@ -71,12 +71,14 @@ public class UserService implements UserServiceInterface {
         return userRepo.findOne(id);
     }
 
+    @Override
+    @Transactional
     public void updateAdminUser(User user){
         User existingUser = userRepo.findById(user.getId());
         existingUser.setName(user.getName());
         existingUser.setSurname(user.getSurname());
         existingUser.setUsername(user.getUsername());
         existingUser.setPassword(user.getPassword());
-        userRepo.save(user);
+        userRepo.save(existingUser);
     }
 }

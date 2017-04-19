@@ -18,7 +18,7 @@ public class UserFormController {
     private UserServiceInterface userService;
 
     @RequestMapping(value = "/admin/users/{id}/delete")
-    public String delete(@PathVariable(value="id") Integer id, Model model) {
+    public String delete(@PathVariable(value="id") Integer id) {
         userService.deleteUser(id);
         return "redirect:/admin/users";
     }
@@ -30,7 +30,7 @@ public class UserFormController {
     }
 
     @RequestMapping(value = "/admin/users/create", method = RequestMethod.POST)
-    public String save(Model model, @ModelAttribute("user") User user) {
+    public String save(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/admin/users";
     }
