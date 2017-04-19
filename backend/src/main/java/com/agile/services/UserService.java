@@ -58,4 +58,25 @@ public class UserService implements UserServiceInterface {
         user.setSurname(surname);
         userRepo.save(user);
     }
+
+    @Override
+    @Transactional
+    public void deleteUser(int id){
+        userRepo.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public User getUser(int id){
+        return userRepo.findOne(id);
+    }
+
+    public void updateAdminUser(User user){
+        User existingUser = userRepo.findById(user.getId());
+        existingUser.setName(user.getName());
+        existingUser.setSurname(user.getSurname());
+        existingUser.setUsername(user.getUsername());
+        existingUser.setPassword(user.getPassword());
+        userRepo.save(user);
+    }
 }

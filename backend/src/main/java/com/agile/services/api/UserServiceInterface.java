@@ -12,4 +12,7 @@ public interface UserServiceInterface {
     User getUserByUserNameAndPassword(String username, String password);
     Map<String, Object> getUserBasicInfoById(int id);
     void updateUser(String surname , String name , int id , String avatar , String username);
+    void deleteUser(int id);
+    User getUser(int id);
+    void updateAdminUser(User user);
 }
