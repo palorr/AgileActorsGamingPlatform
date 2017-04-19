@@ -72,16 +72,16 @@ public class AgileTwoApplication implements CommandLineRunner {
 		walletRepository.save(wallet3);
 
 
-		User user1 = new User("userName1", "userSurname1",
+		User user1 = new User("userNameOne", "userSurnameOne",
 				"user1", "userpass1", userRole, wallet1);
 
-		User user2 = new User("userName2", "userSurname2",
+		User user2 = new User("userNameTwo", "userSurnameTwo",
 				"user2", "userpass2", userRole, wallet2);
 
-		User user3 = new User("userName3", "userSurname3",
+		User user3 = new User("userNameThree", "userSurnameThree",
 				"user3", "userpass3", userRole, wallet3);
 
-		User admin1 = new User("adminName1", "adminSurname1",
+		User admin1 = new User("adminNameOne", "adminSurnameOne",
 				"admin1", "adminpass1", adminRole, null);
 
 

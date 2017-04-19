@@ -50,8 +50,8 @@
                 name="username"
                 type="text"
                 placeholder="Enter username"
-                pattern="[a-zA-Z0-9]{6,16}"
-                title="Username must be between 6 and 16 characters long. Accepted characters are letters and digits"
+                pattern="[a-zA-Z0-9]{4,16}"
+                title="Username must be between 4 and 16 characters long. Accepted characters are letters and digits"
                 required
             />
         </p>
@@ -65,8 +65,8 @@
                 name="password"
                 type="password"
                 placeholder="Enter password"
-                pattern="[a-zA-Z0-9@!#$]{6,16}"
-                title="Password must be between 6 and 16 characters long. Accepted characters are letters, digits and special symbols (@!#$)"
+                pattern="[a-zA-Z0-9@!#$]{4,16}"
+                title="Password must be between 4 and 16 characters long. Accepted characters are letters, digits and special symbols (@!#$)"
                 required
             />
         </p>
