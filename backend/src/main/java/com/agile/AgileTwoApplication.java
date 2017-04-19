@@ -2,6 +2,7 @@ package com.agile;
 
 import com.agile.model.*;
 import com.agile.repositories.*;
+import com.agile.services.api.GameServiceInterface;
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -45,6 +46,9 @@ public class AgileTwoApplication implements CommandLineRunner {
 
 	@Autowired
 	private UserServiceInterface userService;
+
+	@Autowired
+	private GameServiceInterface gameService;
 
 	@Override
 	public void run(String... strings) throws Exception {
@@ -90,8 +94,8 @@ public class AgileTwoApplication implements CommandLineRunner {
 		Game game1 = new Game(10, 100, "game1Name", "game 1 description");
 		Game game2 = new Game(40, 450, "game2Name", "game 2 description");
 
-		gameRepository.save(game1);
-		gameRepository.save(game2);
+		gameService.saveGame(game1);
+		gameService.saveGame(game2);
 
 		UpdatedGames updatedGame1 = new UpdatedGames(game1, user2, transactionTime);
 		UpdatedGames updatedGame2 = new UpdatedGames(game2, user2, transactionTime);
