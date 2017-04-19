@@ -1,7 +1,9 @@
 package com.agile.controllers.admin;
 
 
+import com.agile.model.Role;
 import com.agile.model.User;
+import com.agile.repositories.RoleRepository;
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,11 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 public class UserFormController {
 
     @Autowired
     private UserServiceInterface userService;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @RequestMapping(value = "/admin/users/{id}/delete")
     public String delete(@PathVariable(value="id") Integer id) {
@@ -38,7 +45,9 @@ public class UserFormController {
     @RequestMapping(value = "/admin/users/{id}/edit", method = RequestMethod.GET)
     public String edit(@PathVariable(value="id") Integer id, Model model) {
         User user = userService.getUser(id);
+        List<Role> roles = roleRepository.findAll();
         model.addAttribute("user", user);
+        model.addAttribute("roles", roles);
         model.addAttribute("url", "/admin/users/" + id + "/edit");
         return "user_form";
     }
