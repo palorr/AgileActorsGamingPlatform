@@ -4,3 +4,4 @@ export * from './authorizationModel';
 export * from './genericUser';
 export * from './genericGame';
 export * from './attachmentModel';
+export * from './gameResult';

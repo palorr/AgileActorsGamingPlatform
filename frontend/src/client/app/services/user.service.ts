@@ -55,7 +55,7 @@ export class UserService {
             'Accept': 'application/json',
         });
 
-        let options = new RequestOptions({ headers: headers })
+        let options = new RequestOptions({ headers: headers });
 
 
         return this.http.get(userURL, options)

@@ -109,7 +109,7 @@ public class GameService {
 	public GameResourceAfterPlay playGame(GameResourceToPlay resource) {
 		boolean win;
 		boolean enoughCredits;
-		int ammount;
+		int amount;
 		int credits;
 		
 		Double number = Math.random(); // random double between 0 & 1
@@ -124,7 +124,7 @@ public class GameService {
 			
 			if (number <= gameToPlay.getYield()) { // the user wins when the number is below the yield
 				win = true;
-				ammount = gameToPlay.getWin_credits();
+				amount = gameToPlay.getWin_credits();
 				credits = wallet.getCredits() + gameToPlay.getWin_credits();
 				
 				walletToUpdate.setId(wallet.getId());
@@ -135,7 +135,7 @@ public class GameService {
 
 			} else { // or loses if is over the yield
 				win = false;
-				ammount = 0;
+				amount = 0;
 				credits = wallet.getCredits() - gameToPlay.getWin_credits();
 				
 				walletToUpdate.setId(wallet.getId());
@@ -148,9 +148,9 @@ public class GameService {
 		} else {
 			enoughCredits = false;
 			win = false;
-			ammount = 0;
+			amount = 0;
 		}
-		return new GameResourceAfterPlay(win, enoughCredits, ammount); 
+		return new GameResourceAfterPlay(win, enoughCredits, amount);
 	}
 
 }

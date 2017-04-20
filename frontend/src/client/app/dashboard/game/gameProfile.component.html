@@ -29,11 +29,35 @@
     <p><i class="fa fa-money"></i> Credits to win: {{game.winCredits}}</p>
 
     <div class="col-lg-2"></div>
+
     <button type="button" class="col-lg-3 btn btn-lg" > Try</button>
+
     <div class="col-lg-2"></div>
-    <button type="button" class="col-lg-3 btn btn-lg" > Play</button>
+
+    <button *ngIf="!loading" type="button" class="col-lg-3 btn btn-lg" (click)="playGame()"  > Play</button>
+
+    <span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Loading...
+    </span>
+
     <div class="col-lg-2"></div>
 
   </div>
+  <!--Play Results-->
+  <span *ngIf="gameResult && !gameResult.hasEnoughCredits ">
+		<div class="alert alert-danger" style="font-size: xx-large">
+			I am sorry. You don't have enough credits.
+		</div>
+	</span>
+  <span *ngIf="gameResult && gameResult.hasEnoughCredits && !gameResult.win">
+		<div class="alert alert-info" style="font-size: xx-large">
+			I am sorry. You lost.
+		</div>
+	</span>
+  <span *ngIf="gameResult && gameResult.hasEnoughCredits && gameResult.win ">
+		<div class="alert alert-success" style="font-size: xx-large">
+			Congratulations !!! You won {{gameResult.amountWon}} credits!!!
+		</div>
+	</span>
 
 </div>

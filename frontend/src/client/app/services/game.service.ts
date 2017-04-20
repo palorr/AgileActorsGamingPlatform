@@ -24,6 +24,7 @@ export class GameService {
         throw (res.json());
       });
   }
+
   getGameMainInfo(gameId: number) {
     let userURL = CONFIGURATION.agileUrls.webApi+'games/' + gameId;
 
@@ -41,6 +42,7 @@ export class GameService {
         throw (res.json());
       });
   }
+
   getAllGamesByName(searchTerm: string) {
     let URL = CONFIGURATION.agileUrls.webApi+'games/search/' + searchTerm;
 
@@ -58,6 +60,28 @@ export class GameService {
       });
   }
 
+  playGame(gameId: number ,userId: number) {
+
+    let playGameURL = CONFIGURATION.agileUrls.webApi+'games/play';
+
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+    });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postRequestBody = JSON.stringify({
+      userId: userId,
+      gameId: gameId
+    });
+
+    return this.http.post(playGameURL, postRequestBody, options)
+      .map((response: Response) => response.json() )
+      .catch(res => {
+        console.log('CATCH: ', res.json());
+        throw (res.json());
+      });
+  }
 
 
 

@@ -10,18 +10,18 @@ public class GameResourceAfterPlay {
 
 	private boolean isWin;
 	private boolean hasEnoughCredits;
-	private int ammountWon;
+	private int amountWon;
 
 	/**
 	 * @param isWin
 	 * @param hasEnoughCredits
-	 * @param ammountWon
+	 * @param amountWon
 	 */
-	public GameResourceAfterPlay(boolean isWin, boolean hasEnoughCredits, int ammountWon) {
+	public GameResourceAfterPlay(boolean isWin, boolean hasEnoughCredits, int amountWon) {
 		super();
 		this.isWin = isWin;
 		this.hasEnoughCredits = hasEnoughCredits;
-		this.ammountWon = ammountWon;
+		this.amountWon = amountWon;
 	}
 
 	public boolean isWin() {
@@ -40,11 +40,11 @@ public class GameResourceAfterPlay {
 		this.hasEnoughCredits = hasEnoughCredits;
 	}
 
-	public int getAmmountWon() {
-		return ammountWon;
+	public int getAmountWon() {
+		return amountWon;
 	}
 
-	public void setAmmountWon(int ammountWon) {
-		this.ammountWon = ammountWon;
+	public void setAmountWon(int amountWon) {
+		this.amountWon = amountWon;
 	}
 }
