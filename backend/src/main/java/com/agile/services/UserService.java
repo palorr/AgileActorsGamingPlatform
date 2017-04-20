@@ -5,6 +5,9 @@ import com.agile.repositories.UserRepository;
 import com.agile.resources.UserResource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service("userService")
-public class UserService {
+public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -85,5 +88,10 @@ public class UserService {
 
 	public User findUserById(int id) {
 		return userRepository.findById(id);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return userRepository.findByUsername(username);
 	}
 }
