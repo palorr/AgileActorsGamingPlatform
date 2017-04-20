@@ -1,20 +1,21 @@
 package com.agile.controllers.users;
 
-import com.agile.model.Wallet;
-import com.agile.repositories.WalletRepository;
+import com.agile.resources.WalletResource;
+import com.agile.services.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class WalletController {
 
     @Autowired
-    private WalletRepository walletRepository;
+    private WalletService walletService;
 
-    @GetMapping(value = "/wallets")
-    public List<Wallet> getWallets() {
-        return walletRepository.findAll();
+    @GetMapping(value = "/wallet/{userId}")
+    public WalletResource getWalletByUserId(@PathVariable(value = "userId") int userId) {
+        return walletService.getWalletByUserId(userId);
     }
+
 }

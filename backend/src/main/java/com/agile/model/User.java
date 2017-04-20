@@ -28,7 +28,7 @@ public class User {
     @ManyToOne(optional = false)
     private Role role;
 
-    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
     private Wallet wallet;
 
     protected User() {}
