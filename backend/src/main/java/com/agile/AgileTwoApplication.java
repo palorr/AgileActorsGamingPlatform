@@ -1,6 +1,7 @@
 package com.agile;
 
 import com.agile.model.*;
+import com.agile.model.enums.OperationEnum;
 import com.agile.repositories.*;
 import com.agile.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,10 @@
 package com.agile.services;
 
 import com.agile.model.Game;
-import com.agile.model.OperationEnum;
 import com.agile.model.Tries;
 import com.agile.model.User;
 import com.agile.model.Wallet;
+import com.agile.model.enums.OperationEnum;
 import com.agile.repositories.GameRepository;
 import com.agile.repositories.TryRepository;
 import com.agile.resources.GameResource;

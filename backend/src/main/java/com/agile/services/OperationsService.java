@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.agile.model.Game;
-import com.agile.model.OperationEnum;
 import com.agile.model.User;
 import com.agile.model.UserCreditsOperation;
 import com.agile.model.UserGameBuyOperation;
 import com.agile.model.UserGamePlayOperation;
+import com.agile.model.enums.OperationEnum;
 import com.agile.repositories.UserCreditsOperationsRepository;
 import com.agile.repositories.UserGameBuyOperationRepository;
 import com.agile.repositories.UserGamePlayOperationRepository;

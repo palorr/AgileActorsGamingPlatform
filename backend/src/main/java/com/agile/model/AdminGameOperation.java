@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.*;
 
+import com.agile.model.enums.OperationEnum;
+
 @Entity
 @Table(name="admin_game_operations")
 public class AdminGameOperation {
