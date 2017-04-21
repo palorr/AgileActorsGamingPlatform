@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
- import { UserProfileComponent } from './userProfile.component';
- import { UserEditComponent } from './userEdit.component';
- import { UserSearchComponent } from './userSearch.component';
+import { UserProfileComponent } from './userProfile.component';
+import { UserEditComponent } from './userEdit.component';
+import { UserSearchComponent } from './userSearch.component';
 import { UserListComponent } from './userList.component';
 import { UserComponent } from './user.component';
+import { UserWalletComponent} from './userWallet.component';
+
 import {
 		TabsModule,
 	} from 'ng2-bootstrap/ng2-bootstrap';
@@ -24,14 +26,16 @@ import {
         UserProfileComponent,
         UserEditComponent,
         UserListComponent,
-        UserSearchComponent
+        UserSearchComponent,
+        UserWalletComponent
     ],
     exports: [
         UserComponent,
         UserProfileComponent,
         UserEditComponent,
         UserSearchComponent,
-        UserListComponent
+        UserListComponent,
+        UserWalletComponent
     ]
 })
 

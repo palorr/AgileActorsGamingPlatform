@@ -18,7 +18,8 @@ import {
 	AuthenticationService,
 	RegistrationService,
 	UserService,
-  GameService
+  GameService,
+  WalletService
 } from './services/index';
 
 import { AuthGuard, AuthorizationGuard } from './guards/index';
@@ -51,7 +52,8 @@ import { CurrentUserService } from './helpers/index';
 		GameService,
 		AuthGuard,
 		AuthorizationGuard,
-		CurrentUserService
+		CurrentUserService,
+    WalletService
 	],
 	bootstrap: [AppComponent]
 

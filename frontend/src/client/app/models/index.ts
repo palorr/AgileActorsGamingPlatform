@@ -5,3 +5,4 @@ export * from './genericUser';
 export * from './genericGame';
 export * from './attachmentModel';
 export * from './gameResult';
+export * from './genericWallet';
