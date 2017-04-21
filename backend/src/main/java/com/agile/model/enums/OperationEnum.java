@@ -1,4 +1,4 @@
-package com.agile.model;
+package com.agile.model.enums;
 
 public enum OperationEnum {
 	

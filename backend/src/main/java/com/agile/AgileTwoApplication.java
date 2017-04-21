@@ -1,6 +1,7 @@
 package com.agile;
 
 import com.agile.model.*;
+import com.agile.model.enums.OperationEnum;
 import com.agile.repositories.*;
 import com.agile.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ implements CommandLineRunner
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private TryRepository tryRepository;
 
 	@Autowired
 	private RoleRepository roleRepository;
@@ -70,6 +74,9 @@ implements CommandLineRunner
 		walletRepository.save(wallet2);
 		walletRepository.save(wallet3);
         walletRepository.save(wallet4);
+        
+        Tries tries = new Tries();
+        tryRepository.save(tries);
 
 
 		User user1 = new User("Archontellis", "Sotirchellis",

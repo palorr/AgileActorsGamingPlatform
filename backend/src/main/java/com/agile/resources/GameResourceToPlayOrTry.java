@@ -6,12 +6,12 @@ package com.agile.resources;
  * @author NikosMas
  *
  */
-public class GameResourceToPlay {
+public class GameResourceToPlayOrTry {
 
 	private int userId;
 	private int gameId;
 	
-	public GameResourceToPlay() {
+	public GameResourceToPlayOrTry() {
 		super();
 	}
 
