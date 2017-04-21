@@ -83,6 +83,27 @@ export class GameService {
       });
   }
 
+  tryGame(gameId: number ,userId: number) {
 
+    let tryGameURL = CONFIGURATION.agileUrls.webApi+'games/try';
+
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+    });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postRequestBody = JSON.stringify({
+      userId: userId,
+      gameId: gameId
+    });
+
+    return this.http.post(tryGameURL, postRequestBody, options)
+      .map((response: Response) => response.json() )
+      .catch(res => {
+        console.log('CATCH: ', res.json());
+        throw (res.json());
+      });
+  }
 
 }

@@ -28,6 +28,7 @@ export class UserService {
             });
 
     }
+
     getAllUsersByName(searchTerm: string) {
         let URL = CONFIGURATION.agileUrls.webApi+'users/search/' + searchTerm;
 

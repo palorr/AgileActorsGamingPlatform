@@ -180,19 +180,18 @@ public class GameService {
 		if (tr < 3){
 			if (number <= gameToPlay.getYield()) { // the user wins when the number is below the yield
 				win = true;
-			} else { // or loses if is over the yield
+			}
+			else { // or loses if is over the yield
 				win = false;
 			}
 			
 			tr += 1;
 			efforts.setTryNum(tr);
-			enoughTries = true;
-			if (tr == 3) enoughTries = false;
 			tryRepository.save(efforts);
 			
-			return new GameResourceAfterTry(win, enoughTries);
+			return new GameResourceAfterTry( win , tr);
 		}
-		return new GameResourceAfterTry(false, false);
+		return new GameResourceAfterTry(false, 0);
 	}
 
 

@@ -30,4 +30,29 @@ export class WalletService {
 
   }
 
+  deposit(userId : number , number : string , credits : number) {
+
+    let depositURL = CONFIGURATION.agileUrls.webApi+'wallet/deposit';
+
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+    });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postRequestBody = JSON.stringify({
+      userId: userId,
+      number: number,
+      credits: credits
+    });
+
+    return this.http.post(depositURL, postRequestBody, options)
+      .map((response: Response) => response.json() )
+      .catch(res => {
+        console.log('CATCH: ', res.json());
+        throw (res.json());
+      });
+
+  }
+
 }

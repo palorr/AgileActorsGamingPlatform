@@ -9,16 +9,16 @@ package com.agile.resources;
 public class GameResourceAfterTry {
 
 	private boolean isWin;
-	private boolean hasEnoughTries;
+	private int currentTryNumber;
 
 	/**
 	 * @param isWin
-	 * @param hasEnoughTries
+	 * @param currentTryNumber
 	 */
-	public GameResourceAfterTry(boolean isWin, boolean hasEnoughTries) {
-		super();
-		this.isWin = isWin;
-		this.hasEnoughTries = hasEnoughTries;
+	public GameResourceAfterTry(boolean isWin, int currentTryNumber) {
+		super() ;
+		this.isWin = isWin ;
+		this.currentTryNumber = currentTryNumber ;
 	}
 
 	public boolean isWin() {
@@ -29,11 +29,11 @@ public class GameResourceAfterTry {
 		this.isWin = isWin;
 	}
 
-	public boolean isHasEnoughCredits() {
-		return hasEnoughTries;
+	public int getCurrentTryNumber() {
+		return currentTryNumber;
 	}
 
-	public void setHasEnoughCredits(boolean hasEnoughTries) {
-		this.hasEnoughTries = hasEnoughTries;
+	public void setCurrentTryNumber(int currentTryNumber) {
+		this.currentTryNumber = currentTryNumber;
 	}
 }

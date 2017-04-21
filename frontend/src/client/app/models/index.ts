@@ -4,5 +4,6 @@ export * from './authorizationModel';
 export * from './genericUser';
 export * from './genericGame';
 export * from './attachmentModel';
-export * from './gameResult';
+export * from './playResponse';
 export * from './genericWallet';
+export * from './tryResponse';

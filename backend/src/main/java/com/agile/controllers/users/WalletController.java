@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
-//@CrossOrigin(origins = "http://localhost:5555")
+@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class WalletController {
 

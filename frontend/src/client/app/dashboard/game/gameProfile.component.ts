@@ -3,7 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GameService, AlertService } from '../../services/index';
 
-import { GenericGame , GameResult } from '../../models/index';
+import { GenericGame , PlayResponse } from '../../models/index';
+import {TryResponse} from "../../models/tryResponse";
 
 @Component({
   moduleId: module.id,
@@ -14,7 +15,10 @@ import { GenericGame , GameResult } from '../../models/index';
 export class GameProfileComponent implements OnInit {
   id : number ;
   game : GenericGame ;
-  gameResult: GameResult ;
+  playResponse: PlayResponse ;
+  tryResponse: TryResponse ;
+  hasEnoughTries: boolean ;
+  moreTries: number ;
   loading = false ;
 
   constructor(
@@ -44,20 +48,52 @@ export class GameProfileComponent implements OnInit {
   playGame() {
 
       this.loading = true;
+      this.playResponse = null;//hde the results
+      this.tryResponse = null;
 
       return this.gameService
         .playGame(this.id , 1)//fake -> user 1 is playing, i need token to take the current user
         .subscribe(
 
-          (data: GameResult) => {
-            this.gameResult = data ;
+          (data: PlayResponse) => {
+            this.playResponse = data ;
             this.loading = false ;
-            console.log('Game Result: ', this.gameResult) ;
+            console.log('Game Result: ', this.playResponse) ;
           },
 
           (err) => {
             this.alertService.error('I am sorry, something went wrong. Please try again later!');
 
           });
+  }
+
+  tryGame() {
+
+    this.loading = true ;
+    this.playResponse = null;//hide the results
+    this.tryResponse = null;
+
+    return this.gameService
+      .tryGame(this.id , 1)//fake -> user 1 is tryig, i need token to take the current user
+      .subscribe(
+
+        (data: TryResponse) => {
+          this.tryResponse = data ;
+
+          if(this.tryResponse.currentTryNumber===0) {
+            this.hasEnoughTries = false ;
+          } else {
+            this.hasEnoughTries = true ;
+            this.moreTries = 3 - this.tryResponse.currentTryNumber ;
+          }
+
+          this.loading = false ;
+          console.log('Try Result: ', this.tryResponse) ;
+        },
+
+        (err) => {
+          this.alertService.error('I am sorry, something went wrong. Please try again later!');
+
+        });
   }
 }

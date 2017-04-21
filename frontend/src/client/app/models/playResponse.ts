@@ -1,4 +1,4 @@
-export class GameResult {
+export class PlayResponse {
 
   hasEnoughCredits: boolean;
 
