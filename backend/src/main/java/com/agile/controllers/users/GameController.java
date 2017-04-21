@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.agile.resources.GameResource;
 import com.agile.resources.GameResourceAfterPlay;
-import com.agile.resources.GameResourceToPlay;
+import com.agile.resources.GameResourceAfterTry;
+import com.agile.resources.GameResourceToPlayOrTry;
 
 @CrossOrigin(origins = "http://localhost:5555")
 @RestController
@@ -27,8 +28,13 @@ public class GameController {
 	}
 
 	@PostMapping(value = "games/play")
-	public GameResourceAfterPlay selectGameToPlay(@RequestBody GameResourceToPlay resource) {
+	public GameResourceAfterPlay selectGameToPlay(@RequestBody GameResourceToPlayOrTry resource) {
 		return gameService.playGame(resource);
+	}
+	
+	@PostMapping(value = "games/try")
+	public GameResourceAfterTry selectGameToTry(@RequestBody GameResourceToPlayOrTry resource) {
+		return gameService.tryGame(resource);
 	}
 
 	@GetMapping(value = "/games/search/{searchTerm}")

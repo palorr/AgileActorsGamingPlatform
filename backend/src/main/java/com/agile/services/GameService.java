@@ -2,12 +2,15 @@ package com.agile.services;
 
 import com.agile.model.Game;
 import com.agile.model.OperationEnum;
+import com.agile.model.Tries;
 import com.agile.model.User;
 import com.agile.model.Wallet;
 import com.agile.repositories.GameRepository;
+import com.agile.repositories.TryRepository;
 import com.agile.resources.GameResource;
 import com.agile.resources.GameResourceAfterPlay;
-import com.agile.resources.GameResourceToPlay;
+import com.agile.resources.GameResourceAfterTry;
+import com.agile.resources.GameResourceToPlayOrTry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,14 +30,16 @@ public class GameService {
 	private UserService userService;
 	private WalletService walletService;
 	private OperationsService operationsService;
+	private TryRepository tryRepository;
 
 	@Autowired
 	public GameService(GameRepository gameRepository, UserService userService,
-			WalletService walletService, OperationsService operationsService) {
+			WalletService walletService, OperationsService operationsService,TryRepository tryRepository) {
 		this.gameRepository = gameRepository;
 		this.userService = userService;
 		this.walletService = walletService;
 		this.operationsService = operationsService;
+		this.tryRepository = tryRepository;
 	}
 
 	@Transactional
@@ -106,7 +111,7 @@ public class GameService {
 	 * @return
 	 */
 	@Transactional
-	public GameResourceAfterPlay playGame(GameResourceToPlay resource) {
+	public GameResourceAfterPlay playGame(GameResourceToPlayOrTry resource) {
 		boolean win;
 		boolean enoughCredits;
 		int amount;
@@ -152,5 +157,43 @@ public class GameService {
 		}
 		return new GameResourceAfterPlay(win, enoughCredits, amount);
 	}
+	
+	@Transactional
+	public GameResourceAfterTry tryGame(GameResourceToPlayOrTry resource) {
+		boolean win;
+		boolean enoughTries;
+		
+		Double number = Math.random(); // random double between 0 & 1
+		Game gameToPlay = findGameById(resource.getGameId());
+
+		if (tryRepository.findByGameIdAndUserId(resource.getGameId(), resource.getUserId()) == null){
+			Tries tries = new Tries();
+			tries.setGameId(resource.getGameId());
+			tries.setUserId(resource.getUserId());
+			tries.setTryNum(0);
+			tryRepository.save(tries);
+		}
+		
+		Tries efforts = tryRepository.findByGameIdAndUserId(resource.getGameId(), resource.getUserId());
+		int tr = efforts.getTryNum();
+		
+		if (tr < 3){
+			if (number <= gameToPlay.getYield()) { // the user wins when the number is below the yield
+				win = true;
+			} else { // or loses if is over the yield
+				win = false;
+			}
+			
+			tr += 1;
+			efforts.setTryNum(tr);
+			enoughTries = true;
+			if (tr == 3) enoughTries = false;
+			tryRepository.save(efforts);
+			
+			return new GameResourceAfterTry(win, enoughTries);
+		}
+		return new GameResourceAfterTry(false, false);
+	}
+
 
 }
