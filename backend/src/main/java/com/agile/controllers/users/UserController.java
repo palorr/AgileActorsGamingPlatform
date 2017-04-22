@@ -23,7 +23,6 @@ public class UserController {
 		return userService.getUserBasicInfoById(id);
 	}
 
-//	// TODO: this error "result returns more than one elements" until we set unique data into database (validate username to be unique)
 //	@GetMapping(value = "/users")
 //	public User getUserByCredentials(@Param(value = "username") String username,
 //									 @Param(value = "password") String password) {

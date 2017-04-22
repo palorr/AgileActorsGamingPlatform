@@ -42,7 +42,7 @@ public class UserService {
 
 	@Transactional
 	public List<UserResource> getBasicInfoOfAllUsersWithNameStartsWith(String searchTerm){
-		List<UserResource> usersWithSearchCriteria = userRepository.findByNameStartingWith(searchTerm).stream().map(user -> {
+		List<UserResource> usersWithSearchCriteria = userRepository.findByNameStartingWithOrSurnameStartingWithOrUsernameStartingWith(searchTerm, searchTerm, searchTerm).stream().map(user -> {
 
 			UserResource resource = new UserResource();
 			resource.setId(user.getId());
