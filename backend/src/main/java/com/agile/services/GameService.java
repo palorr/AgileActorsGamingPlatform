@@ -123,14 +123,14 @@ public class GameService {
 		Wallet wallet = walletService.findWalletById(user.getWallet().getId());
 		Game gameToPlay = findGameById(resource.getGameId());
 
-		if (wallet.getCredits() > gameToPlay.getBuy_credits()) {
+		if (wallet.getCredits() > gameToPlay.getBuy_credits()) { // if has enough credits
 			enoughCredits = true;
 			Wallet walletToUpdate = new Wallet();
 			
 			if (number <= gameToPlay.getYield()) { // the user wins when the number is below the yield
 				win = true;
 				amount = gameToPlay.getWin_credits();
-				credits = wallet.getCredits() + gameToPlay.getWin_credits();
+				credits = wallet.getCredits() + gameToPlay.getWin_credits() - gameToPlay.getBuy_credits();
 				
 				walletToUpdate.setId(wallet.getId());
 				walletToUpdate.setCredits(credits);
@@ -141,7 +141,7 @@ public class GameService {
 			} else { // or loses if is over the yield
 				win = false;
 				amount = 0;
-				credits = wallet.getCredits() - gameToPlay.getWin_credits();
+				credits = wallet.getCredits() - gameToPlay.getBuy_credits(); // only lose the money
 				
 				walletToUpdate.setId(wallet.getId());
 				walletToUpdate.setCredits(credits);
