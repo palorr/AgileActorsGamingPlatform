@@ -1,19 +1,19 @@
 package com.agile.resources;
 
-public class WalletDepositResource {
+public class WalletOpeartionsResource {
 
 	private int userId;
 	private String number;
 	private int credits;
 	
-	public WalletDepositResource(int userId, String number, int credits) {
+	public WalletOpeartionsResource(int userId, String number, int credits) {
 		super();
 		this.userId = userId;
 		this.number = number;
 		this.credits = credits;
 	}
 	
-	public WalletDepositResource() {
+	public WalletOpeartionsResource() {
 		super();
 	}
 	public int getUserId() {

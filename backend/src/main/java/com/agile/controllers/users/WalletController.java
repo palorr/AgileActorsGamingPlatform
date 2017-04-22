@@ -1,8 +1,9 @@
 package com.agile.controllers.users;
 
-import com.agile.resources.DepositResponseResource;
-import com.agile.resources.WalletDepositResource;
+import com.agile.resources.WalletDepositAnswerResource;
+import com.agile.resources.WalletOpeartionsResource;
 import com.agile.resources.WalletResource;
+import com.agile.resources.WalletWithdrawAnswerResource;
 import com.agile.services.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,13 @@ public class WalletController {
     }
     
     @PostMapping(value = "/wallet/deposit")
-    public DepositResponseResource deposit(@RequestBody WalletDepositResource resource){
+    public WalletDepositAnswerResource deposit(@RequestBody WalletOpeartionsResource resource){
 		return walletService.deposit(resource);
+    }
+    
+    @PostMapping(value = "/wallet/withdraw")
+    public WalletWithdrawAnswerResource withdraw(@RequestBody WalletOpeartionsResource resource){
+		return walletService.withdraw(resource);
     }
 
 }
