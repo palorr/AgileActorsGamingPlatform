@@ -1,5 +1,6 @@
 package com.agile.resources;
 
+import com.agile.model.Role;
 import com.agile.model.User;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -29,7 +30,7 @@ public class UserSaveData {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.avatar = user.getAvatar();
-        this.role = user.getRole().getName();
+        this.role = user.getRole();
     }
 
     @NotEmpty
@@ -63,7 +64,7 @@ public class UserSaveData {
     private int id;
 
     @NotEmpty
-    private String role = "";
+    private Role role;
 
     public String getPassword() {
         return password;
@@ -113,11 +114,11 @@ public class UserSaveData {
         this.avatar = avatar;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

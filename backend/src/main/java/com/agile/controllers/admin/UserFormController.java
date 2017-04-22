@@ -1,6 +1,7 @@
 package com.agile.controllers.admin;
 
 
+import com.agile.handlers.WebAppConfigHandler;
 import com.agile.model.Role;
 import com.agile.model.User;
 import com.agile.repositories.RoleRepository;
@@ -11,12 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
 
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_UPDATE_USER_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_USERS_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
+import static com.agile.resources.UriPaths.ADMIN_UPDATE_USER_ID_URI;
+
 @Controller
 public class UserFormController {
+
+    @Autowired
+    private WebAppConfigHandler webConfHandler;
 
     @Autowired
     private UserServiceInterface userService;
@@ -53,17 +63,18 @@ public class UserFormController {
         return "redirect:/admin/users";
     }
 
-    @GetMapping(value = "/admin/users/{id}/edit")
-    public String edit(@PathVariable(value="id") Integer id, Model model) {
-        User user = userService.getUser(id);
+    @GetMapping(value = ADMIN_UPDATE_USER_ID_URI)
+    public ModelAndView edit(@PathVariable(value="id") Integer id) {
+        UserSaveData userUpdateData = new UserSaveData(userService.getUser(id));
         List<Role> roles = roleRepository.findAll();
-        model.addAttribute("user", user);
-        model.addAttribute("roles", roles);
-        model.addAttribute("url", "/admin/users/" + id + "/edit");
-        return "user_form";
+        ModelAndView modelAndView = getModelAndView("user_form");
+        modelAndView.addObject("user", userUpdateData);
+        modelAndView.addObject("roles", roles);
+        modelAndView.addObject("url", ADMIN_UPDATE_USER_ID_URI);
+        return modelAndView;
     }
 
-    @PostMapping(value = "/admin/users/{id}/edit")
+    @PostMapping(value = ADMIN_UPDATE_USER_ID_URI)
     public String change(@PathVariable(value="id") Integer id, Model model, @Valid @ModelAttribute("user") UserSaveData userData,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -76,5 +87,16 @@ public class UserFormController {
         }
         userService.updateUserByAdmin(userData);
         return "redirect:/admin/users";
+    }
+
+    private ModelAndView getModelAndView(String viewName) {
+        ModelAndView modelAndView = new ModelAndView(viewName);
+        modelAndView.addObject(ADMIN_UPDATE_USER_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_UPDATE_USER_URI_PARAM));
+        modelAndView.addObject(ADMIN_USERS_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_USERS_URI_PARAM));
+        modelAndView.addObject(LOGOUT_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(LOGOUT_URI_PARAM));
+        return modelAndView;
     }
 }

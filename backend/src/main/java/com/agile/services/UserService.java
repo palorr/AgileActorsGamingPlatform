@@ -97,7 +97,7 @@ public class UserService implements UserServiceInterface {
 
         User user = new User(userData.getName(), userData.getSurname(),
                 userData.getUsername(), passwordEncoder.encode(userData.getPassword()),
-                roleRepo.findByName(userData.getRole()), wallet);
+                userData.getRole(), wallet);
         if (userData.getAvatar() != null) {
             user.setAvatar(userData.getAvatar());
         }
@@ -113,7 +113,7 @@ public class UserService implements UserServiceInterface {
         user.setSurname(userData.getSurname());
         user.setPassword(passwordEncoder.encode(userData.getPassword()));
         user.setUsername(userData.getUsername());
-        user.setRole(roleRepo.findByName(userData.getRole()));
+        user.setRole(userData.getRole());
         return userRepo.save(user);
     }
 

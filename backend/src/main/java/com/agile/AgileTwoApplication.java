@@ -76,19 +76,19 @@ public class AgileTwoApplication implements CommandLineRunner {
 
 
 		User user1 = new User("userNameOne", "userSurnameOne",
-				"user1", passwordEncoder.encode("userpass1"), userRole, wallet1);
+				"user1", "userpass1", userRole, wallet1);
 		UserSaveData userData1 = new UserSaveData(user1);
 
 		User user2 = new User("userNameTwo", "userNameTwo",
-				"user2", passwordEncoder.encode("userpass2"), userRole, wallet2);
+				"user2", "userpass2", userRole, wallet2);
 		UserSaveData userData2 = new UserSaveData(user2);
 
 		User user3 = new User("userNameThree", "userSurnameThree",
-				"user3", passwordEncoder.encode("userpass3"), userRole, wallet3);
+				"user3", "userpass3", userRole, wallet3);
 		UserSaveData userData3 = new UserSaveData(user3);
 
 		User admin1 = new User("adminNameOne", "adminSurnameOne",
-				"admin1", passwordEncoder.encode("adminpass1"), adminRole, null);
+				"admin1", "adminpass1", adminRole, null);
 		UserSaveData userAdmin1 = new UserSaveData(admin1);
 
 		userService.createUser(userData1);
