@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Timestamp;
 
@@ -54,6 +55,7 @@ public class AgileTwoApplication implements CommandLineRunner {
 	public void run(String... strings) throws Exception {
 
 		Timestamp transactionTime = new Timestamp(System.currentTimeMillis());
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		System.out.println("Spring Application started.:");
 
@@ -73,16 +75,16 @@ public class AgileTwoApplication implements CommandLineRunner {
 
 
 		User user1 = new User("userNameOne", "userSurnameOne",
-				"user1", "userpass1", userRole, wallet1);
+				"user1", passwordEncoder.encode("userpass1"), userRole, wallet1);
 
-		User user2 = new User("userNameTwo", "userSurnameTwo",
-				"user2", "userpass2", userRole, wallet2);
+		User user2 = new User("userNameTwo", "userNameTwo",
+				"user2", passwordEncoder.encode("userpass2"), userRole, wallet2);
 
 		User user3 = new User("userNameThree", "userSurnameThree",
-				"user3", "userpass3", userRole, wallet3);
+				"user3", passwordEncoder.encode("userpass3"), userRole, wallet3);
 
 		User admin1 = new User("adminNameOne", "adminSurnameOne",
-				"admin1", "adminpass1", adminRole, null);
+				"admin1", passwordEncoder.encode("adminpass1"), adminRole, null);
 
 
 		userService.saveUser(user1);
@@ -94,8 +96,8 @@ public class AgileTwoApplication implements CommandLineRunner {
 		Game game1 = new Game(10, 100, "game1Name", "game 1 description");
 		Game game2 = new Game(40, 450, "game2Name", "game 2 description");
 
-		gameService.saveGame(game1);
-		gameService.saveGame(game2);
+		gameRepository.save(game1);
+		gameRepository.save(game2);
 
 		UpdatedGames updatedGame1 = new UpdatedGames(game1, user2, transactionTime);
 		UpdatedGames updatedGame2 = new UpdatedGames(game2, user2, transactionTime);
