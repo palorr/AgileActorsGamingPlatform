@@ -2,6 +2,7 @@ package com.agile;
 
 import com.agile.model.*;
 import com.agile.repositories.*;
+import com.agile.resources.UserSaveData;
 import com.agile.services.api.GameServiceInterface;
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,21 +77,24 @@ public class AgileTwoApplication implements CommandLineRunner {
 
 		User user1 = new User("userNameOne", "userSurnameOne",
 				"user1", passwordEncoder.encode("userpass1"), userRole, wallet1);
+		UserSaveData userData1 = new UserSaveData(user1);
 
 		User user2 = new User("userNameTwo", "userNameTwo",
 				"user2", passwordEncoder.encode("userpass2"), userRole, wallet2);
+		UserSaveData userData2 = new UserSaveData(user2);
 
 		User user3 = new User("userNameThree", "userSurnameThree",
 				"user3", passwordEncoder.encode("userpass3"), userRole, wallet3);
+		UserSaveData userData3 = new UserSaveData(user3);
 
 		User admin1 = new User("adminNameOne", "adminSurnameOne",
 				"admin1", passwordEncoder.encode("adminpass1"), adminRole, null);
+		UserSaveData userAdmin1 = new UserSaveData(admin1);
 
-
-		userService.saveUser(user1);
-		userService.saveUser(user2);
-		userService.saveUser(user3);
-		userService.saveUser(admin1);
+		userService.createUser(userData1);
+		userService.createUser(userData2);
+		userService.createUser(userData3);
+		userService.createUser(userAdmin1);
 
 
 		Game game1 = new Game(10, 100, "game1Name", "game 1 description");
@@ -99,19 +103,19 @@ public class AgileTwoApplication implements CommandLineRunner {
 		gameRepository.save(game1);
 		gameRepository.save(game2);
 
-		UpdatedGames updatedGame1 = new UpdatedGames(game1, user2, transactionTime);
-		UpdatedGames updatedGame2 = new UpdatedGames(game2, user2, transactionTime);
-		UpdatedGames updatedGame3 = new UpdatedGames(game2, user3, transactionTime);
+		UpdatedGames updatedGame1 = new UpdatedGames(game1, userService.getUserByUsername("user1"), transactionTime);
+		UpdatedGames updatedGame2 = new UpdatedGames(game2, userService.getUserByUsername("user2"), transactionTime);
+		UpdatedGames updatedGame3 = new UpdatedGames(game2, userService.getUserByUsername("user3"), transactionTime);
 
 		updatedGamesRepository.save(updatedGame1);
 		updatedGamesRepository.save(updatedGame2);
 		updatedGamesRepository.save(updatedGame3);
 
-		UserCreditsOperation userCreditsOperation1 = new UserCreditsOperation(user1, 400,
+		UserCreditsOperation userCreditsOperation1 = new UserCreditsOperation(userService.getUserByUsername("user1"), 400,
 				UserCreditsOperation.OperationEnum.ADDED, transactionTime);
-		UserCreditsOperation userCreditsOperation2 = new UserCreditsOperation(user1, 200,
+		UserCreditsOperation userCreditsOperation2 = new UserCreditsOperation(userService.getUserByUsername("user1"), 200,
 				UserCreditsOperation.OperationEnum.REMOVED, transactionTime);
-		UserCreditsOperation userCreditsOperation3 = new UserCreditsOperation(user2, 124,
+		UserCreditsOperation userCreditsOperation3 = new UserCreditsOperation(userService.getUserByUsername("user2"), 124,
 				UserCreditsOperation.OperationEnum.ADDED, transactionTime);
 
 
@@ -119,26 +123,26 @@ public class AgileTwoApplication implements CommandLineRunner {
 		userCreditsOperationsRepository.save(userCreditsOperation2);
 		userCreditsOperationsRepository.save(userCreditsOperation3);
 
-		UserGameBuyOperation userGameBuyOperation1 = new UserGameBuyOperation(user1, game1, transactionTime);
-		UserGameBuyOperation userGameBuyOperation2 = new UserGameBuyOperation(user1, game2, transactionTime);
-		UserGameBuyOperation userGameBuyOperation3 = new UserGameBuyOperation(user3, game2, transactionTime);
+		UserGameBuyOperation userGameBuyOperation1 = new UserGameBuyOperation(userService.getUserByUsername("user1"), game1, transactionTime);
+		UserGameBuyOperation userGameBuyOperation2 = new UserGameBuyOperation(userService.getUserByUsername("user1"), game2, transactionTime);
+		UserGameBuyOperation userGameBuyOperation3 = new UserGameBuyOperation(userService.getUserByUsername("user3"), game2, transactionTime);
 
 		userGameBuyOperationRepository.save(userGameBuyOperation1);
 		userGameBuyOperationRepository.save(userGameBuyOperation2);
 		userGameBuyOperationRepository.save(userGameBuyOperation3);
 
-		UserGamePlayOperation userGamePlayOperation1 = new UserGamePlayOperation(user1, game1, 500,
+		UserGamePlayOperation userGamePlayOperation1 = new UserGamePlayOperation(userService.getUserByUsername("user1"), game1, 500,
 				false, true, transactionTime);
-		UserGamePlayOperation userGamePlayOperation2  = new UserGamePlayOperation(user1, game2, 0,
+		UserGamePlayOperation userGamePlayOperation2  = new UserGamePlayOperation(userService.getUserByUsername("user1"), game2, 0,
 				false, false, transactionTime);
 
 		userGamePlayOperationRepository.save(userGamePlayOperation1);
 		userGamePlayOperationRepository.save(userGamePlayOperation2);
 
-		AdminViewOperation viewOperation1 = new AdminViewOperation(user1, transactionTime );
-		AdminViewOperation viewOperation2 = new AdminViewOperation(user2, transactionTime );
-		AdminViewOperation viewOperation3 = new AdminViewOperation(user3, transactionTime );
-		AdminViewOperation viewOperation4 = new AdminViewOperation(user2, transactionTime );
+		AdminViewOperation viewOperation1 = new AdminViewOperation(userService.getUserByUsername("user1"), transactionTime );
+		AdminViewOperation viewOperation2 = new AdminViewOperation(userService.getUserByUsername("user2"), transactionTime );
+		AdminViewOperation viewOperation3 = new AdminViewOperation(userService.getUserByUsername("user3"), transactionTime );
+		AdminViewOperation viewOperation4 = new AdminViewOperation(userService.getUserByUsername("user2"), transactionTime );
 
 		adminViewOperationRepository.save(viewOperation1);
 		adminViewOperationRepository.save(viewOperation2);

@@ -8,7 +8,6 @@ import java.util.Map;
 
 public interface UserServiceInterface {
 
-    void saveUser(User user);
     List<User> fetchUsers();
     User getUserByUsernameAndPassword(String username, String password);
     Map<String, Object>
@@ -16,7 +15,7 @@ public interface UserServiceInterface {
     User getUserByUsername(String username);
     void updateUser(String surname , String name , int id , String avatar , String username);
     User createUser(UserSaveData userData);
-    User updateUser(UserSaveData userData);
     void deleteUser(int id);
     User getUser(int id);
+    User updateUserByAdmin(UserSaveData userData);
 }

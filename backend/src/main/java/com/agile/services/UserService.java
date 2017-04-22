@@ -46,11 +46,6 @@ public class UserService implements UserServiceInterface {
     public UserService() {
     }
 
-    @Override
-    @Transactional
-    public void saveUser(User user) {
-        userRepo.save(user);
-    }
 
     @Override
     @Transactional
@@ -131,5 +126,10 @@ public class UserService implements UserServiceInterface {
         userGameBuyOperationRepo.deleteByUserId(id);
         updatedGamesRepo.deleteByUserId(id);
         userRepo.delete(id);
+    }
+
+    @Override
+    public User getUser(int id) {
+        return userRepo.findOne(id);
     }
 }
