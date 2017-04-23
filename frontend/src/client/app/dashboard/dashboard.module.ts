@@ -11,6 +11,7 @@ import { AlertModule } from '../directives/alert.module';
 
 import { UserModule } from './user/user.module' ;
 import { GameModule } from './game/game.module' ;
+import { WalletModule } from './wallet/wallet.module' ;
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { GameModule } from './game/game.module' ;
         BlankPageModule,
         UserModule,
         GameModule,
+        WalletModule,
         AlertModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],

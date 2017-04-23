@@ -8,10 +8,10 @@ import { GenericWallet } from '../../models/index';
 @Component({
   moduleId: module.id,
   selector: 'wallet-profile-cmp',
-  templateUrl: 'userWallet.component.html'
+  templateUrl: './walletProfile.component.html'
 })
 
-export class UserWalletComponent implements OnInit {
+export class WalletProfileComponent implements OnInit {
   id: number;
   wallet: GenericWallet;
 

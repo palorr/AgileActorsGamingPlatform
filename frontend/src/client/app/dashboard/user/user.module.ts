@@ -8,7 +8,6 @@ import { UserEditComponent } from './userEdit.component';
 import { UserSearchComponent } from './userSearch.component';
 import { UserListComponent } from './userList.component';
 import { UserComponent } from './user.component';
-import { UserWalletComponent} from './userWallet.component';
 
 import {
 		TabsModule,
@@ -26,16 +25,14 @@ import {
         UserProfileComponent,
         UserEditComponent,
         UserListComponent,
-        UserSearchComponent,
-        UserWalletComponent
+        UserSearchComponent
     ],
     exports: [
         UserComponent,
         UserProfileComponent,
         UserEditComponent,
         UserSearchComponent,
-        UserListComponent,
-        UserWalletComponent
+        UserListComponent
     ]
 })
 

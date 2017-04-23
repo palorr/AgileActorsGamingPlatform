@@ -4,9 +4,9 @@ import { DashboardComponent } from './index';
 
 import { AuthGuard } from '../guards/index';
 
-
 import { UserRoutes } from './user/user.routes';
 import { GameRoutes } from './game/game.routes';
+import { WalletRoutes } from './wallet/wallet.routes';
 
 export const DashboardRoutes: Route[] = [
   	{
@@ -15,7 +15,8 @@ export const DashboardRoutes: Route[] = [
     	children: [
 		    ...UserRoutes,
         ...GameRoutes,
-        ...BlankPageRoutes
+        ...BlankPageRoutes,
+        ...WalletRoutes
     	]
   	}
 ];
