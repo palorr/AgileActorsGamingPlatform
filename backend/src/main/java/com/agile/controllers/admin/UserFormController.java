@@ -9,7 +9,6 @@ import com.agile.resources.UserSaveData;
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,7 +19,7 @@ import java.util.List;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_UPDATE_USER_URI_PARAM;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_USERS_URI_PARAM;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
-import static com.agile.resources.UriPaths.ADMIN_UPDATE_USER_ID_URI;
+import static com.agile.resources.UriPaths.*;
 
 @Controller
 public class UserFormController {
@@ -34,33 +33,34 @@ public class UserFormController {
     @Autowired
     private RoleRepository roleRepository;
 
-    @RequestMapping(value = "/admin/users/{id}/delete")
+    @RequestMapping(value = ADMIN_DELETE_USER_ID_URI)
     public String delete(@PathVariable(value="id") Integer id) {
         userService.deleteUser(id);
-        return "redirect:/admin/users";
+        return REDIRECT_ADMIN_USERS_URI;
     }
 
-    @GetMapping(value = "/admin/users/create")
-    public String create(Model model) {
+    @GetMapping(value = ADMIN_CREATE_USER_URI)
+    public ModelAndView create() {
         List<Role> roles = roleRepository.findAll();
-        model.addAttribute("url", "/admin/users/create");
-        model.addAttribute("roles", roles);
-        return "user_form";
+        ModelAndView modelAndView = getModelAndView("user_form");
+        modelAndView.addObject("url", ADMIN_CREATE_USER_URI);
+        modelAndView.addObject("roles", roles);
+        return modelAndView;
     }
 
-    @PostMapping(value = "/admin/users/create")
-    public String save(Model model, @Valid @ModelAttribute("user") UserSaveData userData,
-                       BindingResult bindingResult) {
+    @PostMapping(value = ADMIN_CREATE_USER_URI)
+    public ModelAndView save(@Valid @ModelAttribute("user") UserSaveData userData, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<Role> roles = roleRepository.findAll();
-            model.addAttribute("url", "/admin/users/create");
-            model.addAttribute("user", userData);
-            model.addAttribute("roles", roles);
+            ModelAndView modelAndView = getModelAndView("user_form");
+            modelAndView.addObject("url", ADMIN_CREATE_USER_URI);
+            modelAndView.addObject("user", userData);
+            modelAndView.addObject("roles", roles);
             //To-Do: Do something with errors
-            return "user_form";
+            return modelAndView;
         }
         userService.createUser(userData);
-        return "redirect:/admin/users";
+        return getModelAndView(REDIRECT_ADMIN_USERS_URI);
     }
 
     @GetMapping(value = ADMIN_UPDATE_USER_ID_URI)
@@ -70,23 +70,23 @@ public class UserFormController {
         ModelAndView modelAndView = getModelAndView("user_form");
         modelAndView.addObject("user", userUpdateData);
         modelAndView.addObject("roles", roles);
-        modelAndView.addObject("url", ADMIN_UPDATE_USER_ID_URI);
+        modelAndView.addObject("url", webConfHandler.getWebAppPath(ADMIN_UPDATE_USER_URI_PARAM));
         return modelAndView;
     }
 
-    @PostMapping(value = ADMIN_UPDATE_USER_ID_URI)
-    public String change(@PathVariable(value="id") Integer id, Model model, @Valid @ModelAttribute("user") UserSaveData userData,
-                         BindingResult bindingResult) {
+    @PostMapping(value = ADMIN_UPDATE_USER_URI)
+    public ModelAndView change(@Valid @ModelAttribute("user") UserSaveData userData, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<Role> roles = roleRepository.findAll();
-            model.addAttribute("url", "/admin/users/" + id + "/edit");
-            model.addAttribute("user", userData);
-            model.addAttribute("roles", roles);
+            ModelAndView modelAndView = getModelAndView("user_form");
+            modelAndView.addObject("url", webConfHandler.getWebAppPath(ADMIN_UPDATE_USER_URI_PARAM));
+            modelAndView.addObject("user", userData);
+            modelAndView.addObject("roles", roles);
             //To-Do: Do something with errors
-            return "user_form";
+            return modelAndView;
         }
         userService.updateUserByAdmin(userData);
-        return "redirect:/admin/users";
+        return getModelAndView(REDIRECT_ADMIN_USERS_URI);
     }
 
     private ModelAndView getModelAndView(String viewName) {

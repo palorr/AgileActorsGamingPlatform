@@ -11,6 +11,8 @@
 <h2>User Form</h2>
 <p>Create or edit existing user</p>
 <form action=${url} name="user" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <#if user??><input type="hidden" name="id" id ="id" value="${user.getId()}"/></#if>
     <div class="form-group" >
         <p class="required"> <label for="id_name">Name:</label>
             <input
@@ -75,7 +77,7 @@
         <p class="required"><label for="id_role">Role:</label>
             <select class="form-control" id="id_role" name="role">
                 <#list roles as role>
-                    <#if url != "/admin/users/create" && role.getId() == user.getRole().getId()>
+                    <#if url != "/admin/create_user" && role.getId() == user.getRole().getId()>
                         <option value="${role.getId()}" selected>${role.getName()?lower_case}</option>
                     <#else>
                         <option value="${role.getId()}">${role.getName()?lower_case}</option>

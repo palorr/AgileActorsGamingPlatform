@@ -63,7 +63,7 @@ public class UserSaveData {
 
     private int id;
 
-    @NotEmpty
+    @NotNull
     private Role role;
 
     public String getPassword() {
