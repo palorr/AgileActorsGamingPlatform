@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 // import wallet components hera
 import {WalletComponent} from './wallet.component';
 import {WalletProfileComponent} from './walletProfile.component';
+import {WalletDepositComponent} from './walletDeposit.component';
 // <--------------------------->
 
 import {
@@ -23,11 +24,13 @@ import {
   ],
   declarations: [
     WalletComponent,
-    WalletProfileComponent
+    WalletProfileComponent,
+    WalletDepositComponent
   ],
   exports: [
     WalletComponent,
-    WalletProfileComponent
+    WalletProfileComponent,
+    WalletDepositComponent
   ]
 })
 

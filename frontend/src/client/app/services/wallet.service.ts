@@ -55,4 +55,27 @@ export class WalletService {
 
   }
 
+  withdraw(userId: number , number : string , credits : number) {
+
+    let withdrawalURL = CONFIGURATION.agileUrls.webApi+'wallet/withdraw';
+
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+    });
+
+    let options = new RequestOptions({ headers: headers });
+
+    let postRequestBody = JSON.stringify({
+      userId: userId,
+      number: number,
+      credits: credits
+    });
+
+    return this.http.post(withdrawalURL, postRequestBody, options)
+      .map((response: Response) => response.json() )
+      .catch(res => {
+        console.log('CATCH: ', res.json());
+        throw (res.json());
+      });
+  }
 }
