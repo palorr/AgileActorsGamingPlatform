@@ -3,7 +3,6 @@ package com.agile.controllers.admin;
 
 import com.agile.handlers.WebAppConfigHandler;
 import com.agile.model.Role;
-import com.agile.model.User;
 import com.agile.repositories.RoleRepository;
 import com.agile.resources.UserSaveData;
 import com.agile.services.api.UserServiceInterface;
@@ -34,9 +33,9 @@ public class UserFormController {
     private RoleRepository roleRepository;
 
     @RequestMapping(value = ADMIN_DELETE_USER_ID_URI)
-    public String delete(@PathVariable(value="id") Integer id) {
+    public ModelAndView delete(@PathVariable(value="id") Integer id) {
         userService.deleteUser(id);
-        return REDIRECT_ADMIN_USERS_URI;
+        return getModelAndView(REDIRECT_ADMIN_USERS_URI);
     }
 
     @GetMapping(value = ADMIN_CREATE_USER_URI)

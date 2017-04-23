@@ -16,6 +16,8 @@ public class WebAppConfigHandler {
         ADMIN_GAMES_URI_PARAM("adminGamesUri"),
         ADMIN_UPDATE_USER_URI_PARAM("adminUpdateUser"),
         ADMIN_DELETE_USER_URI_PARAM("adminDeleteUser"),
+        ADMIN_UPDATE_GAME_URI_PARAM("adminUpdateGame"),
+        ADMIN_DELETE_GAME_URI_PARAM("adminDeleteGame"),
         ADMIN_URI_PARAM("adminUri"),
         LOGOUT_URI_PARAM("logoutUri");
 
@@ -43,6 +45,10 @@ public class WebAppConfigHandler {
                 ADMIN_UPDATE_USER_URI);
         webAppConfigMap.put(WebAppConfigAttributes.ADMIN_DELETE_USER_URI_PARAM.getParam(),
                 ADMIN_DELETE_USER_URI);
+        webAppConfigMap.put(WebAppConfigAttributes.ADMIN_UPDATE_GAME_URI_PARAM.getParam(),
+                ADMIN_UPDATE_GAME_URI);
+        webAppConfigMap.put(WebAppConfigAttributes.ADMIN_DELETE_GAME_URI_PARAM.getParam(),
+                ADMIN_DELETE_GAME_URI);
         webAppConfigMap.put(WebAppConfigAttributes.ADMIN_URI_PARAM.getParam(),
                 ADMIN_URI);
     }

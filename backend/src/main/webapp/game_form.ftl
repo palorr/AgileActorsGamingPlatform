@@ -11,6 +11,8 @@
     <h2>Game Form</h2>
     <p>Create or edit existing game</p>
     <form action=${url} name="game" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <#if game??><input type="hidden" name="id" id ="id" value="${game.getId()}"/></#if>
         <div class="form-group" >
             <p class="required"> <label for="id_name">Name:</label>
                 <input

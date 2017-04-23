@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.*;
 import static com.agile.resources.UriPaths.ADMIN_GAMES_ID_URI;
 import static com.agile.resources.UriPaths.ADMIN_GAMES_URI;
-import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_GAMES_URI_PARAM;
-import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
 
 @Controller
 public class AdminGameController {
@@ -28,6 +27,10 @@ public class AdminGameController {
     @GetMapping(value = ADMIN_GAMES_URI)
     public ModelAndView loadGames() {
         ModelAndView modelAndView = getModelAndView("games");
+        modelAndView.addObject(ADMIN_UPDATE_GAME_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_UPDATE_GAME_URI_PARAM));
+        modelAndView.addObject(ADMIN_DELETE_GAME_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_DELETE_GAME_URI_PARAM));
         modelAndView.addObject(GAMES_DATA, gameService.fetchGames());
         return modelAndView;
     }
@@ -45,6 +48,8 @@ public class AdminGameController {
         ModelAndView modelAndView = new ModelAndView(viewName);
         modelAndView.addObject(LOGOUT_URI_PARAM.getParam(),
                 webConfHandler.getWebAppPath(LOGOUT_URI_PARAM));
+        modelAndView.addObject(ADMIN_GAMES_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_GAMES_URI_PARAM));
         return modelAndView;
     }
 }

@@ -11,7 +11,7 @@
 <#macro page_body>
     <h2><i class="fa fa-gamepad" aria-hidden="true"></i> Games</h2>
     <p>Showing all database games</p>
-    <a href="/admin/games/create" class="btn btn-primary pull-right">Create Game</a>
+    <a href="/admin/create_game" class="btn btn-primary pull-right">Create Game</a>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -32,9 +32,9 @@
                 <td>${game.getBuy_credits()}</td>
                 <td>${game.getWin_credits()}</td>
                 <td>
-                    <a type="button" class=" btn btn-xs btn-primary" href="/admin/games/${game.getId()}">Details</a>
-                    <a type="button" class=" btn btn-xs btn-default" href="/admin/games/${game.getId()}/edit"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
-                    <a type="button" class=" btn btn-xs btn-danger" href="/admin/games/${game.getId()}/delete"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                    <a type="button" class=" btn btn-xs btn-primary" href="${adminGamesUri}${game.getId()}">Details</a>
+                    <a type="button" class=" btn btn-xs btn-default" href="${adminUpdateGame}${game.getId()}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                    <a type="button" class=" btn btn-xs btn-danger" href="${adminDeleteGame}${game.getId()}"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                 </td>
             </tr>
             </#list>
