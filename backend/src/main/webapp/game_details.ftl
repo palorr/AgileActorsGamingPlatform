@@ -18,7 +18,7 @@
         <li class="list-group-item"><strong>Buy Credits: </strong>${game.getBuy_credits()}</li>
         <li class="list-group-item"><strong>Win Credits: </strong>${game.getWin_credits()}</li>
     </ul>
-    <a type="button" class="btn btn-primary" href="/admin/games">Back</a>
+    <a type="button" class="btn btn-primary" href=${adminGamesUri}>Back</a>
 </#macro>
 
 <@display_page/>

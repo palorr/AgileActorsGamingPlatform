@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
@@ -31,7 +32,7 @@ public class User {
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private Wallet wallet;
 
-    protected User() {}
+    public User() {}
 
     public User(String name, String surname, String username, String password, Role role, Wallet wallet) {
         this.role = role;
