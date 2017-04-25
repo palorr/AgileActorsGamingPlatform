@@ -1,51 +1,101 @@
 package com.agile.controllers.admin;
 
 
-import com.agile.model.User;
-import com.agile.repositories.UserRepository;
+import com.agile.handlers.WebAppConfigHandler;
+import com.agile.model.Role;
+import com.agile.repositories.RoleRepository;
+import com.agile.resources.UserSaveData;
+import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+import java.util.List;
+
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_UPDATE_USER_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_USERS_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
+import static com.agile.resources.UriPaths.*;
 
 @Controller
 public class UserFormController {
 
     @Autowired
-    private UserRepository userRepository;
+    private WebAppConfigHandler webConfHandler;
 
-    @RequestMapping(value = "/admin/users/{id}/delete")
-    public String delete(@PathVariable(value="id") Integer id, Model model) {
-        userRepository.delete(id);
-        return "redirect:/admin/users";
+    @Autowired
+    private UserServiceInterface userService;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @RequestMapping(value = ADMIN_DELETE_USER_ID_URI)
+    public ModelAndView delete(@PathVariable(value="id") Integer id) {
+        userService.deleteUser(id);
+        return getModelAndView(REDIRECT_ADMIN_USERS_URI);
     }
 
-    @RequestMapping(value = "/admin/users/create", method = RequestMethod.GET)
-    public String create(Model model) {
-        model.addAttribute("url", "/admin/users/create");
-        return "user_form";
+    @GetMapping(value = ADMIN_CREATE_USER_URI)
+    public ModelAndView create() {
+        List<Role> roles = roleRepository.findAll();
+        ModelAndView modelAndView = getModelAndView("user_form");
+        modelAndView.addObject("url", ADMIN_CREATE_USER_URI);
+        modelAndView.addObject("roles", roles);
+        return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/users/create", method = RequestMethod.POST)
-    public String save(Model model, @ModelAttribute("user") User user) {
-        userRepository.save(user);
-        return "redirect:/admin/users";
+    @PostMapping(value = ADMIN_CREATE_USER_URI)
+    public ModelAndView save(@Valid @ModelAttribute("user") UserSaveData userData, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<Role> roles = roleRepository.findAll();
+            ModelAndView modelAndView = getModelAndView("user_form");
+            modelAndView.addObject("url", ADMIN_CREATE_USER_URI);
+            modelAndView.addObject("user", userData);
+            modelAndView.addObject("roles", roles);
+            //To-Do: Do something with errors
+            return modelAndView;
+        }
+        userService.createUser(userData);
+        return getModelAndView(REDIRECT_ADMIN_USERS_URI);
     }
 
-    @RequestMapping(value = "/admin/users/{id}/edit", method = RequestMethod.GET)
-    public String edit(@PathVariable(value="id") Integer id, Model model) {
-        User user = userRepository.findOne(id);
-        model.addAttribute("user", user);
-        model.addAttribute("url", "/admin/users/" + id + "/edit");
-        return "user_form";
+    @GetMapping(value = ADMIN_UPDATE_USER_ID_URI)
+    public ModelAndView edit(@PathVariable(value="id") Integer id) {
+        UserSaveData userUpdateData = new UserSaveData(userService.getUser(id));
+        List<Role> roles = roleRepository.findAll();
+        ModelAndView modelAndView = getModelAndView("user_form");
+        modelAndView.addObject("user", userUpdateData);
+        modelAndView.addObject("roles", roles);
+        modelAndView.addObject("url", webConfHandler.getWebAppPath(ADMIN_UPDATE_USER_URI_PARAM));
+        return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/users/{id}/edit", method = RequestMethod.POST)
-    public String change(@ModelAttribute("user") User user, Model model) {
-        userRepository.save(user);
-        return "redirect:/admin/users";
+    @PostMapping(value = ADMIN_UPDATE_USER_URI)
+    public ModelAndView change(@Valid @ModelAttribute("user") UserSaveData userData, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<Role> roles = roleRepository.findAll();
+            ModelAndView modelAndView = getModelAndView("user_form");
+            modelAndView.addObject("url", webConfHandler.getWebAppPath(ADMIN_UPDATE_USER_URI_PARAM));
+            modelAndView.addObject("user", userData);
+            modelAndView.addObject("roles", roles);
+            //To-Do: Do something with errors
+            return modelAndView;
+        }
+        userService.updateUserByAdmin(userData);
+        return getModelAndView(REDIRECT_ADMIN_USERS_URI);
+    }
+
+    private ModelAndView getModelAndView(String viewName) {
+        ModelAndView modelAndView = new ModelAndView(viewName);
+        modelAndView.addObject(ADMIN_UPDATE_USER_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_UPDATE_USER_URI_PARAM));
+        modelAndView.addObject(ADMIN_USERS_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_USERS_URI_PARAM));
+        modelAndView.addObject(LOGOUT_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(LOGOUT_URI_PARAM));
+        return modelAndView;
     }
 }

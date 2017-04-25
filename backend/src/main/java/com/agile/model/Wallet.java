@@ -12,7 +12,9 @@ public class Wallet {
 
 	private int credits;
 
-	public Wallet() {}
+	public Wallet() {
+		this.credits = 0;
+	}
 
 	public Wallet(int credits) {
 		this.credits = credits;

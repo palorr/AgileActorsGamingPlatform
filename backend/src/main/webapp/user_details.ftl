@@ -2,9 +2,9 @@
 
 <#macro side_menu>
     <ul class="nav nav-sidebar">
-        <li><a href="/admin/"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
-        <li class="active"><a href="/admin/users/"><i class="fa fa-users" aria-hidden="true"></i> Users</a></li>
-        <li><a href="/admin/games/"><i class="fa fa-gamepad" aria-hidden="true"></i> Games</a></li>
+        <li><a href="${adminUri}"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+        <li class="active"><a href="${adminUsersUri}"><i class="fa fa-users" aria-hidden="true"></i> Users</a></li>
+        <li><a href="${adminGamesUri}"><i class="fa fa-gamepad" aria-hidden="true"></i> Games</a></li>
     </ul>
 </#macro>
 
@@ -19,7 +19,7 @@
         <li class="list-group-item"><strong>Password: </strong>${user.getPassword()}</li>
         <li class="list-group-item"><strong>Role: </strong>${user.getRole().getName()?lower_case}</li>
     </ul>
-    <a type="button" class="btn btn-primary" href="/admin/users">Back</a>
+    <a type="button" class="btn btn-primary" href="${adminUsersUri}">Back</a>
 </#macro>
 
 <@display_page/>

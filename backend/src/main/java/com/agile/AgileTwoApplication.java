@@ -3,7 +3,9 @@ package com.agile;
 import com.agile.model.*;
 import com.agile.model.enums.OperationEnum;
 import com.agile.repositories.*;
-import com.agile.services.UserService;
+import com.agile.services.api.UserServiceInterface;
+import com.agile.resources.UserSaveData;
+import com.agile.services.api.GameServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,9 +20,6 @@ implements CommandLineRunner
 	public static void main(String[] args) {
 		SpringApplication.run(AgileTwoApplication.class, args);
 	}
-
-	@Autowired
-	private UserRepository userRepository;
 	
 	@Autowired
 	private TryRepository tryRepository;
@@ -50,7 +49,7 @@ implements CommandLineRunner
 	private WalletRepository walletRepository;
 
 	@Autowired
-	private UserService userService;
+	private UserServiceInterface userService;
 
 	@Override
 	public void run(String... strings) throws Exception {
@@ -81,29 +80,32 @@ implements CommandLineRunner
 
 		User user1 = new User("Archontellis", "Sotirchellis",
 				"user1", "agiletest", userRole, wallet1);
+		user1.setAvatar("https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAATNAAAAJDdjYmM0NmI0LTViNDMtNDE0Ny04Mjk2LTkzZDI2MmM2MjU3Zg.jpg");
+		UserSaveData userData1 = new UserSaveData(user1);
 
 		User user2 = new User("Nikos", "Mastrogiannopoulos",
 				"user2", "agiletest", userRole, wallet2);
+		user2.setAvatar("https://scontent.fath3-2.fna.fbcdn.net/v/t1.0-9/15826725_10209595825591327_3694477759808677138_n.jpg?oh=ac322b5ce4eb225c856d7953c7c1609c&oe=598E674D");
+		UserSaveData userData2 = new UserSaveData(user2);
 
 		User user3 = new User("Stamatis", "Katsaounis",
 				"user3", "agiletest", userRole, wallet3);
+		UserSaveData userData3 = new UserSaveData(user3);
 
 		User user4 = new User("Vlasis", "Barousis",
 				"user4", "agiletest", userRole, wallet4);
-
-		User admin1 = new User("adminName1", "adminSurname1",
-				"admin1", "adminpass1", adminRole, null);
-
-		user1.setAvatar("https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAATNAAAAJDdjYmM0NmI0LTViNDMtNDE0Ny04Mjk2LTkzZDI2MmM2MjU3Zg.jpg");
-		user2.setAvatar("https://scontent.fath3-2.fna.fbcdn.net/v/t1.0-9/15826725_10209595825591327_3694477759808677138_n.jpg?oh=ac322b5ce4eb225c856d7953c7c1609c&oe=598E674D");
 		user4.setAvatar("https://scontent.fath3-2.fna.fbcdn.net/v/t1.0-9/9157_10207996918935306_4375061747766220940_n.jpg?oh=9b94a4a84d3dd84cbede66df1d5ae9a3&oe=5998A84F");
+		UserSaveData userData4 = new UserSaveData(user3);
 
+		User admin1 = new User("adminNameOne", "adminSurnameOne",
+				"admin1", "adminpass1", adminRole, null);
+		UserSaveData userAdmin1 = new UserSaveData(admin1);
 
-		userService.saveUser(user1);
-		userService.saveUser(user2);
-		userService.saveUser(user3);
-		userService.saveUser(user4);
-		userService.saveUser(admin1);
+		userService.createUser(userData1);
+		userService.createUser(userData2);
+		userService.createUser(userData3);
+		userService.createUser(userData4);
+		userService.createUser(userAdmin1);
 
 
 		Game game1 = new Game(10, 50, "Roullete", "game 1 description","",0.3);
@@ -117,19 +119,19 @@ implements CommandLineRunner
 		gameRepository.save(game1);
 		gameRepository.save(game2);
 
-		UpdatedGames updatedGame1 = new UpdatedGames(game1, user2, transactionTime);
-		UpdatedGames updatedGame2 = new UpdatedGames(game2, user2, transactionTime);
-		UpdatedGames updatedGame3 = new UpdatedGames(game2, user3, transactionTime);
+		UpdatedGames updatedGame1 = new UpdatedGames(game1, userService.getUserByUsername("user1"), transactionTime);
+		UpdatedGames updatedGame2 = new UpdatedGames(game2, userService.getUserByUsername("user2"), transactionTime);
+		UpdatedGames updatedGame3 = new UpdatedGames(game2, userService.getUserByUsername("user3"), transactionTime);
 
 		updatedGamesRepository.save(updatedGame1);
 		updatedGamesRepository.save(updatedGame2);
 		updatedGamesRepository.save(updatedGame3);
 
-		UserCreditsOperation userCreditsOperation1 = new UserCreditsOperation(user1, 400,
+		UserCreditsOperation userCreditsOperation1 = new UserCreditsOperation(userService.getUserByUsername("user1"), 400,
 				OperationEnum.ADDED, transactionTime);
-		UserCreditsOperation userCreditsOperation2 = new UserCreditsOperation(user1, 200,
+		UserCreditsOperation userCreditsOperation2 = new UserCreditsOperation(userService.getUserByUsername("user1"), 200,
 				OperationEnum.REMOVED, transactionTime);
-		UserCreditsOperation userCreditsOperation3 = new UserCreditsOperation(user2, 124,
+		UserCreditsOperation userCreditsOperation3 = new UserCreditsOperation(userService.getUserByUsername("user2"), 124,
 				OperationEnum.ADDED, transactionTime);
 
 
@@ -137,26 +139,26 @@ implements CommandLineRunner
 		userCreditsOperationsRepository.save(userCreditsOperation2);
 		userCreditsOperationsRepository.save(userCreditsOperation3);
 
-		UserGameBuyOperation userGameBuyOperation1 = new UserGameBuyOperation(user1, game1, transactionTime);
-		UserGameBuyOperation userGameBuyOperation2 = new UserGameBuyOperation(user1, game2, transactionTime);
-		UserGameBuyOperation userGameBuyOperation3 = new UserGameBuyOperation(user3, game2, transactionTime);
+		UserGameBuyOperation userGameBuyOperation1 = new UserGameBuyOperation(userService.getUserByUsername("user1"), game1, transactionTime);
+		UserGameBuyOperation userGameBuyOperation2 = new UserGameBuyOperation(userService.getUserByUsername("user1"), game2, transactionTime);
+		UserGameBuyOperation userGameBuyOperation3 = new UserGameBuyOperation(userService.getUserByUsername("user3"), game2, transactionTime);
 
 		userGameBuyOperationRepository.save(userGameBuyOperation1);
 		userGameBuyOperationRepository.save(userGameBuyOperation2);
 		userGameBuyOperationRepository.save(userGameBuyOperation3);
 
-		UserGamePlayOperation userGamePlayOperation1 = new UserGamePlayOperation(user1, game1, 500,
+		UserGamePlayOperation userGamePlayOperation1 = new UserGamePlayOperation(userService.getUserByUsername("user1"), game1, 500,
 				false, true, transactionTime);
-		UserGamePlayOperation userGamePlayOperation2  = new UserGamePlayOperation(user1, game2, 0,
+		UserGamePlayOperation userGamePlayOperation2  = new UserGamePlayOperation(userService.getUserByUsername("user1"), game2, 0,
 				false, false, transactionTime);
 
 		userGamePlayOperationRepository.save(userGamePlayOperation1);
 		userGamePlayOperationRepository.save(userGamePlayOperation2);
 
-		AdminViewOperation viewOperation1 = new AdminViewOperation(user1, transactionTime );
-		AdminViewOperation viewOperation2 = new AdminViewOperation(user2, transactionTime );
-		AdminViewOperation viewOperation3 = new AdminViewOperation(user3, transactionTime );
-		AdminViewOperation viewOperation4 = new AdminViewOperation(user2, transactionTime );
+		AdminViewOperation viewOperation1 = new AdminViewOperation(userService.getUserByUsername("user1"), transactionTime );
+		AdminViewOperation viewOperation2 = new AdminViewOperation(userService.getUserByUsername("user2"), transactionTime );
+		AdminViewOperation viewOperation3 = new AdminViewOperation(userService.getUserByUsername("user3"), transactionTime );
+		AdminViewOperation viewOperation4 = new AdminViewOperation(userService.getUserByUsername("user2"), transactionTime );
 
 		adminViewOperationRepository.save(viewOperation1);
 		adminViewOperationRepository.save(viewOperation2);

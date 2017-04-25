@@ -58,7 +58,7 @@
                         <li><a href="#">Credit Operations</a></li>
                         <li><a href="#">Buy Operations</a></li>
                         <li><a href="#">View Operations</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href=${logoutUri}>Logout</a></li>
                     </ul>
                 </div>
             </div>
