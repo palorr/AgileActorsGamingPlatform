@@ -81,7 +81,7 @@ export class WalletDepositComponent implements OnInit {
   }
 
   validateCreditsAmount( credits: string) {
-    var re = /^[0-9]{1,3}$/; // max number 999
+    var re = /^[0-9]{1,3}$/; // max number 999 min 0
     return re.test(credits);
   }
 

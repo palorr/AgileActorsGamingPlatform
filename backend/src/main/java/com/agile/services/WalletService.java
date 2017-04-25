@@ -90,15 +90,14 @@ public class WalletService implements WalletServiceInterface{
 		boolean overLimit = false;
 		boolean hasEnoughCredits = false;
 
-		String tr = resource.getNumber().substring(0, 1);
-		int t = resource.getNumber().length();
+
 		if (userService.findUserById(resource.getUserId()) != null && resource.getNumber().substring(0, 2).equals("GR") && resource.getNumber().length() == 34) {
 			success = true;
 
 			Wallet wallet = userService.findUserById(resource.getUserId()).getWallet();
 			int existedCredits = wallet.getCredits();
 
-			if (existedCredits >= 30) {
+			if (resource.getCredits()>=30) {
 
 				overLimit = true;
 				if (resource.getCredits() <= existedCredits) {

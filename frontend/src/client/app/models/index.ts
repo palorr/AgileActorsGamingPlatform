@@ -8,3 +8,4 @@ export * from './playResponse';
 export * from './genericWallet';
 export * from './tryResponse';
 export * from './depositResponse';
+export * from './withdrawResponse';

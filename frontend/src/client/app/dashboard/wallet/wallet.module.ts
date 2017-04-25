@@ -4,17 +4,16 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AlertModule } from '../../directives/alert.module';
 
-// import wallet components hera
+// import wallet components here
 import {WalletComponent} from './wallet.component';
 import {WalletProfileComponent} from './walletProfile.component';
 import {WalletDepositComponent} from './walletDeposit.component';
+import {WalletWithdrawComponent} from './walletWithdraw.component';
 // <--------------------------->
 
 import {
   TabsModule,
 } from 'ng2-bootstrap/ng2-bootstrap';
-
-
 
 @NgModule({
   imports: [
@@ -27,12 +26,14 @@ import {
   declarations: [
     WalletComponent,
     WalletProfileComponent,
-    WalletDepositComponent
+    WalletDepositComponent,
+    WalletWithdrawComponent
   ],
   exports: [
     WalletComponent,
     WalletProfileComponent,
-    WalletDepositComponent
+    WalletDepositComponent,
+    WalletWithdrawComponent
   ]
 })
 

@@ -26,11 +26,11 @@
   <!--space-->
   <div class="col-lg-4">
     <ol class="breadcrumb">
-      <li>
-        <a href="Javascript:void(0)" routerLink="/dashboard/blankpage"> Withdrawal </a>
+      <li class="active">
+        <a href="Javascript:void(0)" [routerLink]="['/dashboard/wallet/withdraw',id]"><i class="fa fa-profile" aria-hidden="true"></i> Withdrawal</a>
       </li>
       <li class="active">
-        <a href="Javascript:void(0)" [routerLink]="['/dashboard/wallet/deposit',id]"><i class="fa fa-profile" aria-hidden="true"></i>Deposit</a>
+        <a href="Javascript:void(0)" [routerLink]="['/dashboard/wallet/deposit',id]"><i class="fa fa-profile" aria-hidden="true"></i> Deposit</a>
       </li>
     </ol>
   </div>
