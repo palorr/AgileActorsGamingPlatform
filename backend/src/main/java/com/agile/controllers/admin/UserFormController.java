@@ -58,7 +58,7 @@ public class UserFormController {
             //To-Do: Do something with errors
             return modelAndView;
         }
-        userService.createUser(userData);
+        userService.createUser(userData, null);
         return getModelAndView(REDIRECT_ADMIN_USERS_URI);
     }
 

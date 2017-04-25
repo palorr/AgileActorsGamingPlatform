@@ -12,6 +12,9 @@ public class Wallet {
 
 	private int credits;
 
+	@OneToOne(mappedBy = "wallet")
+	private User user;
+
 	public Wallet() {
 		this.credits = 0;
 	}
@@ -36,8 +39,16 @@ public class Wallet {
 		this.credits = credits;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
-		return "Wallet [id =" + id + ", credits =" + credits + "]";
+		return "Wallet [id =" + id + ", credits =" + credits + ", user =" + user + "]";
 	}
 }

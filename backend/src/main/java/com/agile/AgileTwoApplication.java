@@ -101,11 +101,11 @@ implements CommandLineRunner
 				"admin1", "adminpass1", adminRole, null);
 		UserSaveData userAdmin1 = new UserSaveData(admin1);
 
-		userService.createUser(userData1);
-		userService.createUser(userData2);
-		userService.createUser(userData3);
-		userService.createUser(userData4);
-		userService.createUser(userAdmin1);
+		userService.createUser(userData1, wallet1);
+		userService.createUser(userData2, wallet2);
+		userService.createUser(userData3, wallet3);
+		userService.createUser(userData4, wallet4);
+		userService.createUser(userAdmin1, null);
 
 
 		Game game1 = new Game(10, 50, "Roullete", "game 1 description","",0.3);

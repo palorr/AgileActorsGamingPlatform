@@ -1,6 +1,7 @@
 package com.agile.services.api;
 
 import com.agile.model.User;
+import com.agile.model.Wallet;
 import com.agile.resources.UserResource;
 import com.agile.resources.UserSaveData;
 
@@ -12,7 +13,7 @@ public interface UserServiceInterface {
     User getUserByUsernameAndPassword(String username, String password);
     User getUserByUsername(String username);
     void updateUser(String surname , String name , int id , String avatar , String username);
-    User createUser(UserSaveData userData);
+    User createUser(UserSaveData userData, Wallet wallet);
     void deleteUser(int id);
     User getUser(int id);
     User updateUserByAdmin(UserSaveData userData);

@@ -4,7 +4,7 @@ import com.agile.resources.WalletDepositAnswerResource;
 import com.agile.resources.WalletOperationsResource;
 import com.agile.resources.WalletResource;
 import com.agile.resources.WalletWithdrawAnswerResource;
-import com.agile.services.WalletService;
+import com.agile.services.api.WalletServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class WalletController {
 
     @Autowired
-    private WalletService walletService;
+    private WalletServiceInterface walletService;
 
     @GetMapping(value = "rest/wallet/{userId}")
     public WalletResource getWalletByUserId(@PathVariable(value = "userId") int userId) {

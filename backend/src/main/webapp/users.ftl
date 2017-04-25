@@ -19,6 +19,7 @@
             <th>ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
+            <th>Username</th>
             <th>Role</th>
             <th>Actions</th>
         </tr>
@@ -29,6 +30,7 @@
                 <td>${user.getId()}</td>
                 <td>${user.getName()}</td>
                 <td>${user.getSurname()}</td>
+                <td>${user.getUsername()}</td>
                 <td>${user.getRole().getName()?lower_case}</td>
                 <td>
                     <a type="button" class=" btn btn-xs btn-primary" href="${adminUsersUri}${user.getId()}">Details</a>

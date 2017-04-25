@@ -16,6 +16,7 @@
     <thead>
     <tr>
         <th>ID</th>
+        <th>Owner</th>
         <th>Credits</th>
     </tr>
     </thead>
@@ -23,6 +24,7 @@
         <#list wallets as wallet>
         <tr>
             <td>${wallet.getId()}</td>
+            <td><#if wallet.getUser()??>${wallet.getUser().getName()} ${wallet.getUser().getSurname()}</#if></td>
             <td>${wallet.getCredits()}</td>
         </tr>
         </#list>

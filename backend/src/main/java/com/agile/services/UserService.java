@@ -100,9 +100,11 @@ public class UserService implements UserServiceInterface {
 
     @Override
     @Transactional
-    public User createUser(UserSaveData userData) {
-        Wallet wallet = new Wallet();
-        walletRepo.save(wallet);
+    public User createUser(UserSaveData userData, Wallet wallet) {
+        if (wallet == null){
+            wallet = new Wallet();
+            walletRepo.save(wallet);
+        }
 
         User user = new User(userData.getName(), userData.getSurname(),
                 userData.getUsername(), passwordEncoder.encode(userData.getPassword()),

@@ -30,6 +30,7 @@ public class User {
     private Role role;
 
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "wallets_id")
     private Wallet wallet;
 
     public User() {}
