@@ -1,0 +1,48 @@
+
+<div *ngIf="wallet" class="container-fluid">
+
+  <div class="row">
+    <h2 class="page-header">
+      User Wallet
+    </h2>
+  </div>
+
+  <!--routing-path-->
+  <div class="col-lg-4">
+    <ol class="breadcrumb">
+      <li>
+        <a href="Javascript:void(0)" routerLink="/dashboard/blankpage"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
+      </li>
+      <li class="active">
+        <a href="Javascript:void(0)" [routerLink]="['/dashboard/users/view',id]"><i class="fa fa-fw fa-user" aria-hidden="true"></i> My Profile</a>
+      </li>
+      <li class="active">
+        <i class="fa fa-money"></i> My Wallet
+      </li>
+    </ol>
+  </div>
+  <!--space-->
+  <div class="col-lg-4"></div>
+  <!--space-->
+  <div class="col-lg-4">
+    <ol class="breadcrumb">
+      <li>
+        <a href="Javascript:void(0)" routerLink="/dashboard/blankpage"> Withdrawal </a>
+      </li>
+      <li class="active">
+        <a href="Javascript:void(0)" [routerLink]="['/dashboard/wallet/deposit',id]"><i class="fa fa-profile" aria-hidden="true"></i>Deposit</a>
+      </li>
+    </ol>
+  </div>
+
+
+  <div class="col-lg-12 card card-block bio" *ngIf="wallet">
+    <div class="col-lg-12">
+      <img src="https://cdn.shopify.com/s/files/1/0145/1752/products/Walnut-02.jpg?v=1416155729" alt="AvatarImage" style="border-radius: 50%; width: 350px; display: block; margin-left: auto; margin-right: auto;">
+      <br/>
+      <h2>Balance</h2>
+      <p><i class="fa fa-dollar"></i> {{wallet.credits}} Credits</p>
+    </div>
+  </div>
+
+</div>

@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.*;
 
+import com.agile.model.enums.OperationEnum;
+
 @Entity
 @Table(name="user_credits_operations")
 public class UserCreditsOperation {
@@ -19,32 +21,17 @@ public class UserCreditsOperation {
 	private int creditsAddedRemoved;
 
 	@Column(nullable = false)
-	private String operation;
+	private OperationEnum operation;
 
 	@Column(nullable = false)
 	private Timestamp date;
-
-	public enum OperationEnum {
-		ADDED("added"),
-		REMOVED("removed");
-
-		private String url;
-
-		OperationEnum(String url) {
-			this.url = url;
-		}
-
-		public String get() {
-			return url;
-		}
-	}
 
 	protected UserCreditsOperation() {}
 
     public UserCreditsOperation(User user, int creditsAddedRemoved, OperationEnum operation, Timestamp date) {
         this.user = user;
         this.creditsAddedRemoved = creditsAddedRemoved;
-        this.operation = operation.get();
+        this.operation = operation;
         this.date = date;
     }
 
@@ -72,12 +59,12 @@ public class UserCreditsOperation {
 		this.creditsAddedRemoved = creditsAddedRemoved;
 	}
 
-	public String getOperation() {
+	public OperationEnum getOperation() {
 		return operation;
 	}
 
 	public void setOperation(OperationEnum operation) {
-		this.operation = operation.get();
+		this.operation = operation;
 	}
 
 	public Timestamp getDate() {

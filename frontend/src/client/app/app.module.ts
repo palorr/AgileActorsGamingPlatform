@@ -13,16 +13,18 @@ import { SignupModule } from './signup/signup.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 
-import { 
-	AlertService, 
-	AuthenticationService, 
+import {
+	AlertService,
+	AuthenticationService,
 	RegistrationService,
-	UserService
+	UserService,
+  GameService,
+  WalletService
 } from './services/index';
 
 import { AuthGuard, AuthorizationGuard } from './guards/index';
 
-import { CurrentUserService } from './helpers/index'
+import { CurrentUserService } from './helpers/index';
 
 @NgModule({
 	imports: [
@@ -44,12 +46,14 @@ import { CurrentUserService } from './helpers/index'
 			useValue: '<%= APP_BASE %>'
 		},
 		AlertService,
-        AuthenticationService,
+    AuthenticationService,
 		RegistrationService,
 		UserService,
+		GameService,
 		AuthGuard,
 		AuthorizationGuard,
-		CurrentUserService
+		CurrentUserService,
+    WalletService
 	],
 	bootstrap: [AppComponent]
 

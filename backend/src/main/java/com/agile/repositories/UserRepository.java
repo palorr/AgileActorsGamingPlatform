@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.agile.model.User;
-import org.springframework.transaction.annotation.Transactional;
 
-//@Transactional(readOnly = true)
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findByName(String name);
@@ -15,10 +13,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findByUsernameAndPassword(String username, String password);
 
+    List<User> findByNameStartingWith(String searchTerm);
+
+    List<User> findByNameStartingWithOrSurnameStartingWithOrUsernameStartingWith(String param1, String param2, String param3 );
+
     User findById(int id);
 
     User findByUsername(String username);
-
-    /*@Query("select r from Role r where r.id = ?1")
-    Role findRoleByUserId(Integer id);*/
 }

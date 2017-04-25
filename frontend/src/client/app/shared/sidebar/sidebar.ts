@@ -12,15 +12,12 @@ import { AuthenticationService } from '../../services/index';
 export class SidebarComponent implements OnInit {
 	isActive = false;
 	showMenu: string = '';
-	
 	isUserLoggedIn: boolean;
-	
 	constructor(
 		private authenticationService: AuthenticationService,
 		private route: ActivatedRoute,
 		private router: Router
 	) { }
-	
 	ngOnInit() {
 		if (localStorage.getItem('currentUser')) {
 			this.isUserLoggedIn = true;
@@ -28,11 +25,9 @@ export class SidebarComponent implements OnInit {
 			this.isUserLoggedIn = false;
 		}
 	}
-	
 	eventCalled() {
 		this.isActive = !this.isActive;
 	}
-	
 	addExpandClass(element: any) {
 		if (element === this.showMenu) {
 			this.showMenu = '0';
@@ -40,10 +35,8 @@ export class SidebarComponent implements OnInit {
 			this.showMenu = element;
 		}
 	}
-	
 	logOut() {
 		this.authenticationService.logout();
 		this.router.navigate(['/login']);
 	}
-	
 }

@@ -23,13 +23,13 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 600)
     private String avatar;
 
     @ManyToOne(optional = false)
     private Role role;
 
-    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
     private Wallet wallet;
 
     public User() {}

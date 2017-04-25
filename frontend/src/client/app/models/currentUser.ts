@@ -6,6 +6,6 @@ export class CurrentUser {
 	Name: string;
 	ShortBio: string;
 	AvatarImage: string;
-	Username: string;	
+	Username: string;
 	IsAdmin: boolean;
 }

@@ -11,6 +11,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.regex.Pattern;
 
 import static com.agile.resources.UriPaths.*;
 
@@ -27,8 +32,27 @@ class SecurityConfigHandler extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().requireCsrfProtectionMatcher(new RequestMatcher() {
+            private Pattern allowedMethods = Pattern.compile("^(GET|SET|PUT)$");
+            private RegexRequestMatcher apiMatcher = new RegexRequestMatcher("/rest/.*", null);
+
+            @Override
+            public boolean matches(HttpServletRequest request) {
+                // No CSRF due to allowedMethod
+                if(allowedMethods.matcher(request.getMethod()).matches())
+                    return false;
+
+                // No CSRF due to api call
+                if(apiMatcher.matches(request))
+                    return false;
+
+                // CSRF for everything else that is not an API call or an allowedMethod
+                return true;
+            }
+        });
+
         http.authorizeRequests()
-                .antMatchers(HOME_ONE_URI, HOME_TWO_URI).permitAll()
+                .antMatchers("/rest/**", HOME_ONE_URI, HOME_TWO_URI).permitAll()
                 .antMatchers(ADMIN_URI).hasAuthority(RolesEnum.ADMIN.getValue())
                 .anyRequest().fullyAuthenticated()
                 .and()

@@ -9,16 +9,20 @@ import {TopNavComponent} from '../shared/index';
 import {SidebarComponent} from '../shared/index';
 import { AlertModule } from '../directives/alert.module';
 
-import { UserModule } from './user/user.module' ; 
+import { UserModule } from './user/user.module' ;
+import { GameModule } from './game/game.module' ;
+import { WalletModule } from './wallet/wallet.module' ;
 
 @NgModule({
     imports: [
         CommonModule,
-    	RouterModule,
-    	DropdownModule,
+    	  RouterModule,
+    	  DropdownModule,
         ModalModule,
         BlankPageModule,
         UserModule,
+        GameModule,
+        WalletModule,
         AlertModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],

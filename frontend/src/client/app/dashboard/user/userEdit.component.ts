@@ -77,7 +77,7 @@ export class UserEditComponent implements OnInit {
 
           for(let element in err.modelState) {
             err.modelState[element].forEach((errorMsg: string) => {
-              errorString += errorMsg + "\n\n";
+              errorString += errorMsg + '\n\n';
             });
           }
 

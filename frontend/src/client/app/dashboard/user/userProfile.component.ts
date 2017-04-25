@@ -8,7 +8,7 @@ import { GenericUser } from '../../models/index';
 
 @Component({
 	moduleId: module.id,
-	selector: 'userProfile-cmp',
+	selector: 'user-profile-cmp',
 	templateUrl: 'userProfile.component.html'
 })
 
@@ -22,11 +22,11 @@ export class UserProfileComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private userService: UserService,
-		private alertService: AlertService,
+		private alertService: AlertService
 	) { }
 
 	ngOnInit() {
-		console.log("THIS>ROUTES>PARAMS: ", this.route.params);
+		console.log('THIS>ROUTES>PARAMS: ', this.route.params);
 		this.route.params.forEach((params: Params) => {
 			this.id = +params['id'];
 

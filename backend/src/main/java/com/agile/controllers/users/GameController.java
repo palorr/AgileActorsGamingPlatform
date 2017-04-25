@@ -1,38 +1,44 @@
 package com.agile.controllers.users;
 
 import java.util.List;
-
+import com.agile.services.api.GameServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.agile.model.Game;
-import com.agile.repositories.GameRepository;
+import com.agile.resources.GameResource;
+import com.agile.resources.GameResourceAfterPlay;
+import com.agile.resources.GameResourceAfterTry;
+import com.agile.resources.GameResourceToPlayOrTry;
 
+@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class GameController {
 
 	@Autowired
-	private GameRepository gameRepository;
+	private GameServiceInterface gameService;
 
-	@GetMapping(value = "user/games")
-	public List<Game> games() {
-		List<Game> games = gameRepository.findAll();
-		return games;
+	@GetMapping(value = "rest/games")
+	public List<GameResource> getBasicInfoOfAllGames() {
+		return gameService.getBasicInfoOfAllGames();
 	}
 
-	@GetMapping(value = "user/games/{id}")
-	public Game gameDetails(@PathVariable(value = "id") Integer id) {
-		Game game = gameRepository.findOne(id);
-		return game;
+	@GetMapping(value = "rest/games/{id}")
+	public GameResource getGameBasicInfoById(@PathVariable(value = "id") int id) {
+		return gameService.getGameBasicInfoById(id);
 	}
 
-	@GetMapping(value = "user/game")
-	public Game gameDetailsByName(@Param(value = "name") String name) {
-		Game game = gameRepository.findByName(name);
-		return game;
+	@PostMapping(value = "rest/games/play")
+	public GameResourceAfterPlay selectGameToPlay(@RequestBody GameResourceToPlayOrTry resource) {
+		return gameService.playGame(resource);
+	}
+	
+	@PostMapping(value = "rest/games/try")
+	public GameResourceAfterTry selectGameToTry(@RequestBody GameResourceToPlayOrTry resource) {
+		return gameService.tryGame(resource);
 	}
 
+	@GetMapping(value = "rest/games/search/{searchTerm}")
+	public List<GameResource> searchUser(@PathVariable(value = "searchTerm") String searchTerm){
+		return gameService.getBasicInfoOfAllGamesWithNameStartsWith(searchTerm);
+	}
 }

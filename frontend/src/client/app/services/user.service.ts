@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
 import { GenericUser } from '../models/index';
 
@@ -16,10 +15,10 @@ export class UserService {
         let allUsersURL = CONFIGURATION.agileUrls.webApi+'users';
 
         let headers = new Headers({
-            'Accept': 'application/json',
+            'Accept': 'application/json'
         });
 
-        let options = new RequestOptions({ headers: headers })
+        let options = new RequestOptions({ headers: headers });
 
         return this.http.get(allUsersURL, options)
             .map((response: Response) => response.json())
@@ -29,8 +28,9 @@ export class UserService {
             });
 
     }
+
     getAllUsersByName(searchTerm: string) {
-        let URL = CONFIGURATION.agileUrls.webApi+'users/getAllUsersByName/' + searchTerm;
+        let URL = CONFIGURATION.agileUrls.webApi+'users/search/' + searchTerm;
 
         let headers = new Headers({
             'Accept': 'application/json',
@@ -55,7 +55,7 @@ export class UserService {
             'Accept': 'application/json',
         });
 
-        let options = new RequestOptions({ headers: headers })
+        let options = new RequestOptions({ headers: headers });
 
 
         return this.http.get(userURL, options)
@@ -78,17 +78,15 @@ export class UserService {
                 throw (res.json());
             });
     }
-    // isRequestorThisUser(Username: string) {
-    //     if (localStorage.getItem('currentUser').includes(Username)) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
-     updateUser(user: GenericUser) {
-         let editUserURL = CONFIGURATION.agileUrls.webApi+'users/edit';
+    updateUser(user: GenericUser) {
+        let editUserURL = CONFIGURATION.agileUrls.webApi+'users/edit';
 
-         let options = CONFIGURATION.jwt();
+        let headers = new Headers({
+          'Content-Type': 'application/json',
+        });
+
+         let options = new RequestOptions({ headers: headers });
 
          let putRequestBody = JSON.stringify(user);
 
@@ -100,4 +98,10 @@ export class UserService {
              });
      }
 
+  // isRequestorThisUser(Username: string) {
+  //     if (localStorage.getItem('currentUser').includes(Username)) {
+  //         return true;
+  //     }
+  //     return false;
+  // }
 }

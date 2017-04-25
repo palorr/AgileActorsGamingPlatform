@@ -1,26 +1,28 @@
 package com.agile;
 
 import com.agile.model.*;
+import com.agile.model.enums.OperationEnum;
 import com.agile.repositories.*;
+import com.agile.services.api.UserServiceInterface;
 import com.agile.resources.UserSaveData;
 import com.agile.services.api.GameServiceInterface;
-import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Timestamp;
 
 @SpringBootApplication
-public class AgileTwoApplication implements CommandLineRunner {
+public class AgileTwoApplication 
+implements CommandLineRunner 
+{
 	public static void main(String[] args) {
 		SpringApplication.run(AgileTwoApplication.class, args);
 	}
-
+	
 	@Autowired
-	private UserRepository userRepository;
+	private TryRepository tryRepository;
 
 	@Autowired
 	private RoleRepository roleRepository;
@@ -49,14 +51,10 @@ public class AgileTwoApplication implements CommandLineRunner {
 	@Autowired
 	private UserServiceInterface userService;
 
-	@Autowired
-	private GameServiceInterface gameService;
-
 	@Override
 	public void run(String... strings) throws Exception {
 
 		Timestamp transactionTime = new Timestamp(System.currentTimeMillis());
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		System.out.println("Spring Application started.:");
 
@@ -69,23 +67,35 @@ public class AgileTwoApplication implements CommandLineRunner {
 		Wallet wallet1 = new Wallet(5000);
 		Wallet wallet2 = new Wallet(3000);
 		Wallet wallet3 = new Wallet(2000);
+		Wallet wallet4 = new Wallet(6000);
 
 		walletRepository.save(wallet1);
 		walletRepository.save(wallet2);
 		walletRepository.save(wallet3);
+        walletRepository.save(wallet4);
+        
+        Tries tries = new Tries();
+        tryRepository.save(tries);
 
 
-		User user1 = new User("userNameOne", "userSurnameOne",
-				"user1", "userpass1", userRole, wallet1);
+		User user1 = new User("Archontellis", "Sotirchellis",
+				"user1", "agiletest", userRole, wallet1);
+		user1.setAvatar("https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAATNAAAAJDdjYmM0NmI0LTViNDMtNDE0Ny04Mjk2LTkzZDI2MmM2MjU3Zg.jpg");
 		UserSaveData userData1 = new UserSaveData(user1);
 
-		User user2 = new User("userNameTwo", "userNameTwo",
-				"user2", "userpass2", userRole, wallet2);
+		User user2 = new User("Nikos", "Mastrogiannopoulos",
+				"user2", "agiletest", userRole, wallet2);
+		user2.setAvatar("https://scontent.fath3-2.fna.fbcdn.net/v/t1.0-9/15826725_10209595825591327_3694477759808677138_n.jpg?oh=ac322b5ce4eb225c856d7953c7c1609c&oe=598E674D");
 		UserSaveData userData2 = new UserSaveData(user2);
 
-		User user3 = new User("userNameThree", "userSurnameThree",
-				"user3", "userpass3", userRole, wallet3);
+		User user3 = new User("Stamatis", "Katsaounis",
+				"user3", "agiletest", userRole, wallet3);
 		UserSaveData userData3 = new UserSaveData(user3);
+
+		User user4 = new User("Vlasis", "Barousis",
+				"user4", "agiletest", userRole, wallet4);
+		user4.setAvatar("https://scontent.fath3-2.fna.fbcdn.net/v/t1.0-9/9157_10207996918935306_4375061747766220940_n.jpg?oh=9b94a4a84d3dd84cbede66df1d5ae9a3&oe=5998A84F");
+		UserSaveData userData4 = new UserSaveData(user4);
 
 		User admin1 = new User("adminNameOne", "adminSurnameOne",
 				"admin1", "adminpass1", adminRole, null);
@@ -94,12 +104,18 @@ public class AgileTwoApplication implements CommandLineRunner {
 		userService.createUser(userData1);
 		userService.createUser(userData2);
 		userService.createUser(userData3);
+		userService.createUser(userData4);
 		userService.createUser(userAdmin1);
 
 
-		Game game1 = new Game(10, 100, "game1Name", "game 1 description");
-		Game game2 = new Game(40, 450, "game2Name", "game 2 description");
+		Game game1 = new Game(10, 50, "Roullete", "game 1 description","",0.3);
+		Game game2 = new Game(40, 100, "BlackJack", "game 2 description","",0.5);
 
+		game1.setAvatar("https://68.media.tumblr.com/8220060b6e6c9c2cca312641277e3f12/tumblr_njz885ZeDA1s2wio8o1_500.gif");
+		game2.setAvatar("https://68.media.tumblr.com/78bd456f44ab059cda364aed9812a2f4/tumblr_o1m115Z1Zr1s2wio8o1_500.gif");
+
+		game1.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+		game2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 		gameRepository.save(game1);
 		gameRepository.save(game2);
 
@@ -112,11 +128,11 @@ public class AgileTwoApplication implements CommandLineRunner {
 		updatedGamesRepository.save(updatedGame3);
 
 		UserCreditsOperation userCreditsOperation1 = new UserCreditsOperation(userService.getUserByUsername("user1"), 400,
-				UserCreditsOperation.OperationEnum.ADDED, transactionTime);
+				OperationEnum.ADDED, transactionTime);
 		UserCreditsOperation userCreditsOperation2 = new UserCreditsOperation(userService.getUserByUsername("user1"), 200,
-				UserCreditsOperation.OperationEnum.REMOVED, transactionTime);
+				OperationEnum.REMOVED, transactionTime);
 		UserCreditsOperation userCreditsOperation3 = new UserCreditsOperation(userService.getUserByUsername("user2"), 124,
-				UserCreditsOperation.OperationEnum.ADDED, transactionTime);
+				OperationEnum.ADDED, transactionTime);
 
 
 		userCreditsOperationsRepository.save(userCreditsOperation1);

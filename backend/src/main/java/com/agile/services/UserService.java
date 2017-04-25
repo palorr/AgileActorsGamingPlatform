@@ -1,6 +1,8 @@
 package com.agile.services;
 
 import com.agile.model.User;
+import com.agile.repositories.UserRepository;
+import com.agile.resources.UserResource;
 import com.agile.resources.UserSaveData;
 import com.agile.model.Wallet;
 import com.agile.repositories.*;
@@ -10,21 +12,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service("userService")
 public class UserService implements UserServiceInterface {
 
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository userRepository;
 
     @Autowired
     private WalletRepository walletRepo;
-
-    @Autowired
-    private RoleRepository roleRepo;
 
     @Autowired
     private UserCreditsOperationsRepository userCreditsOperationsRepo;
@@ -50,43 +48,54 @@ public class UserService implements UserServiceInterface {
     @Override
     @Transactional
     public List<User> fetchUsers() {
-        return userRepo.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     @Transactional
     public User getUserByUsernameAndPassword(String username, String password) {
-        return userRepo.findByUsernameAndPassword(username, password);
+        return userRepository.findByUsernameAndPassword(username, password);
     }
 
     @Override
     @Transactional
     public User getUserByUsername(String username) {
-        return userRepo.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     @Override
     @Transactional
-    public Map<String, Object> getUserBasicInfoById(int id) {
-        User user = userRepo.findById(id);
-        Map<String, Object> map = new HashMap<String, Object>();
+	public UserResource getUserBasicInfoById(int id) {
+		User user = userRepository.findById(id);
+		UserResource resource = new UserResource();
+		resource.setId(id);
+		resource.setName(user.getName());
+		resource.setSurname(user.getSurname());
+		resource.setUsername(user.getUsername());
+		resource.setAvatar(user.getAvatar());
 
-        map.put("id", user.getId());
-        map.put("name", user.getName());
-        map.put("surname", user.getSurname());
-        map.put("username", user.getUsername());
-        map.put("avatar", user.getAvatar());
-        return map;
-    }
+		return resource;
+	}
 
     @Override
     @Transactional
     public void updateUser(String surname, String name, int id, String avatar, String username) {
-        User user = userRepo.findById(id);
+        User user = userRepository.findById(id);
         user.setAvatar(avatar);
         user.setName(name);
         user.setSurname(surname);
-        userRepo.save(user);
+        userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(UserResource resource) {
+        User user = userRepository.findById(resource.getId());
+        user.setAvatar(resource.getAvatar());
+        user.setName(resource.getName());
+        user.setSurname(resource.getSurname());
+        user.setUsername(resource.getUsername());
+        userRepository.save(user);
     }
 
     @Override
@@ -101,20 +110,20 @@ public class UserService implements UserServiceInterface {
         if (userData.getAvatar() != null) {
             user.setAvatar(userData.getAvatar());
         }
-        return userRepo.save(user);
+        return userRepository.save(user);
     }
 
     @Override
     @Transactional
     public User updateUserByAdmin(UserSaveData userData) {
-        User user = userRepo.findOne(userData.getId());
+        User user = userRepository.findOne(userData.getId());
         //user.setAvatar(userData.getAvatar());
         user.setName(userData.getName());
         user.setSurname(userData.getSurname());
         user.setPassword(passwordEncoder.encode(userData.getPassword()));
         user.setUsername(userData.getUsername());
         user.setRole(userData.getRole());
-        return userRepo.save(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -125,11 +134,62 @@ public class UserService implements UserServiceInterface {
         adminViewOperationRepo.deleteByUserId(id);
         userGameBuyOperationRepo.deleteByUserId(id);
         updatedGamesRepo.deleteByUserId(id);
-        userRepo.delete(id);
+        userRepository.delete(id);
     }
 
     @Override
     public User getUser(int id) {
-        return userRepo.findOne(id);
+        return userRepository.findOne(id);
     }
+
+    @Override
+    public User findUserById(int id) {
+		return userRepository.findById(id);
+	}
+
+    @Override
+    public User getUserByUserNameAndPassword(String username, String password) {
+		return userRepository.findByUsernameAndPassword(username, password);
+	}
+
+    @Transactional
+	public void saveUser(User user) {
+		userRepository.save(user);
+	}
+
+    @Override
+    @Transactional
+	public List<UserResource> getBasicInfoOfAllUsersWithNameStartsWith(String searchTerm){
+		List<UserResource> usersWithSearchCriteria = userRepository.findByNameStartingWithOrSurnameStartingWithOrUsernameStartingWith(searchTerm, searchTerm, searchTerm).stream().map(user -> {
+
+			UserResource resource = new UserResource();
+			resource.setId(user.getId());
+			resource.setName(user.getName());
+			resource.setUsername(user.getUsername());
+			resource.setSurname(user.getSurname());
+			resource.setAvatar(user.getAvatar());
+			return resource;
+		}).collect(Collectors.toList());
+
+		return usersWithSearchCriteria;
+	}
+
+    @Override
+    @Transactional
+	public List<UserResource> getBasicInfoOfAllUsers() {
+		List<UserResource> usersToReturn = userRepository.findAll().stream().map(user -> {
+
+			UserResource resource = new UserResource();
+			resource.setId(user.getId());
+			resource.setName(user.getName());
+			resource.setUsername(user.getUsername());
+			resource.setSurname(user.getSurname());
+			resource.setAvatar(user.getAvatar());
+
+			return resource;
+
+		}).collect(Collectors.toList());
+
+		return usersToReturn;
+	}
 }

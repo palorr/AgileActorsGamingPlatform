@@ -1,6 +1,5 @@
 package com.agile.model;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -10,11 +9,11 @@ public class Game {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false)
-    private int buy_credits;
+    @Column(name = "buy_credits", nullable = false)
+    private int buyCredits;
 
-    @Column(nullable = false)
-    private int win_credits;
+    @Column(name = "win_credits", nullable = false)
+    private int winCredits;
 
     @Column(nullable = false)
     private String name;
@@ -22,13 +21,32 @@ public class Game {
     @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
+    private String avatar;
+
+    @Column(nullable = false)
+    private double yield;
+
     protected Game() {}
 
-    public Game(int buy_credits, int win_credits, String name, String description) {
-        this.buy_credits = buy_credits;
-        this.win_credits = win_credits;
+    public Game(int buy_credits, int win_credits, String name, String description,String avatar, double yield) {
+        this.buyCredits = buy_credits;
+        this.winCredits = win_credits;
         this.name = name;
         this.description = description;
+        this.avatar = avatar;
+
+        if(yield>1.0) //yield cant be over 100% win percentage
+            this.yield = 1;
+        else
+            this.yield = yield;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if(this.avatar == null) {
+            this.avatar = "http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png";
+        }
     }
 
     public int getId() {
@@ -40,19 +58,19 @@ public class Game {
     }
 
     public int getBuy_credits() {
-        return buy_credits;
+        return buyCredits;
     }
 
-    public void setBuy_credits(int buy_credits) {
-        this.buy_credits = buy_credits;
+    public void setBuy_credits(int buyCredits) {
+        this.buyCredits = buyCredits;
     }
 
     public int getWin_credits() {
-        return win_credits;
+        return winCredits;
     }
 
-    public void setWin_credits(int win_credits) {
-        this.win_credits = win_credits;
+    public void setWin_credits(int winCredits) {
+        this.winCredits = winCredits;
     }
 
     public String getName() {
@@ -71,9 +89,28 @@ public class Game {
         this.description = description;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public double getYield() {
+        return yield;
+    }
+
+    public void setYield(double yield) {
+        if(yield>1.0) //yield cant be over 100% win percentage
+            this.yield = 1;
+        else
+            this.yield = yield;
+    }
+
     @Override
 	public String toString() {
-		return "Game [id=" + id + ", buy_credits=" + buy_credits + ", win_credits=" + win_credits +
+		return "Game [id=" + id + ", buy_credits=" + buyCredits + ", win_credits=" + winCredits +
                 ", name=" + name + ", description=" + description + "]";
 	}
 }
