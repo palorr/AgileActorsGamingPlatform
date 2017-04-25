@@ -15,7 +15,7 @@ export let CONFIGURATION = {
     // },
 
     agileUrls:{
-        webApi: 'http://localhost:8081/'
+        webApi: 'http://localhost:8081/rest/'
     },
 
     jwt: function() {

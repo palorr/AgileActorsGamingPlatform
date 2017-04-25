@@ -15,12 +15,12 @@ public class RoleController {
     @Autowired
     private RoleRepository roleRepository;
 
-    @GetMapping(value = "/roles")
+    @GetMapping(value = "rest/roles")
     public List<Role> getRoles() {
         return roleRepository.findAll();
     }
 
-    @GetMapping(value = "/roles/{id}")
+    @GetMapping(value = "rest/roles/{id}")
     public Role getRoleByID(@PathVariable(value = "id") Integer id) {
         return roleRepository.findOne(id);
     }

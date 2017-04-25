@@ -13,7 +13,7 @@ public class UpdatedGamesController {
     @Autowired
     private UpdatedGamesRepository updatedGamesRepository;
 
-    @GetMapping(value = "/updatedGames")
+    @GetMapping(value = "rest/updatedGames")
     public List<UpdatedGames> getUpdatedGames() {
         List<UpdatedGames> updatedGames = updatedGamesRepository.findAll();
         return updatedGames;

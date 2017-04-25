@@ -21,12 +21,12 @@ public class UserController {
 	@Autowired
 	private WebAppConfigHandler webConfHandler;
 
-	@GetMapping(value = "/users")
+	@GetMapping(value = "rest/users")
 	public List<UserResource> getBasicInfoOfAllUsers() {
 		return userService.getBasicInfoOfAllUsers();
 	}
 
-	@GetMapping(value = "/users/{id}")
+	@GetMapping(value = "rest/users/{id}")
 	public UserResource getUserBasicInfoById(@PathVariable(value = "id") int id){
 		return userService.getUserBasicInfoById(id);
 	}
@@ -37,13 +37,13 @@ public class UserController {
 //		return userService.getUserByUserNameAndPassword(username, password);
 //	}
 
-	@GetMapping(value = "/userByCredentials/{username}/{password}")
+	@GetMapping(value = "rest/userByCredentials/{username}/{password}")
 	public User getUserByCredentials(@PathVariable(value = "username") String username,
 									 @PathVariable(value = "password") String password) {
 		return userService.getUserByUsernameAndPassword(username, password);
 	}
 
-	@GetMapping(value = "/userByUsername/{username}")
+	@GetMapping(value = "rest/userByUsername/{username}")
 	public ModelAndView getUserByUsername(@PathVariable(value = "username") String username) {
 		User user = userService.getUserByUsername(username);
 		ModelAndView modelAndView = new ModelAndView("user_details", "user", user);
@@ -58,12 +58,12 @@ public class UserController {
 		return modelAndView;
 	}
 
-    @PutMapping(value = "/users/edit")
+    @PutMapping(value = "rest/users/edit")
     public void updateUser(@RequestBody UserResource userResource) {
 		userService.updateUser(userResource);
     }
 
-    @GetMapping(value = "/users/search/{searchTerm}")
+    @GetMapping(value = "rest/users/search/{searchTerm}")
 	public List<UserResource> searchUser(@PathVariable(value = "searchTerm") String searchTerm){
 		return userService.getBasicInfoOfAllUsersWithNameStartsWith(searchTerm);
 	}

@@ -16,17 +16,17 @@ public class WalletController {
     @Autowired
     private WalletService walletService;
 
-    @GetMapping(value = "/wallet/{userId}")
+    @GetMapping(value = "rest/wallet/{userId}")
     public WalletResource getWalletByUserId(@PathVariable(value = "userId") int userId) {
         return walletService.getWalletByUserId(userId);
     }
     
-    @PostMapping(value = "/wallet/deposit")
+    @PostMapping(value = "rest/wallet/deposit")
     public WalletDepositAnswerResource deposit(@RequestBody WalletOpeartionsResource resource){
 		return walletService.deposit(resource);
     }
     
-    @PostMapping(value = "/wallet/withdraw")
+    @PostMapping(value = "rest/wallet/withdraw")
     public WalletWithdrawAnswerResource withdraw(@RequestBody WalletOpeartionsResource resource){
 		return walletService.withdraw(resource);
     }
