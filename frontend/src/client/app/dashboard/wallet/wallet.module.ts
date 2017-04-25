@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AlertModule } from '../../directives/alert.module';
 
 // import wallet components hera
 import {WalletComponent} from './wallet.component';
@@ -20,7 +21,8 @@ import {
     CommonModule,
     RouterModule,
     FormsModule,
-    TabsModule
+    TabsModule,
+    AlertModule
   ],
   declarations: [
     WalletComponent,

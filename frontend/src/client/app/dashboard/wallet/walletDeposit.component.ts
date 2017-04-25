@@ -15,8 +15,8 @@ import { DepositResponse } from '../../models/index';
 export class WalletDepositComponent implements OnInit {
 
   id: number;
-  couponNumber: string ;
-  creditsToDeposit: number ;
+  couponNumberToSent: string ;
+  creditsToDepositToSent: string ;
   depositResponse: DepositResponse ;
   loading = false;
 
@@ -39,22 +39,51 @@ export class WalletDepositComponent implements OnInit {
 
     this.loading = true;
 
-      this.walletService.deposit(this.id, this.couponNumber, this.creditsToDeposit)
+    if(!this.validateCouponNumber(this.couponNumberToSent)) {
+      this.alertService.error('Coupon number length must be 20 digits.');
+      this.loading = false;
+      return;
+    }
+
+    if(!this.validateCreditsAmount(this.creditsToDepositToSent)) {
+      this.alertService.error('Credits amount is not valid.');
+      this.loading = false;
+      return;
+    }
+
+    this.walletService.deposit(this.id, this.couponNumberToSent, +this.creditsToDepositToSent)
         .subscribe(
           (data: DepositResponse) => {
 
             this.depositResponse = data;
             console.log('Deposit Response: ', this.depositResponse);
+            this.loading = false;
+
+            if(this.depositResponse.success) {
+              this.alertService.success('Congratulations. You have successfully made a deposit of '+
+                this.depositResponse.credits+' credits');
+            }else {
+              this.alertService.error('This coupon number does not exist!');
+            }
 
           },
           (err) => {
+            this.loading = false;
             this.alertService.error('I am sorry, something went wrong. Please try again later!');
           }
         );
 
   }
 
+  validateCouponNumber( number: string ) {
+    var re = /^[0-9]{20}$/; // exactly 20 digits
+    return re.test(number);
+  }
 
+  validateCreditsAmount( credits: string) {
+    var re = /^[0-9]{1,3}$/; // max number 999
+    return re.test(credits);
+  }
 
 
 }

@@ -78,4 +78,5 @@ export class WalletService {
         throw (res.json());
       });
   }
+
 }

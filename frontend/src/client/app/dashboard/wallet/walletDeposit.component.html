@@ -26,4 +26,57 @@
 
 
 
+  <div class="row" >  <!--*ngIf="isRequestorThisUser"-->
+    <div class="col-lg-7 card card-block">
+
+      <form name="form" (ngSubmit)="deposit()" role="form" #depositForm="ngForm" novalidate>
+
+        <fieldset class="form-group" [ngClass]="{ 'has-error': depositForm.submitted && !couponNumber.valid }">
+
+          <label for="couponNumber">Coupon number (*)</label>
+
+          <input type="text" class="form-control input-underline input-lg"
+                 name="couponNumber" id="couponNumber" placeholder="Enter your coupon number here ..."
+                 maxlength="20"
+                 required [(ngModel)]="couponNumberToSent"
+                 #couponNumber="ngModel">
+
+          <div [hidden]="couponNumber.valid || couponNumber.pristine" class="error">
+            Coupon number is required !
+          </div>
+
+        </fieldset>
+
+        <fieldset class="form-group" [ngClass]="{ 'has-error': depositForm.submitted && !creditsToDeposit.valid }">
+
+          <label for="creditsToDeposit">Credits Amount (*)</label>
+
+          <input type="text" class="form-control input-underline input-lg"
+                 name="creditsToDeposit" id="creditsToDeposit" placeholder="Enter the amount of credits you want to insert here ..."
+                 maxlength="3"
+                 required [(ngModel)]="creditsToDepositToSent"
+                 #creditsToDeposit="ngModel">
+
+          <div [hidden]="creditsToDeposit.valid || creditsToDeposit.pristine" class="error">
+            Amount of credits is required !
+          </div>
+
+        </fieldset>
+
+        <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!depositForm.form.valid"><i class="fa fa-user-plus"></i> Deposit</button>
+
+
+        <span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> We working on it, please wait...
+				</span>
+
+        <br/><br/>
+
+        <alert></alert>
+
+      </form>
+
+    </div>
+  </div>
+
 </div>
