@@ -10,4 +10,5 @@ public interface GameServiceInterface {
     List<Game> fetchGames();
     void deleteGame(int id);
     Game getGame(int id);
+    Game updateGameByAdmin(Game game);
 }

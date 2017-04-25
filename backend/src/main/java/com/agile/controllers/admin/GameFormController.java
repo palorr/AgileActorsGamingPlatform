@@ -51,7 +51,7 @@ public class GameFormController {
 
     @PostMapping(value = ADMIN_UPDATE_GAME_URI)
     public ModelAndView change(@ModelAttribute("game") Game game) {
-        gameService.saveGame(game);
+        gameService.updateGameByAdmin(game);
         return getModelAndView(REDIRECT_ADMIN_GAMES_URI);
     }
 

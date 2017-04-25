@@ -210,4 +210,14 @@ public class GameService implements GameServiceInterface{
 		}
 		return new GameResourceAfterTry(false, 0);
 	}
+
+	@Override
+	@Transactional
+	public Game updateGameByAdmin(Game form_game) {
+		Game game = gameRepository.findOne(form_game.getId());
+		game.setName(form_game.getName());
+		game.setDescription(form_game.getDescription());
+		game.setWin_credits(form_game.getWin_credits());
+		return gameRepository.save(game);
+	}
 }

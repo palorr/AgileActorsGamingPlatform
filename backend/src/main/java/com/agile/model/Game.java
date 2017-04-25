@@ -42,6 +42,13 @@ public class Game {
             this.yield = yield;
     }
 
+    @PrePersist
+    public void prePersist() {
+        if(this.avatar == null) {
+            this.avatar = "http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png";
+        }
+    }
+
     public int getId() {
         return id;
     }
