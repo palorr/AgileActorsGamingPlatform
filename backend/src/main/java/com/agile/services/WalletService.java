@@ -5,10 +5,11 @@ import javax.transaction.Transactional;
 import com.agile.model.User;
 import com.agile.repositories.UserRepository;
 import com.agile.resources.WalletDepositAnswerResource;
-import com.agile.resources.WalletOpeartionsResource;
+import com.agile.resources.WalletOperationsResource;
 import com.agile.resources.WalletResource;
 import com.agile.resources.WalletWithdrawAnswerResource;
 
+import com.agile.services.api.WalletServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,10 @@ import com.agile.model.Wallet;
 import com.agile.model.enums.CouponNumbersEnum;
 import com.agile.repositories.WalletRepository;
 
+import java.util.List;
+
 @Service
-public class WalletService {
+public class WalletService implements WalletServiceInterface{
 
 	private WalletRepository walletRepository;
 	private UserRepository userRepository;
@@ -31,24 +34,33 @@ public class WalletService {
 		this.walletRepository = walletRepository;
 	}
 
+	@Override
+	public List<Wallet> fetchWallets() {
+		return walletRepository.findAll();
+	}
+
+	@Override
 	@Transactional
 	public Wallet findWalletById(int id) {
 		return walletRepository.findOne(id);
 	}
 
+	@Override
 	@Transactional
 	public Wallet updateWalletCredits(Wallet wallet) {
 		return walletRepository.save(wallet);
 	}
 
+	@Override
 	@Transactional
 	public WalletResource getWalletByUserId(int userId) {
 		Wallet wallet = userRepository.findById(userId).getWallet();
 		return new WalletResource(wallet.getId(), wallet.getCredits());
 	}
 
+	@Override
 	@Transactional
-	public WalletDepositAnswerResource deposit(WalletOpeartionsResource resource) {
+	public WalletDepositAnswerResource deposit(WalletOperationsResource resource) {
 
 		boolean success = false;
 		Integer creditsInserted = 0;
@@ -71,7 +83,8 @@ public class WalletService {
 		return new WalletDepositAnswerResource(success, creditsInserted);
 	}
 
-	public WalletWithdrawAnswerResource withdraw(WalletOpeartionsResource resource) {
+	@Override
+	public WalletWithdrawAnswerResource withdraw(WalletOperationsResource resource) {
 		boolean success = false;
 		Integer creditsTaken = 0;
 		boolean overLimit = false;

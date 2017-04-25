@@ -6,6 +6,7 @@ public class UriPaths {
     public static final String ADMIN_URI = "/admin/";
     public static final String ADMIN_USERS_URI = "/admin/users/";
     public static final String ADMIN_GAMES_URI = "/admin/games/";
+    public static final String ADMIN_WALLETS_URI = "/admin/wallets/";
 
     /* Admin User Panel Uris */
     public static final String REDIRECT_ADMIN_USERS_URI = "redirect:/admin/users/";

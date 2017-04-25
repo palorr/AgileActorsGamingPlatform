@@ -1,7 +1,7 @@
 package com.agile.controllers.users;
 
 import com.agile.resources.WalletDepositAnswerResource;
-import com.agile.resources.WalletOpeartionsResource;
+import com.agile.resources.WalletOperationsResource;
 import com.agile.resources.WalletResource;
 import com.agile.resources.WalletWithdrawAnswerResource;
 import com.agile.services.WalletService;
@@ -22,12 +22,12 @@ public class WalletController {
     }
     
     @PostMapping(value = "rest/wallet/deposit")
-    public WalletDepositAnswerResource deposit(@RequestBody WalletOpeartionsResource resource){
+    public WalletDepositAnswerResource deposit(@RequestBody WalletOperationsResource resource){
 		return walletService.deposit(resource);
     }
     
     @PostMapping(value = "rest/wallet/withdraw")
-    public WalletWithdrawAnswerResource withdraw(@RequestBody WalletOpeartionsResource resource){
+    public WalletWithdrawAnswerResource withdraw(@RequestBody WalletOperationsResource resource){
 		return walletService.withdraw(resource);
     }
 

@@ -2,9 +2,10 @@
 
 <#macro side_menu>
     <ul class="nav nav-sidebar">
-        <li><a href="/admin/"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
-        <li class="active"><a href="#"><i class="fa fa-users" aria-hidden="true"></i> Users</a></li>
-        <li><a href="/admin/games/"><i class="fa fa-gamepad" aria-hidden="true"></i> Games</a></li>
+        <li><a href="${adminUri}"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Dashboard</a></li>
+        <li class="active"><a href="#"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Users</a></li>
+        <li><a href="${adminGamesUri}"><i class="fa fa-gamepad fa-fw" aria-hidden="true"></i> Games</a></li>
+        <li><a href="/admin/wallets/"><i class="fa fa-euro fa-fw" aria-hidden="true"></i> Wallets</a></li>
     </ul>
 </#macro>
 

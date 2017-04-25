@@ -50,6 +50,10 @@ public class AdminGameController {
                 webConfHandler.getWebAppPath(LOGOUT_URI_PARAM));
         modelAndView.addObject(ADMIN_GAMES_URI_PARAM.getParam(),
                 webConfHandler.getWebAppPath(ADMIN_GAMES_URI_PARAM));
+        modelAndView.addObject(ADMIN_USERS_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_USERS_URI_PARAM));
+        modelAndView.addObject(ADMIN_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_URI_PARAM));
         return modelAndView;
     }
 }
