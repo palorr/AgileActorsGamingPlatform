@@ -95,7 +95,7 @@ implements CommandLineRunner
 		User user4 = new User("Vlasis", "Barousis",
 				"user4", "agiletest", userRole, wallet4);
 		user4.setAvatar("https://scontent.fath3-2.fna.fbcdn.net/v/t1.0-9/9157_10207996918935306_4375061747766220940_n.jpg?oh=9b94a4a84d3dd84cbede66df1d5ae9a3&oe=5998A84F");
-		UserSaveData userData4 = new UserSaveData(user3);
+		UserSaveData userData4 = new UserSaveData(user4);
 
 		User admin1 = new User("adminNameOne", "adminSurnameOne",
 				"admin1", "adminpass1", adminRole, null);
