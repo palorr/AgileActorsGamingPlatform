@@ -1,7 +1,7 @@
 package com.agile.controllers.users;
 
 import java.util.List;
-import com.agile.services.GameService;
+import com.agile.services.api.GameServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ import com.agile.resources.GameResourceToPlayOrTry;
 public class GameController {
 
 	@Autowired
-	private GameService gameService;
+	private GameServiceInterface gameService;
 
 	@GetMapping(value = "games")
 	public List<GameResource> getBasicInfoOfAllGames() {

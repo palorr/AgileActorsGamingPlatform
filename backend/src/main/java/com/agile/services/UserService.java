@@ -147,6 +147,7 @@ public class UserService implements UserServiceInterface {
 		return userRepository.findById(id);
 	}
 
+    @Override
     public User getUserByUserNameAndPassword(String username, String password) {
 		return userRepository.findByUsernameAndPassword(username, password);
 	}

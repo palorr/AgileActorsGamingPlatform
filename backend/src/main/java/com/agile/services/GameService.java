@@ -64,7 +64,7 @@ public class GameService implements GameServiceInterface{
     }
 
 
-
+	@Override
 	@Transactional
 	public List<GameResource> getBasicInfoOfAllGames() {
 		List<GameResource> gamesToReturn = gameRepository.findAll().stream().map(game -> {
@@ -84,6 +84,7 @@ public class GameService implements GameServiceInterface{
 		return gamesToReturn;
 	}
 
+	@Override
 	@Transactional
 	public List<GameResource> getBasicInfoOfAllGamesWithNameStartsWith(String searchTerm){
 
@@ -102,6 +103,7 @@ public class GameService implements GameServiceInterface{
 		return gamesWithSearchCriteria;
 	}
 
+	@Override
 	@Transactional
 	public GameResource getGameBasicInfoById(int id) {
 		Game game = gameRepository.findById(id);
@@ -127,6 +129,8 @@ public class GameService implements GameServiceInterface{
 	 * @param resource containing the required parameters
 	 * @return
 	 */
+
+	@Override
 	@Transactional
 	public GameResourceAfterPlay playGame(GameResourceToPlayOrTry resource) {
 		boolean win;
@@ -175,6 +179,7 @@ public class GameService implements GameServiceInterface{
 		return new GameResourceAfterPlay(win, enoughCredits, amount);
 	}
 
+	@Override
 	@Transactional
 	public GameResourceAfterTry tryGame(GameResourceToPlayOrTry resource) {
 		boolean win;

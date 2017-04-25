@@ -21,4 +21,5 @@ public interface UserServiceInterface {
     List<UserResource> getBasicInfoOfAllUsersWithNameStartsWith(String searchTerm);
     void updateUser(UserResource resource);
     User findUserById(int id);
+    User getUserByUserNameAndPassword(String username, String password);
 }
