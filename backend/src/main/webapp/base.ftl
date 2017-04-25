@@ -30,6 +30,34 @@
     </ul>
 </#macro>
 
+<#macro navbar>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/admin/"><i class="fa fa-fort-awesome" aria-hidden="true"></i> IWG Admin Panel</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/admin/users/">Users</a></li>
+                    <li><a href="/admin/games/">Games</a></li>
+                    <li><a href="#">Wallets</a></li>
+                    <li><a href="#">Play Operations</a></li>
+                    <li><a href="#">Credit Operations</a></li>
+                    <li><a href="#">Buy Operations</a></li>
+                    <li><a href="#">View Operations</a></li>
+                    <li><a href=${logoutUri}>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</#macro>
+
 <#macro display_page>
     <!DOCTYPE html>
     <html lang="en">
@@ -38,32 +66,7 @@
     </head>
 
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/admin/"><i class="fa fa-fort-awesome" aria-hidden="true"></i> IWG Admin Panel</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/admin/users/">Users</a></li>
-                        <li><a href="/admin/games/">Games</a></li>
-                        <li><a href="#">Wallets</a></li>
-                        <li><a href="#">Play Operations</a></li>
-                        <li><a href="#">Credit Operations</a></li>
-                        <li><a href="#">Buy Operations</a></li>
-                        <li><a href="#">View Operations</a></li>
-                        <li><a href=${logoutUri}>Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
+        <@navbar/>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
