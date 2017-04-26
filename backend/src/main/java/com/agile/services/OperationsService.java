@@ -1,6 +1,7 @@
 package com.agile.services;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -66,6 +67,10 @@ public class OperationsService {
 
 		UserGameBuyOperation userBuyOperation = new UserGameBuyOperation(user, game, date);
 		userGameBuyOperationRepository.save(userBuyOperation);
+	}
+
+	public List<UserCreditsOperation> fetchCreditOperations() {
+		return userCreditsOperationsRepository.findAll();
 	}
 
 }
