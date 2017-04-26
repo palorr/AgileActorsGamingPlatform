@@ -23,7 +23,7 @@
         <li style="padding: 10px 25px 10px 15px;font-size: 12px; color: #4b646f;">User Operations</li>
         <li><a href="/admin/play_operations/"><i class="fa fa-trophy fa-fw" aria-hidden="true"></i> Play Operations</a></li>
         <li><a href="/admin/credit_operations/"><i class="fa fa-credit-card fa-fw" aria-hidden="true"></i> Credit Operations</a></li>
-        <li><a href="#"><i class="fa fa-ticket fa-fw" aria-hidden="true"></i> Buy Operations</a></li>
+        <li><a href="/admin/buy_operations/"><i class="fa fa-ticket fa-fw" aria-hidden="true"></i> Buy Operations</a></li>
         <li style="padding: 10px 25px 10px 15px;font-size: 12px; color: #4b646f;">Admin Operations</li>
         <li><a href="#"><i class="fa fa-eye fa-fw" aria-hidden="true"></i> View Operations</a></li>
         <li><a href="#"><i class="fa fa-gamepad fa-fw" aria-hidden="true"></i> Game Operations</a></li>
@@ -49,7 +49,7 @@
                     <li><a href="/admin/wallets/">Wallets</a></li>
                     <li><a href="/admin/play_operations/">Play Operations</a></li>
                     <li><a href="/admin/credit_operations/">Credit Operations</a></li>
-                    <li><a href="#">Buy Operations</a></li>
+                    <li><a href="/admin/buy_operations/">Buy Operations</a></li>
                     <li><a href="#">View Operations</a></li>
                     <li><a href=${logoutUri}>Logout</a></li>
                 </ul>

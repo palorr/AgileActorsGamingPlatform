@@ -77,4 +77,7 @@ public class OperationsService {
 		return userGamePlayOperationRepository.findAll();
 	}
 
+	public List<UserGameBuyOperation> fetchBuyOperations() {
+		return userGameBuyOperationRepository.findAll();
+	}
 }
