@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
 import { WalletService, AlertService } from '../../services/index';
-
 import { WithdrawResponse } from '../../models/index';
-
+import {AuthGuard} from '../../guards/auth.guard';
+import {UserService} from '../../services/user.service';
+import {AuthenticationService} from '../../services/authentication.service';
 
 @Component({
   moduleId: module.id,
@@ -14,22 +14,30 @@ import { WithdrawResponse } from '../../models/index';
 
 export class WalletWithdrawComponent implements OnInit {
 
-  id: number;
+  id: string;
   IBAN: string ;
   creditsToWithdraw: string ;
-  withdrawResponse: WithdrawResponse;
-  loading = false;
+  withdrawResponse: WithdrawResponse ;
+  loading = false ;
+  isRequesterLoggedIn: boolean = false ;
+  isRequesterThisUser: boolean = false ;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private walletService: WalletService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private guard: AuthGuard,
+    private userService: UserService,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
-      this.id = +params['id']; // export id from url path
+      this.id = params['id']; // export id from url path
+
+      this.isRequesterLoggedIn = this.guard.isUserLoggedIn();
+      this.isRequesterThisUser = this.userService.isRequesterThisUser(this.id);
 
     });
   }
@@ -50,7 +58,14 @@ export class WalletWithdrawComponent implements OnInit {
       return;
     }
 
-    this.walletService.withdraw(this.id, this.IBAN, +this.creditsToWithdraw)
+    if(!this.isRequesterThisUser || !this.isRequesterLoggedIn) {
+      this.alertService.error('You are not authorized to be here.');
+      this.loading = false;
+      this.authenticationService.logout();
+      return;
+    }
+
+    this.walletService.withdraw(+this.id, this.IBAN, +this.creditsToWithdraw)
       .subscribe(
         (data: WithdrawResponse) => {
 

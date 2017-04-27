@@ -1,4 +1,4 @@
-<div *ngIf="user" class="container-fluid">
+<div *ngIf="user && isRequesterThisUser && isRequesterLoggedIn" class="container-fluid">
   <!-- Page Heading -->
   <div class="row">
     <div class="col-lg-12">
@@ -19,7 +19,7 @@
     </div>
   </div>
   <!-- /.row -->
-  <div class="row" >  <!--*ngIf="isRequestorThisUser"-->
+  <div class="row" >
     <div class="col-lg-12">
 
       <form name="form" (ngSubmit)="editUser()" role="form" #editUserForm="ngForm" novalidate>

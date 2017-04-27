@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { ActivatedRoute, Params} from '@angular/router';
 import { WalletService, AlertService } from '../../services/index';
-
 import { DepositResponse } from '../../models/index';
-
+import { AuthGuard } from '../../guards/auth.guard';
+import { UserService } from '../../services/user.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   moduleId: module.id,
@@ -14,23 +14,29 @@ import { DepositResponse } from '../../models/index';
 
 export class WalletDepositComponent implements OnInit {
 
-  id: number;
+  id: string;
   couponNumberToSent: string ;
   creditsToDepositToSent: string ;
   depositResponse: DepositResponse ;
   loading = false;
+  isRequesterLoggedIn: boolean = false ;
+  isRequesterThisUser: boolean = false ;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private walletService: WalletService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private guard: AuthGuard,
+    private userService: UserService,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
-      this.id = +params['id'];
+      this.id = params['id'];
 
+      this.isRequesterLoggedIn = this.guard.isUserLoggedIn();
+      this.isRequesterThisUser = this.userService.isRequesterThisUser(this.id);
 
     });
   }
@@ -51,7 +57,14 @@ export class WalletDepositComponent implements OnInit {
       return;
     }
 
-    this.walletService.deposit(this.id, this.couponNumberToSent, +this.creditsToDepositToSent)
+    if(!this.isRequesterThisUser || !this.isRequesterLoggedIn) {
+      this.alertService.error('You are not authorized to be here.');
+      this.loading = false;
+      this.authenticationService.logout();
+      return;
+    }
+
+    this.walletService.deposit(+this.id, this.couponNumberToSent, +this.creditsToDepositToSent)
         .subscribe(
           (data: DepositResponse) => {
 

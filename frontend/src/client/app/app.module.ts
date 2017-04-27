@@ -22,7 +22,7 @@ import {
   WalletService
 } from './services/index';
 
-import { AuthGuard, AuthorizationGuard } from './guards/index';
+import { AuthGuard } from './guards/index';
 
 import { CurrentUserService } from './helpers/index';
 
@@ -51,7 +51,6 @@ import { CurrentUserService } from './helpers/index';
 		UserService,
 		GameService,
 		AuthGuard,
-		AuthorizationGuard,
 		CurrentUserService,
     WalletService
 	],
