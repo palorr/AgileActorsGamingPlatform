@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.*;
 
 
-//@CrossOrigin(origins = "http://localhost:5555")
+@CrossOrigin(origins = "http://localhost:5555")
 @RestController
 public class UserController {
 

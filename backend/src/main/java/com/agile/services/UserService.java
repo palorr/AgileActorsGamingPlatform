@@ -64,9 +64,8 @@ public class UserService implements UserServiceInterface {
         User user = userRepository.findByUsername(username);
 
         if(user != null){
-            String encryptedPassword = passwordEncoder.encode(password);
 
-            if(user.getPassword().equals(encryptedPassword)){
+            if(passwordEncoder.matches(password,user.getPassword())){
                 response.setId(user.getId());
             }
         }

@@ -7,22 +7,22 @@
         	<img src="assets/img/agile-logo.png" width="150px" class="user-avatar" />
 
 			<h1>Agile Actors Team 2 Login</h1>
-			
+
 			<form name="form" (ngSubmit)="loginUser()" role="form" #loginUserForm="ngForm" novalidate>
 
 				<div class="form-content">
-					
+
 					<div class="form-group" [ngClass]="{ 'has-error': loginUserForm.submitted && !username.valid }">
 
-						<label for="username">EMAIL</label>
+						<label for="username">USERNAME</label>
 
-						<input type="text" class="form-control input-underline input-lg" 
+						<input type="text" class="form-control input-underline input-lg"
 							name="username" id="username" placeholder="Enter your email address..."
 							required [(ngModel)]="user.username"
 							#username="ngModel">
 
 						<div [hidden]="username.valid || username.pristine" class="error help-block">
-							Email is required !
+							Username is required !
 						</div>
 
 					</div>
@@ -31,7 +31,7 @@
 
 						<label for="password">PASSWORD</label>
 
-						<input type="password" class="form-control input-underline input-lg" 
+						<input type="password" class="form-control input-underline input-lg"
 							name="password" id="password" placeholder="Enter your desired password..."
 							required [(ngModel)]="user.password"
 							#password="ngModel">
@@ -41,26 +41,26 @@
 						</div>
 
 					</div>
-					
+
 				</div>
-				
+
 				<button *ngIf="!loading"  class="btn btn-primary" type="submit" [disabled]= "!loginUserForm.form.valid"><i class="fa fa-sign-in"></i> Login</button>
-				
+
 				<span *ngIf="loading">
 
 					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Signing you in...
-					
+
 				</span>
-				
+
 				<br/><br/>
-				
+
 				<alert></alert>
-				
+
 				<br/>
-				
+
 				<a class="btn btn-primary" routerLink="/signup"><i class="fa fa-user-plus"></i> Not a user? Go to register page </a>
-				
+
 			</form>
-		</div>	
+		</div>
 	</div>
 </div>

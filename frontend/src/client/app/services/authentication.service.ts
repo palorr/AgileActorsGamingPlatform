@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { CONFIGURATION } from '../shared/app.constants';
 
 @Injectable()
 export class AuthenticationService {
@@ -11,7 +10,9 @@ export class AuthenticationService {
 
     login(username: string, password: string) {
 
-        let loginURL = CONFIGURATION.agileUrls+'oauth2/token';
+        let loginURL = 'http://localhost:8081/rest/login';
+
+        console.log(username);
 
         let headers = new Headers({
           'Content-Type': 'application/json',
@@ -22,14 +23,17 @@ export class AuthenticationService {
           password: password
         });
 
+
         let options = new RequestOptions({ headers: headers });
+
+        console.log(options);
 
         return this.http.post(loginURL, postRequestBody, options)
             .map((response: Response) => {
 
                 console.log('Response: ', response.json());
 
-                let id = response.json();
+                let id = +response.json().id;
 
                 if ( id ) {
 
