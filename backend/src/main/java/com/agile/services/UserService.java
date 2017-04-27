@@ -2,6 +2,8 @@ package com.agile.services;
 
 import com.agile.model.User;
 import com.agile.repositories.UserRepository;
+import com.agile.resources.CredentialsToLogin;
+import com.agile.resources.DummyLoginResponse;
 import com.agile.resources.UserResource;
 import com.agile.resources.UserSaveData;
 import com.agile.model.Wallet;
@@ -53,8 +55,22 @@ public class UserService implements UserServiceInterface {
 
     @Override
     @Transactional
-    public User getUserByUsernameAndPassword(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password);
+    public DummyLoginResponse getUserByUsernameAndPassword( CredentialsToLogin credentials) {
+
+        String username = credentials.getUsername();
+        String password = credentials.getPassword();
+
+        DummyLoginResponse response = new DummyLoginResponse(0);
+        User user = userRepository.findByUsername(username);
+
+        if(user != null){
+            String encryptedPassword = passwordEncoder.encode(password);
+
+            if(user.getPassword().equals(encryptedPassword)){
+                response.setId(user.getId());
+            }
+        }
+        return response;
     }
 
     @Override

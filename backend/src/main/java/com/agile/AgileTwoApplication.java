@@ -79,7 +79,7 @@ implements CommandLineRunner
 
 
 		User user1 = new User("Archontellis", "Sotirchellis",
-				"user1", "agiletest", userRole, wallet1);
+				"user1", "test", userRole, wallet1);
 		user1.setAvatar("https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAATNAAAAJDdjYmM0NmI0LTViNDMtNDE0Ny04Mjk2LTkzZDI2MmM2MjU3Zg.jpg");
 		UserSaveData userData1 = new UserSaveData(user1);
 

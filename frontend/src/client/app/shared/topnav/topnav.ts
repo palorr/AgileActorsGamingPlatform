@@ -3,11 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { AuthGuard } from '../../guards/index';
 
-import { CurrentUserService } from '../../helpers/index';
-
-import { CurrentUser } from '../../models/index';
-
 import { AuthenticationService, UserService } from '../../services/index';
+import { GenericUser } from '../../models/genericUser';
 
 @Component({
 	moduleId: module.id,
@@ -19,30 +16,27 @@ export class TopNavComponent implements OnInit {
 
 	isLoggedIn: boolean = false;
 
-	currentUser = {};
+	currentUser: GenericUser;
 
 	intervals: any[] = [];
 
 	constructor(
 		private authGuard: AuthGuard,
-		private currentUserService: CurrentUserService,
 		private userService: UserService,
 		private authenticationService: AuthenticationService,
-		private route: ActivatedRoute,
 		private router: Router
 	) { }
 
 	ngOnInit() {
 
-		if (this.authGuard.isUserLoggedIn()) {
-			this.isLoggedIn = true;
-		}
+		if ( this.authGuard.canActivate() ) {//go to login page if not logged in
 
-		if (localStorage.getItem('currentUser')) {
+      this.isLoggedIn = true ;
+
 			this.userService
-				.getCurrentUserInfo()
+				.getUserMainInfo(this.userService.getCurrentUserId())
 				.subscribe(
-				(data) => {
+				(data: GenericUser) => {
 					this.currentUser = data;
 					console.log('Current User: ', this.currentUser);
 				},
@@ -50,6 +44,7 @@ export class TopNavComponent implements OnInit {
 					console.log('ERROR: ', err);
 				});
 		}
+
 	}
 
 	logOut() {

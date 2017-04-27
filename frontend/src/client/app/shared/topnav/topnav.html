@@ -1,26 +1,26 @@
 <nav class="navbar navbar-dark bg-inverse navbar-fixed-top topnav">
     <div class="site-nav__left">
-        <a>Java Coding School</a> 
+        <a>Java Coding School</a>
     </div>
     <div class="site-nav__middle">
     <a class="navbar-brand" [routerLink]="['/dashboard/home']">Agile Actors Team 2</a>
     </div>
     <div class="site-nav__right">
     <div class="collapse navbar-toggleable-xs clearfix text-center">
-        
+
         <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">
             <span [ngSwitch]="isLoggedIn">
                 <span *ngSwitchCase="true">
                     <li  class="dropdown nav-item" dropdown>
-                        <a href="javascript:;" id="single-button" class="nav-link dropdown-toggle" dropdownToggle >
-                            <i class="fa fa-user"></i> <span *ngIf="currentUser.Name">{{currentUser.Name}} | </span>{{currentUser.Username}} <b class="caret"></b>
+                        <a href="javascript:" id="single-button" class="nav-link dropdown-toggle" dropdownToggle >
+                            <i class="fa fa-user"></i> <span *ngIf="currentUser.name">{{currentUser.surname}} | </span>{{currentUser.username}} <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="single-button">
                             <li>
-                                <a class="dropdown-item" [routerLink]="['users/view', currentUser.Id]"><i class="fa fa-fw fa-user"></i> View Profile</a>
+                                <a class="dropdown-item" [routerLink]="['users/view', currentUser.id]"><i class="fa fa-fw fa-user"></i> View Profile</a>
                             </li>
                             <li>
-                                <a class="dropdown-item"  [routerLink]="['users/edit', currentUser.Id]"><i class="fa fa-fw fa-edit"></i> Edit Profile</a>
+                                <a class="dropdown-item"  [routerLink]="['users/edit', currentUser.id]"><i class="fa fa-fw fa-edit"></i> Edit Profile</a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -33,12 +33,12 @@
                 </span>
                 <span *ngSwitchCase="false">
                     <li class="dropdown nav-item">
-                        <a [routerLink]="['/signup']" href="javascript:;" id="single-button" class="nav-link" >
+                        <a [routerLink]="['/signup']" href="javascript:;" id="signup" class="nav-link" >
                             <i class="fa fa-user-plus"></i> Register
                         </a>
                     </li>
                     <li class="dropdown nav-item"                    >
-                       <a [routerLink]="['/login']" href="javascript:;" id="single-button" class="nav-link" >
+                       <a [routerLink]="['/login']" href="javascript:;" id="login" class="nav-link" >
                             <i class="fa fa-sign-in"></i> Login
                         </a>
                     </li>

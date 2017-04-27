@@ -2,6 +2,8 @@ package com.agile.services.api;
 
 import com.agile.model.User;
 import com.agile.model.Wallet;
+import com.agile.resources.CredentialsToLogin;
+import com.agile.resources.DummyLoginResponse;
 import com.agile.resources.UserResource;
 import com.agile.resources.UserSaveData;
 
@@ -10,7 +12,7 @@ import java.util.List;
 public interface UserServiceInterface {
 
     List<User> fetchUsers();
-    User getUserByUsernameAndPassword(String username, String password);
+    DummyLoginResponse getUserByUsernameAndPassword(CredentialsToLogin credentials);
     User getUserByUsername(String username);
     void updateUser(String surname , String name , int id , String avatar , String username);
     User createUser(UserSaveData userData, Wallet wallet);
