@@ -43,6 +43,8 @@ export class AuthenticationService {
                     };
 
                     localStorage.setItem('currentUser', JSON.stringify(userDetails));
+                } else {
+                  throw(response.json());
                 }
             })
             .catch(res => {
