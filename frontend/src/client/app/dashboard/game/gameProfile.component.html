@@ -35,11 +35,6 @@
     <button *ngIf="!loading" type="button" class="col-lg-3 btn btn-lg" (click)="tryGame()"> Try</button>
 
     <div class="col-lg-2">
-
-      <span *ngIf="loading">
-					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Loading...
-      </span>
-
     </div>
 
     <button *ngIf="!loading" type="button" class="col-lg-3 btn btn-lg" (click)="playGame()"  > Play</button>
@@ -83,5 +78,10 @@
 			Congratulations !!! You won !!! You have {{moreTries}} more tries.
 		</div>
 	</span>
+
+  <!--Loading Animation-->
+  <span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Loading...
+  </span>
 
 </div>

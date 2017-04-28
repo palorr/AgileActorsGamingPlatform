@@ -24,8 +24,6 @@ import {
 
 import { AuthGuard } from './guards/index';
 
-import { CurrentUserService } from './helpers/index';
-
 @NgModule({
 	imports: [
 		BrowserModule,
@@ -51,7 +49,6 @@ import { CurrentUserService } from './helpers/index';
 		UserService,
 		GameService,
 		AuthGuard,
-		CurrentUserService,
     WalletService
 	],
 	bootstrap: [AppComponent]
