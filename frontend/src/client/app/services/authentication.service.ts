@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import {CONFIGURATION} from '../shared/app.constants';
 
 
 @Injectable()
@@ -10,7 +11,8 @@ export class AuthenticationService {
 
     login(username: string, password: string) {
 
-        let loginURL = 'http://localhost:8081/rest/login';
+
+        let loginURL = CONFIGURATION.agileUrls.webApi+'login';
 
         console.log(username);
 

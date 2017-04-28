@@ -64,10 +64,10 @@ implements CommandLineRunner
 		roleRepository.save(adminRole);
 		roleRepository.save(userRole);
 
-		Wallet wallet1 = new Wallet(5000);
-		Wallet wallet2 = new Wallet(3000);
-		Wallet wallet3 = new Wallet(2000);
-		Wallet wallet4 = new Wallet(6000);
+		Wallet wallet1 = new Wallet(100);
+		Wallet wallet2 = new Wallet(100);
+		Wallet wallet3 = new Wallet(100);
+		Wallet wallet4 = new Wallet(100);
 
 		walletRepository.save(wallet1);
 		walletRepository.save(wallet2);

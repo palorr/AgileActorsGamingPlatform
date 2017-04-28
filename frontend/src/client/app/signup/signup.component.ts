@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { AlertService, RegistrationService } from '../services/index';
-
 import { User } from '../models/user';
+import { RegisterResponse } from '../models/index';
 
-/**
-*	This class represents the lazy loaded SignupComponent.
-*/
 
 @Component({
 	moduleId: module.id,
@@ -18,7 +14,7 @@ import { User } from '../models/user';
 export class SignupComponent {
 
 	user: User = new User();
-
+  registerResponse:  RegisterResponse;
 	loading = false;
 
     constructor(
@@ -30,8 +26,8 @@ export class SignupComponent {
     registerUser() {
         this.loading = true;
 
-        if(!this.validateEmail(this.user.username)) {
-            this.alertService.error('Provided email address is not valid.');
+        if(!this.validateUsername(this.user.username)) {
+            this.alertService.error('Username must have 5 minimum length !!!');
 			      this.loading = false;
 			      return;
         }
@@ -42,39 +38,39 @@ export class SignupComponent {
           return;
         }
 
-		console.log('USER TO REGISTER: ', this.user);
+		    console.log('USER TO REGISTER: ', this.user);
 
-        this.registrationService.registerUser(this.user.username, this.user.name, this.user.password, this.user.repeatPassword)
+        this.registrationService
+          .registerUser(this.user.username ,this.user.name, this.user.surname, this.user.password, this.user.repeatPassword)
             .subscribe(
-                (data) => {
-                    // set success message and pass true paramater to persist the message after redirecting to the login page
+                (data: RegisterResponse) => {
+
+                  this.registerResponse = data ;
+
+                  if(this.registerResponse.success) {
+
                     this.alertService.success('Registration successful! Please login now.', true);
                     this.router.navigate(['/login']);
+
+                  } else {
+                    this.loading = false ;
+                    this.alertService.error('This username has already been registered. Please try again with a different one!');
+
+                  }
                 },
                 (err) => {
 
-                    let errorString = '';
+                  this.alertService.error('Something went wrong.Please try again later!');
 
-                    for(let element in err.ModelState) {
-                        console.log(element);
-                        err.ModelState[element].forEach((errorMsg: string) => {
-                            console.log('ELEM: ', errorMsg);
-                            errorString += errorMsg + '\n\n';
-                        });
-                    }
+                  this.loading = false;
 
-                    if(errorString !== '') {
-                      this.alertService.error(errorString);
-                    }else {
-                      this.alertService.error('This email has already been registered. Please try again with a different one!');
-                    }
-                    this.loading = false;
                 });
 
     }
 
-    validateEmail(email: string) {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
+    validateUsername(username: string) {
+
+        let re = /^.{5,}$/; //minlength = 5
+        return re.test(username);
     }
 }
