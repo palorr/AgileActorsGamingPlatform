@@ -26,7 +26,7 @@
         <li><a href="/admin/buy_operations/"><i class="fa fa-ticket fa-fw" aria-hidden="true"></i> Buy Operations</a></li>
         <li style="padding: 10px 25px 10px 15px;font-size: 12px; color: #4b646f;">Admin Operations</li>
         <li><a href="#"><i class="fa fa-eye fa-fw" aria-hidden="true"></i> View Operations</a></li>
-        <li><a href="#"><i class="fa fa-gamepad fa-fw" aria-hidden="true"></i> Game Operations</a></li>
+        <li><a href="/admin/game_operations/"><i class="fa fa-gamepad fa-fw" aria-hidden="true"></i> Game Operations</a></li>
     </ul>
 </#macro>
 
