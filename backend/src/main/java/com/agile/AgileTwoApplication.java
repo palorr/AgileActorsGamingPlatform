@@ -9,18 +9,28 @@ import com.agile.services.api.GameServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.sql.Timestamp;
 
+/*
+@ComponentScan("com.agile")
+@EnableJpaRepositories(basePackages= {"com.agile.repositories"})
+*/
 @SpringBootApplication
-public class AgileTwoApplication 
-implements CommandLineRunner 
+@EnableAutoConfiguration
+public class AgileTwoApplication extends SpringBootServletInitializer
 {
 	public static void main(String[] args) {
 		SpringApplication.run(AgileTwoApplication.class, args);
 	}
-	
+
+
 	@Autowired
 	private TryRepository tryRepository;
 
@@ -52,8 +62,7 @@ implements CommandLineRunner
 	private UserServiceInterface userService;
 
 	@Override
-	public void run(String... strings) throws Exception {
-
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		Timestamp transactionTime = new Timestamp(System.currentTimeMillis());
 
 		System.out.println("Spring Application started.:");
@@ -164,5 +173,8 @@ implements CommandLineRunner
 		adminViewOperationRepository.save(viewOperation2);
 		adminViewOperationRepository.save(viewOperation3);
 		adminViewOperationRepository.save(viewOperation4);
+
+		return application.sources(AgileTwoApplication.class);
+
 	}
 }
