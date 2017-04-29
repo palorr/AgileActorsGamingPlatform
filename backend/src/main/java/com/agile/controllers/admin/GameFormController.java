@@ -2,12 +2,14 @@ package com.agile.controllers.admin;
 
 import com.agile.handlers.WebAppConfigHandler;
 import com.agile.model.Game;
+import com.agile.resources.UriPaths;
 import com.agile.services.api.GameServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.*;
 import static com.agile.resources.UriPaths.*;
@@ -35,9 +37,9 @@ public class GameFormController {
     }
 
     @PostMapping(value = ADMIN_CREATE_GAME_URI)
-    public ModelAndView save(@ModelAttribute("game") Game game) {
+    public RedirectView save(@ModelAttribute("game") Game game) {
         gameService.saveGame(game);
-        return getModelAndView(REDIRECT_ADMIN_GAMES_URI);
+        return new RedirectView(ADMIN_GAMES_URI);
     }
 
     @GetMapping(value = ADMIN_UPDATE_GAME_ID_URI)
@@ -50,17 +52,19 @@ public class GameFormController {
     }
 
     @PostMapping(value = ADMIN_UPDATE_GAME_URI)
-    public ModelAndView change(@ModelAttribute("game") Game game) {
+    public RedirectView change(@ModelAttribute("game") Game game) {
         gameService.updateGameByAdmin(game);
-        return getModelAndView(REDIRECT_ADMIN_GAMES_URI);
+        return new RedirectView(ADMIN_GAMES_URI);
     }
 
     private ModelAndView getModelAndView(String viewName) {
         ModelAndView modelAndView = new ModelAndView(viewName);
-        modelAndView.addObject(ADMIN_UPDATE_GAME_URI_PARAM.getParam(),
-                webConfHandler.getWebAppPath(ADMIN_UPDATE_GAME_URI_PARAM));
         modelAndView.addObject(ADMIN_GAMES_URI_PARAM.getParam(),
                 webConfHandler.getWebAppPath(ADMIN_GAMES_URI_PARAM));
+        modelAndView.addObject(ADMIN_USERS_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_USERS_URI_PARAM));
+        modelAndView.addObject(ADMIN_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_URI_PARAM));
         modelAndView.addObject(LOGOUT_URI_PARAM.getParam(),
                 webConfHandler.getWebAppPath(LOGOUT_URI_PARAM));
         return modelAndView;

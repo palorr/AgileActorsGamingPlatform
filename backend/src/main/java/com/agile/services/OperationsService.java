@@ -1,17 +1,15 @@
 package com.agile.services;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.agile.model.*;
+import com.agile.repositories.AdminGameOperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.agile.model.Game;
-import com.agile.model.User;
-import com.agile.model.UserCreditsOperation;
-import com.agile.model.UserGameBuyOperation;
-import com.agile.model.UserGamePlayOperation;
 import com.agile.model.enums.OperationEnum;
 import com.agile.repositories.UserCreditsOperationsRepository;
 import com.agile.repositories.UserGameBuyOperationRepository;
@@ -30,14 +28,19 @@ public class OperationsService {
 	private UserGameBuyOperationRepository userGameBuyOperationRepository;
 	private UserGamePlayOperationRepository userGamePlayOperationRepository;
 
+	private AdminGameOperationRepository adminGameOperationRepository;
+
 	@Autowired
 	public OperationsService(UserCreditsOperationsRepository userCreditsOperationsRepository,
 			UserGameBuyOperationRepository userGameBuyOperationRepository,
-			UserGamePlayOperationRepository userGamePlayOperationRepository) {
+			UserGamePlayOperationRepository userGamePlayOperationRepository,
+			AdminGameOperationRepository adminGameOperationRepository) {
 
 		this.userCreditsOperationsRepository = userCreditsOperationsRepository;
 		this.userGameBuyOperationRepository = userGameBuyOperationRepository;
 		this.userGamePlayOperationRepository = userGamePlayOperationRepository;
+
+		this.adminGameOperationRepository = adminGameOperationRepository;
 	}
 
 	/**
@@ -68,4 +71,19 @@ public class OperationsService {
 		userGameBuyOperationRepository.save(userBuyOperation);
 	}
 
+	public List<UserCreditsOperation> fetchCreditOperations() {
+		return userCreditsOperationsRepository.findAll();
+	}
+
+	public List<UserGamePlayOperation> fetchPlayOperations() {
+		return userGamePlayOperationRepository.findAll();
+	}
+
+	public List<UserGameBuyOperation> fetchBuyOperations() {
+		return userGameBuyOperationRepository.findAll();
+	}
+
+	public List<AdminGameOperation> fetchGameOperations() {
+		return adminGameOperationRepository.findAll();
+	}
 }

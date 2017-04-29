@@ -15,9 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.List;
 
-import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_UPDATE_USER_URI_PARAM;
-import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_USERS_URI_PARAM;
-import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.LOGOUT_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.*;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_GAMES_URI_PARAM;
+import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_URI_PARAM;
 import static com.agile.resources.UriPaths.*;
 
 @Controller
@@ -90,10 +90,12 @@ public class UserFormController {
 
     private ModelAndView getModelAndView(String viewName) {
         ModelAndView modelAndView = new ModelAndView(viewName);
-        modelAndView.addObject(ADMIN_UPDATE_USER_URI_PARAM.getParam(),
-                webConfHandler.getWebAppPath(ADMIN_UPDATE_USER_URI_PARAM));
+        modelAndView.addObject(ADMIN_GAMES_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_GAMES_URI_PARAM));
         modelAndView.addObject(ADMIN_USERS_URI_PARAM.getParam(),
                 webConfHandler.getWebAppPath(ADMIN_USERS_URI_PARAM));
+        modelAndView.addObject(ADMIN_URI_PARAM.getParam(),
+                webConfHandler.getWebAppPath(ADMIN_URI_PARAM));
         modelAndView.addObject(LOGOUT_URI_PARAM.getParam(),
                 webConfHandler.getWebAppPath(LOGOUT_URI_PARAM));
         return modelAndView;
