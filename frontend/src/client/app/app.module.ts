@@ -19,7 +19,8 @@ import {
 	RegistrationService,
 	UserService,
   GameService,
-  WalletService
+  WalletService,
+  HomeService
 } from './services/index';
 
 import { AuthGuard } from './guards/index';
@@ -49,7 +50,8 @@ import { AuthGuard } from './guards/index';
 		UserService,
 		GameService,
 		AuthGuard,
-    WalletService
+    WalletService,
+    HomeService
 	],
 	bootstrap: [AppComponent]
 

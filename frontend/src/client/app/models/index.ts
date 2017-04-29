@@ -8,3 +8,4 @@ export * from './tryResponse';
 export * from './depositResponse';
 export * from './withdrawResponse';
 export * from './registerResponse';
+export * from './wonGameResponse';
