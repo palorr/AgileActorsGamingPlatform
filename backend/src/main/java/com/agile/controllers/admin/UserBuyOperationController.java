@@ -1,31 +1,30 @@
 package com.agile.controllers.admin;
 
 import com.agile.handlers.WebAppConfigHandler;
-import com.agile.services.api.WalletServiceInterface;
+import com.agile.services.OperationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.*;
-import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.ADMIN_URI_PARAM;
-import static com.agile.resources.UriPaths.ADMIN_WALLETS_URI;
+import static com.agile.resources.UriPaths.ADMIN_USER_BUY_URI;
 
 @Controller
-public class AdminWalletController {
-
-    @Autowired
-    private WalletServiceInterface walletService;
+public class UserBuyOperationController {
 
     @Autowired
     private WebAppConfigHandler webConfHandler;
 
-    private static final String WALLETS_DATA= "wallets";
+    @Autowired
+    private OperationsService operationsService;
 
-    @GetMapping(value = ADMIN_WALLETS_URI)
-    public ModelAndView loadWallets() {
-        ModelAndView modelAndView = getModelAndView("wallets");
-        modelAndView.addObject(WALLETS_DATA, walletService.fetchWallets());
+    private static final String OPERATIONS_DATA= "operations";
+
+    @GetMapping(value = ADMIN_USER_BUY_URI)
+    public ModelAndView loadOperations() {
+        ModelAndView modelAndView = getModelAndView("user_buy_operations");
+        modelAndView.addObject(OPERATIONS_DATA, operationsService.fetchBuyOperations());
         return modelAndView;
     }
 
