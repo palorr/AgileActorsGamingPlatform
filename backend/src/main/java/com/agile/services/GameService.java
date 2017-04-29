@@ -231,6 +231,9 @@ public class GameService implements GameServiceInterface{
 		game.setName(form_game.getName());
 		game.setDescription(form_game.getDescription());
 		game.setWin_credits(form_game.getWin_credits());
+		game.setBuy_credits(form_game.getBuy_credits());
+		game.setYield(form_game.getYield());
+		game.setAvatar(form_game.getAvatar());
 		return gameRepository.save(game);
 	}
 }

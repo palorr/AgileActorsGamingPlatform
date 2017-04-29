@@ -25,6 +25,7 @@
             <th>Description</th>
             <th>Buy Credits</th>
             <th>Win Credits</th>
+            <th>Yield</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -36,6 +37,7 @@
                 <td>${game.getDescription()}</td>
                 <td>${game.getBuy_credits()}</td>
                 <td>${game.getWin_credits()}</td>
+                <td>${game.getYield()}</td>
                 <td>
                     <a type="button" class=" btn btn-xs btn-primary" href="${adminGamesUri}${game.getId()}">Details</a>
                     <a type="button" class=" btn btn-xs btn-default" href="${adminUpdateGame}${game.getId()}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>

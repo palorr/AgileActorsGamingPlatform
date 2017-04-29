@@ -19,9 +19,11 @@
     <ul class="list-group">
         <li class="list-group-item"><strong>ID: </strong>${game.getId()}</li>
         <li class="list-group-item"><strong>Name: </strong>${game.getName()}</li>
+        <li class="list-group-item"><strong>Avatar url: </strong>${game.getAvatar()}</li>
         <li class="list-group-item"><strong>Description: </strong>${game.getDescription()}</li>
         <li class="list-group-item"><strong>Buy Credits: </strong>${game.getBuy_credits()}</li>
         <li class="list-group-item"><strong>Win Credits: </strong>${game.getWin_credits()}</li>
+        <li class="list-group-item"><strong>Yield: </strong>${game.getYield()}</li>
     </ul>
     <a type="button" class="btn btn-primary" href=${adminGamesUri}>Back</a>
 </#macro>

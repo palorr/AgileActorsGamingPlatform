@@ -32,6 +32,18 @@
                 />
             </p>
         </div>
+        <div class="form-group" >
+            <p class="required"> <label for="id_avatar">Avatar:</label>
+                <input
+                    <#if game??>value="${game.getAvatar()}"</#if>
+                    class="form-control"
+                    id="id_avatar"
+                    name="avatar"
+                    type="url"
+                    placeholder="Enter avatar url"
+                />
+            </p>
+        </div>
         <div class="form-group">
             <p class="required"><label for="id_description">Description:</label>
                 <textarea
@@ -62,6 +74,19 @@
                     name="win_credits"
                     type="number"
                     placeholder="Enter win credits"
+                />
+            </p>
+        </div>
+        <div class="form-group">
+            <p class="required"><label for="id_yield">Yield:</label>
+                <input
+                    <#if game??>value="${game.getYield()}"</#if>
+                    class="form-control"
+                    id="id_yield"
+                    name="yield"
+                    type="number"
+                    step="0.01"
+                    placeholder="Enter yield"
                 />
             </p>
         </div>
