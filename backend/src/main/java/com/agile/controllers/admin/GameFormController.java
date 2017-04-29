@@ -2,7 +2,6 @@ package com.agile.controllers.admin;
 
 import com.agile.handlers.WebAppConfigHandler;
 import com.agile.model.Game;
-import com.agile.resources.UriPaths;
 import com.agile.services.api.GameServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

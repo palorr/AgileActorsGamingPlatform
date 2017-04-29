@@ -2,7 +2,6 @@ package com.agile.services;
 
 import com.agile.model.*;
 import com.agile.model.enums.OperationEnum;
-import com.agile.repositories.AdminGameOperationRepository;
 import com.agile.repositories.GameRepository;
 import com.agile.repositories.TryRepository;
 import com.agile.resources.GameResource;
@@ -16,8 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,9 +35,6 @@ public class GameService implements GameServiceInterface{
 
 	@Autowired
 	private GameRepository gameRepository;
-
-	@Autowired
-	private AdminGameOperationRepository adminGameOperationRepository;
 
     @Override
     @Transactional
@@ -191,7 +185,6 @@ public class GameService implements GameServiceInterface{
 	@Transactional
 	public GameResourceAfterTry tryGame(GameResourceToPlayOrTry resource) {
 		boolean win;
-		boolean enoughTries;
 
 		Double number = Math.random(); // random double between 0 & 1
 		Game gameToPlay = findGameById(resource.getGameId());

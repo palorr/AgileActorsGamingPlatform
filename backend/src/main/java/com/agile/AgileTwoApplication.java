@@ -108,14 +108,15 @@ implements CommandLineRunner
 		userService.createUser(userAdmin1, null);
 
 
-		Game game1 = new Game(10, 50, "Roullete", "game 1 description","",0.3);
-		Game game2 = new Game(40, 100, "BlackJack", "game 2 description","",0.5);
+		Game game1 = new Game(30, 110, "Roullete", "game 1 description","",0.5);
+		Game game2 = new Game(80, 100, "BlackJack", "game 2 description","",0.6);
 
 		game1.setAvatar("https://68.media.tumblr.com/8220060b6e6c9c2cca312641277e3f12/tumblr_njz885ZeDA1s2wio8o1_500.gif");
 		game2.setAvatar("https://68.media.tumblr.com/78bd456f44ab059cda364aed9812a2f4/tumblr_o1m115Z1Zr1s2wio8o1_500.gif");
-
+		
 		game1.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 		game2.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+
 		gameRepository.save(game1);
 		gameRepository.save(game2);
 
@@ -146,14 +147,6 @@ implements CommandLineRunner
 		userGameBuyOperationRepository.save(userGameBuyOperation1);
 		userGameBuyOperationRepository.save(userGameBuyOperation2);
 		userGameBuyOperationRepository.save(userGameBuyOperation3);
-
-		UserGamePlayOperation userGamePlayOperation1 = new UserGamePlayOperation(userService.getUserByUsername("palor"), game1, 500,
-				false, true, transactionTime);
-		UserGamePlayOperation userGamePlayOperation2  = new UserGamePlayOperation(userService.getUserByUsername("palor"), game2, 0,
-				false, false, transactionTime);
-
-		userGamePlayOperationRepository.save(userGamePlayOperation1);
-		userGamePlayOperationRepository.save(userGamePlayOperation2);
 
 		AdminViewOperation viewOperation1 = new AdminViewOperation(userService.getUserByUsername("palor"), transactionTime );
 		AdminViewOperation viewOperation2 = new AdminViewOperation(userService.getUserByUsername("user2"), transactionTime );

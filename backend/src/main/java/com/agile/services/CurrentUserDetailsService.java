@@ -3,8 +3,6 @@ package com.agile.services;
 
 import com.agile.model.User;
 import com.agile.validator.LoggednInUser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CurrentUserDetailsService implements UserDetailsService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CurrentUserDetailsService.class);
 
     @Autowired
     private UserService userService;

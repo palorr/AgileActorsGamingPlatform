@@ -13,6 +13,6 @@ public interface UserGamePlayOperationRepository extends JpaRepository<UserGameP
 
 	List<UserGamePlayOperation> findTop10BywinCreditsGreaterThanOrderByDateDesc(int winCredits);
 
-	@Query(value = "select new com.agile.repositories.CountGame(u.game.id, count(u.game.id)) from UserGamePlayOperation u group by u.game.id order by count(u.game.id)")
+	@Query(value = "select new com.agile.repositories.CountGame(u.game.id, count(u.game.id)) from UserGamePlayOperation u group by u.game.id order by count(u.game.id) desc")
 	List<CountGame> findGames(Pageable page);
 }
