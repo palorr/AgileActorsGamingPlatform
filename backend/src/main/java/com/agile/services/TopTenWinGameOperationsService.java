@@ -26,7 +26,7 @@ public class TopTenWinGameOperationsService {
 
 	public List<WinGamesResource> getWinGames() {
 
-		return userGameOperationRepository.findTop10ByIsWinOrderByDateDesc(true).stream().map(operation -> {
+		return userGameOperationRepository.findTop10BywinCreditsGreaterThanOrderByDateDesc(0).stream().map(operation -> {
 			User user = operation.getUser();
 			Game game = operation.getGame();
 
