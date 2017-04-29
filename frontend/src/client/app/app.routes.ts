@@ -9,5 +9,5 @@ export const routes: Routes = [
 	...LoginRoutes,
 	...SignupRoutes,
 	...DashboardRoutes,
-	{ path: '**', redirectTo: 'dashboard/blankpage' }
+	{ path: '**', redirectTo: 'dashboard/home' }
 ];

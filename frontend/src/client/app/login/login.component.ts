@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 (data) => {
                     console.log('SUCCESS IN LOGIN: ', data);
-                    this.router.navigate(['/dashboard/blankpage']);
+                    this.router.navigate(['/dashboard/home']);
                 },
                 (err) => {
                     this.alertService.error('Username or password are incorrect');
