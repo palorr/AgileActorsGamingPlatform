@@ -1,59 +1,57 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
 import { GenericUser } from '../../models/index';
-
 import { AlertService, UserService } from '../../services/index';
+import { AuthGuard } from '../../guards/auth.guard';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   moduleId: module.id,
   selector: 'user-edit-cmp',
   templateUrl: 'userEdit.component.html'
 })
+
 export class UserEditComponent implements OnInit {
-  id:number ;
+  id: string ;
   user: GenericUser = new GenericUser();
-  isRequestorThisUser : boolean = false;
-  isRequestorLoggedIn : boolean = false;
+  isRequesterThisUser : boolean = false;
+  isRequesterLoggedIn : boolean = false;
   loading = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
-    private userService: UserService
+    private userService: UserService,
+    private guard: AuthGuard,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
-      this.id = +params['id'];
-      // let isLoggedIn = false;
-      // let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      // ///
-      // if (currentUser && currentUser.user.access_token) {
-      //   isLoggedIn = true;
-      // }
-      // if (this.authGuard.isUserLoggedIn())
-      // 	this.isRequestorLoggedIn = true;
-      ///
-      this.userService.getUserMainInfo(this.id)
-        .subscribe(
-          (data: GenericUser) => {
+      this.id = params['id'];
 
-            this.user = data;
-            console.log('User Profile View Data: ', this.user);
-            // if(isLoggedIn)
-            //   this.isRequestorThisUser = this.userService.isRequestorThisUser(this.user.username);
-            // if(!isLoggedIn || !this.isRequestorThisUser){
-            //   this.alertService.error('You are not authorized to edit this profile!', true);
-            //   this.router.navigate(['/dashboard/home']);
-            // }
-          },
-          (err) => {
-            this.alertService.error('I am sorry, something went wrong. Please try again later!');
-          }
-        );
+      this.isRequesterLoggedIn = this.guard.isUserLoggedIn();
+      this.isRequesterThisUser = this.userService.isRequesterThisUser(this.id);
 
+      if(!this.isRequesterLoggedIn || !this.isRequesterThisUser) {
+        this.alertService.error('You are not authorized to edit this profile!', true);
+        this.authenticationService.logout();//something went wrong, remove data from local storage and go to login page
+      }
+      if(this.isRequesterLoggedIn && this.isRequesterThisUser) {
+        this.userService.getUserMainInfo(+this.id)
+          .subscribe(
+            (data: GenericUser) => {
+
+              this.user = data;
+              console.log('User Profile View Data: ', this.user);
+
+            },
+            (err) => {
+              this.alertService.error('I am sorry, something went wrong. Please try again later!');
+            }
+          );
+      }
 
     });
 

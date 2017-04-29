@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe } from '@angular/core';
 
 @Pipe({
   name: 'limitTo'
@@ -13,3 +13,4 @@ export class TruncatePipe {
     return value.length > limit ? value.substring(0, limit) + trail : value;
   }
 }
+

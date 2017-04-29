@@ -98,10 +98,22 @@ export class UserService {
              });
      }
 
-  // isRequestorThisUser(Username: string) {
-  //     if (localStorage.getItem('currentUser').includes(Username)) {
-  //         return true;
-  //     }
-  //     return false;
-  // }
+    isRequesterThisUser(Id: string) {
+
+      if (localStorage.getItem('currentUser').includes(Id)) {
+        return true;
+      }
+
+      return false;
+    }
+
+    getCurrentUserId() {
+      let id = JSON.parse(localStorage.getItem('currentUser')).id;
+      return id ;
+    }
+
+    getCurrentUserUsername() {
+      let username = JSON.parse(localStorage.getItem('currentUser')).username;
+      return username ;
+    }
 }

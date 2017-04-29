@@ -2,10 +2,10 @@ package com.agile.controllers.users;
 
 import java.util.List;
 import com.agile.handlers.WebAppConfigHandler;
+import com.agile.resources.*;
 import com.agile.services.api.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.agile.resources.UserResource;
 import com.agile.model.User;
 import org.springframework.web.servlet.ModelAndView;
 import static com.agile.handlers.WebAppConfigHandler.WebAppConfigAttributes.*;
@@ -31,16 +31,14 @@ public class UserController {
 		return userService.getUserBasicInfoById(id);
 	}
 
-//	@GetMapping(value = "/users")
-//	public User getUserByCredentials(@Param(value = "username") String username,
-//									 @Param(value = "password") String password) {
-//		return userService.getUserByUserNameAndPassword(username, password);
-//	}
+	@PostMapping(value = "rest/login")
+	public DummyLoginResponse getUserByCredentials(@RequestBody CredentialsToLogin credentials) {
+		return userService.getUserByUsernameAndPassword(credentials);
+	}
 
-	@GetMapping(value = "rest/userByCredentials/{username}/{password}")
-	public User getUserByCredentials(@PathVariable(value = "username") String username,
-									 @PathVariable(value = "password") String password) {
-		return userService.getUserByUsernameAndPassword(username, password);
+	@PostMapping(value = "rest/register")
+	public RegisterResponse registerUser(@RequestBody UserToRegister userToRegister) {
+		return userService.registerUserFromRest(userToRegister);
 	}
 
 	@GetMapping(value = "rest/userByUsername/{username}")

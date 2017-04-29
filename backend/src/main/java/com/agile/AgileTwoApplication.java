@@ -64,10 +64,10 @@ implements CommandLineRunner
 		roleRepository.save(adminRole);
 		roleRepository.save(userRole);
 
-		Wallet wallet1 = new Wallet(5000);
-		Wallet wallet2 = new Wallet(3000);
-		Wallet wallet3 = new Wallet(2000);
-		Wallet wallet4 = new Wallet(6000);
+		Wallet wallet1 = new Wallet(100);
+		Wallet wallet2 = new Wallet(100);
+		Wallet wallet3 = new Wallet(100);
+		Wallet wallet4 = new Wallet(100);
 
 		walletRepository.save(wallet1);
 		walletRepository.save(wallet2);
@@ -79,7 +79,7 @@ implements CommandLineRunner
 
 
 		User user1 = new User("Archontellis", "Sotirchellis",
-				"user1", "agiletest", userRole, wallet1);
+				"palor", "agiletest", userRole, wallet1);
 		user1.setAvatar("https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAATNAAAAJDdjYmM0NmI0LTViNDMtNDE0Ny04Mjk2LTkzZDI2MmM2MjU3Zg.jpg");
 		UserSaveData userData1 = new UserSaveData(user1);
 
@@ -119,7 +119,7 @@ implements CommandLineRunner
 		gameRepository.save(game1);
 		gameRepository.save(game2);
 
-		UpdatedGames updatedGame1 = new UpdatedGames(game1, userService.getUserByUsername("user1"), transactionTime);
+		UpdatedGames updatedGame1 = new UpdatedGames(game1, userService.getUserByUsername("palor"), transactionTime);
 		UpdatedGames updatedGame2 = new UpdatedGames(game2, userService.getUserByUsername("user2"), transactionTime);
 		UpdatedGames updatedGame3 = new UpdatedGames(game2, userService.getUserByUsername("user3"), transactionTime);
 
@@ -127,9 +127,9 @@ implements CommandLineRunner
 		updatedGamesRepository.save(updatedGame2);
 		updatedGamesRepository.save(updatedGame3);
 
-		UserCreditsOperation userCreditsOperation1 = new UserCreditsOperation(userService.getUserByUsername("user1"), 400,
+		UserCreditsOperation userCreditsOperation1 = new UserCreditsOperation(userService.getUserByUsername("palor"), 400,
 				OperationEnum.ADDED, transactionTime);
-		UserCreditsOperation userCreditsOperation2 = new UserCreditsOperation(userService.getUserByUsername("user1"), 200,
+		UserCreditsOperation userCreditsOperation2 = new UserCreditsOperation(userService.getUserByUsername("palor"), 200,
 				OperationEnum.REMOVED, transactionTime);
 		UserCreditsOperation userCreditsOperation3 = new UserCreditsOperation(userService.getUserByUsername("user2"), 124,
 				OperationEnum.ADDED, transactionTime);
@@ -139,23 +139,23 @@ implements CommandLineRunner
 		userCreditsOperationsRepository.save(userCreditsOperation2);
 		userCreditsOperationsRepository.save(userCreditsOperation3);
 
-		UserGameBuyOperation userGameBuyOperation1 = new UserGameBuyOperation(userService.getUserByUsername("user1"), game1, transactionTime);
-		UserGameBuyOperation userGameBuyOperation2 = new UserGameBuyOperation(userService.getUserByUsername("user1"), game2, transactionTime);
+		UserGameBuyOperation userGameBuyOperation1 = new UserGameBuyOperation(userService.getUserByUsername("palor"), game1, transactionTime);
+		UserGameBuyOperation userGameBuyOperation2 = new UserGameBuyOperation(userService.getUserByUsername("palor"), game2, transactionTime);
 		UserGameBuyOperation userGameBuyOperation3 = new UserGameBuyOperation(userService.getUserByUsername("user3"), game2, transactionTime);
 
 		userGameBuyOperationRepository.save(userGameBuyOperation1);
 		userGameBuyOperationRepository.save(userGameBuyOperation2);
 		userGameBuyOperationRepository.save(userGameBuyOperation3);
 
-		UserGamePlayOperation userGamePlayOperation1 = new UserGamePlayOperation(userService.getUserByUsername("user1"), game1, 500,
+		UserGamePlayOperation userGamePlayOperation1 = new UserGamePlayOperation(userService.getUserByUsername("palor"), game1, 500,
 				false, true, transactionTime);
-		UserGamePlayOperation userGamePlayOperation2  = new UserGamePlayOperation(userService.getUserByUsername("user1"), game2, 0,
+		UserGamePlayOperation userGamePlayOperation2  = new UserGamePlayOperation(userService.getUserByUsername("palor"), game2, 0,
 				false, false, transactionTime);
 
 		userGamePlayOperationRepository.save(userGamePlayOperation1);
 		userGamePlayOperationRepository.save(userGamePlayOperation2);
 
-		AdminViewOperation viewOperation1 = new AdminViewOperation(userService.getUserByUsername("user1"), transactionTime );
+		AdminViewOperation viewOperation1 = new AdminViewOperation(userService.getUserByUsername("palor"), transactionTime );
 		AdminViewOperation viewOperation2 = new AdminViewOperation(userService.getUserByUsername("user2"), transactionTime );
 		AdminViewOperation viewOperation3 = new AdminViewOperation(userService.getUserByUsername("user3"), transactionTime );
 		AdminViewOperation viewOperation4 = new AdminViewOperation(userService.getUserByUsername("user2"), transactionTime );

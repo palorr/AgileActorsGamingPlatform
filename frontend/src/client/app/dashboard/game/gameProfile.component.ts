@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { ActivatedRoute, Params } from '@angular/router';
 import { GameService, AlertService } from '../../services/index';
-
 import { GenericGame , PlayResponse } from '../../models/index';
-import {TryResponse} from "../../models/tryResponse";
+import { TryResponse } from '../../models/tryResponse';
+import { UserService } from '../../services/user.service';
+import { AuthGuard } from '../../guards/auth.guard';
 
 @Component({
   moduleId: module.id,
@@ -13,26 +13,32 @@ import {TryResponse} from "../../models/tryResponse";
 })
 
 export class GameProfileComponent implements OnInit {
-  id : number ;
+
+  id : string ;
   game : GenericGame ;
   playResponse: PlayResponse ;
   tryResponse: TryResponse ;
   hasEnoughTries: boolean ;
   moreTries: number ;
   loading = false ;
+  isRequesterLoggedIn: boolean = false ;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private gameService: GameService,
     private alertService: AlertService,
+    private guard: AuthGuard,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
 
     this.route.params.forEach((params: Params) => {
-      this.id = +params['id'];
-      this.gameService.getGameMainInfo(this.id)
+      this.id = params['id'];
+
+      this.isRequesterLoggedIn = this.guard.isUserLoggedIn();
+
+      this.gameService.getGameMainInfo(+this.id)
         .subscribe(
           (data: GenericGame) => {
             this.game = data;
@@ -47,53 +53,63 @@ export class GameProfileComponent implements OnInit {
 
   playGame() {
 
+    if(this.isRequesterLoggedIn) {
+
       this.loading = true;
-      this.playResponse = null;//hde the results
+      this.playResponse = null;//hide the results
       this.tryResponse = null;
 
-      return this.gameService
-        .playGame(this.id , 1)//fake -> user 1 is playing, i need token to take the current user
+      this.gameService
+        .playGame(+this.id, this.userService.getCurrentUserId())
         .subscribe(
-
           (data: PlayResponse) => {
-            this.playResponse = data ;
-            this.loading = false ;
-            console.log('Game Result: ', this.playResponse) ;
+            this.playResponse = data;
+            this.loading = false;
+            console.log('Game Result: ', this.playResponse);
           },
 
           (err) => {
             this.alertService.error('I am sorry, something went wrong. Please try again later!');
 
           });
+    } else {
+      this.alertService.error('I am sorry, you have to login first!');
+    }
+
   }
 
   tryGame() {
 
-    this.loading = true ;
-    this.playResponse = null;//hide the results
-    this.tryResponse = null;
+    if(this.isRequesterLoggedIn) {
 
-    return this.gameService
-      .tryGame(this.id , 1)//fake -> user 1 is tryig, i need token to take the current user
-      .subscribe(
+      this.loading = true;
+      this.playResponse = null;//hide the results
+      this.tryResponse = null;
 
-        (data: TryResponse) => {
-          this.tryResponse = data ;
+      this.gameService
+        .tryGame(+this.id, this.userService.getCurrentUserId())
+        .subscribe(
+          (data: TryResponse) => {
+            this.tryResponse = data;
 
-          if(this.tryResponse.currentTryNumber===0) {
-            this.hasEnoughTries = false ;
-          } else {
-            this.hasEnoughTries = true ;
-            this.moreTries = 3 - this.tryResponse.currentTryNumber ;
-          }
+            if (this.tryResponse.currentTryNumber === 0) {
+              this.hasEnoughTries = false;
+            } else {
+              this.hasEnoughTries = true;
+              this.moreTries = 3 - this.tryResponse.currentTryNumber;
+            }
 
-          this.loading = false ;
-          console.log('Try Result: ', this.tryResponse) ;
-        },
+            this.loading = false;
+            console.log('Try Result: ', this.tryResponse);
+          },
 
-        (err) => {
-          this.alertService.error('I am sorry, something went wrong. Please try again later!');
+          (err) => {
+            this.alertService.error('I am sorry, something went wrong. Please try again later!');
 
-        });
+          });
+
+    } else {
+      this.alertService.error('I am sorry, you have to login first!');
+    }
   }
 }

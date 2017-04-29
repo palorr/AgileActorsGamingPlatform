@@ -1,5 +1,5 @@
 
-<div *ngIf="wallet" class="container-fluid">
+<div *ngIf="wallet && isRequesterLoggedIn && isRequesterThisUser" class="container-fluid">
 
   <div class="row">
     <h2 class="page-header">
@@ -41,7 +41,7 @@
       <img src="https://cdn.shopify.com/s/files/1/0145/1752/products/Walnut-02.jpg?v=1416155729" alt="AvatarImage" style="border-radius: 50%; width: 350px; display: block; margin-left: auto; margin-right: auto;">
       <br/>
       <h2>Balance</h2>
-      <p><i class="fa fa-dollar"></i> {{wallet.credits}} Credits</p>
+      <p style="font-size: x-large"><i class="fa fa-dollar"></i> {{wallet.credits}} Credits</p>
     </div>
   </div>
 

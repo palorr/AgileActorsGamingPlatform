@@ -16,33 +16,34 @@ import { AlertService, AuthenticationService } from '../services/index';
 })
 
 export class LoginComponent implements OnInit {
-	
+
 	user: User = new User();
-	
+
 	loading = false;
- 
+
     constructor(
         private router: Router,
         private authenticationService: AuthenticationService,
         private alertService: AlertService
     ) { }
- 
+
     ngOnInit() {
         // reset login status
         this.authenticationService.logout();
     }
- 
+
     loginUser() {
-		
+
         this.loading = true;
-        
+        console.log(this.user.username, this.user.password);
         this.authenticationService.login(this.user.username, this.user.password)
             .subscribe(
                 (data) => {
+                    console.log('SUCCESS IN LOGIN: ', data);
                     this.router.navigate(['/dashboard/home']);
                 },
                 (err) => {
-                    this.alertService.error(err.error_description);
+                    this.alertService.error('Username or password are incorrect');
                     this.loading = false;
                 });
     }

@@ -1,4 +1,4 @@
-<div *ngIf="game" class="container-fluid">
+<div *ngIf="game && isRequesterLoggedIn" class="container-fluid">
 
   <div class="row">
 
@@ -9,7 +9,7 @@
     <div class="col-lg-4">
       <ol class="breadcrumb">
         <li>
-          <a href="Javascript:void(0)" routerLink="/dashboard/blankpage"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
+          <a href="Javascript:void(0)" routerLink="/dashboard/home"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
         </li>
         <li class="active">
           <i class="fa fa-gamepad"></i> Game Profile
@@ -35,11 +35,6 @@
     <button *ngIf="!loading" type="button" class="col-lg-3 btn btn-lg" (click)="tryGame()"> Try</button>
 
     <div class="col-lg-2">
-
-      <span *ngIf="loading">
-					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Loading...
-      </span>
-
     </div>
 
     <button *ngIf="!loading" type="button" class="col-lg-3 btn btn-lg" (click)="playGame()"  > Play</button>
@@ -73,15 +68,20 @@
 			I am sorry. You don't have enough tries.
 		</div>
 	</span>
-  <span *ngIf="tryResponse && hasEnoughTries && !tryResponse.isWin">
+  <span *ngIf="tryResponse && hasEnoughTries && !tryResponse.win">
 		<div class="alert alert-info" style="font-size: xx-large">
 			I am sorry. You lost. You have {{moreTries}} more tries.
 		</div>
 	</span>
-  <span *ngIf="tryResponse && tryResponse.isWin ">
+  <span *ngIf="tryResponse && tryResponse.win ">
 		<div class="alert alert-success" style="font-size: xx-large">
 			Congratulations !!! You won !!! You have {{moreTries}} more tries.
 		</div>
 	</span>
+
+  <!--Loading Animation-->
+  <span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> Loading...
+  </span>
 
 </div>

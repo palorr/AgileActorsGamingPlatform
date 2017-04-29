@@ -1,18 +1,6 @@
 import { Headers, RequestOptions } from '@angular/http';
 
 export let CONFIGURATION = {
-    /*azureUrls: {
-        authServer: 'http://etravelauthserver.azurewebsites.net/',
-        webApp: 'http://etravelwebapp.azurewebsites.net/',
-        webApi: 'http://etravelwebapi.azurewebsites.net/'
-    },
-    */
-
-    // azureUrls: {
-    //     authServer: 'http://localhost:56478/',
-    //     webApp: 'http://localhost:5555/',
-    //     webApi: 'http://localhost:56378/'
-    // },
 
     agileUrls:{
         webApi: 'http://localhost:8081/rest/'

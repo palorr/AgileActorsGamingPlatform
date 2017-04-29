@@ -1,9 +1,6 @@
 import { Route } from '@angular/router';
-import { BlankPageRoutes } from './blank-page/index';
+import { HomeRoutes } from './home/index';
 import { DashboardComponent } from './index';
-
-import { AuthGuard } from '../guards/index';
-
 import { UserRoutes } from './user/user.routes';
 import { GameRoutes } from './game/game.routes';
 import { WalletRoutes } from './wallet/wallet.routes';
@@ -15,7 +12,7 @@ export const DashboardRoutes: Route[] = [
     	children: [
 		    ...UserRoutes,
         ...GameRoutes,
-        ...BlankPageRoutes,
+        ...HomeRoutes,
         ...WalletRoutes
     	]
   	}

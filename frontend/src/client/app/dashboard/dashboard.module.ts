@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DropdownModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { BlankPageModule } from './blank-page/blankPage.module';
+import { HomeModule } from './home/home.module';
 import { DashboardComponent } from './dashboard.component';
-import {TopNavComponent} from '../shared/index';
-import {SidebarComponent} from '../shared/index';
+import { TopNavComponent } from '../shared/index';
+import { SidebarComponent } from '../shared/index';
 import { AlertModule } from '../directives/alert.module';
 
 import { UserModule } from './user/user.module' ;
@@ -19,7 +19,7 @@ import { WalletModule } from './wallet/wallet.module' ;
     	  RouterModule,
     	  DropdownModule,
         ModalModule,
-        BlankPageModule,
+        HomeModule,
         UserModule,
         GameModule,
         WalletModule,

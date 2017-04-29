@@ -1,40 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map' ;
 
 import { CONFIGURATION } from '../shared/app.constants';
 
 @Injectable()
 export class RegistrationService {
     constructor(private http: Http) { }
- 
-    registerUser(username: string, name: string, password: string, confirmPassword: string) {
-        
-        let registerURL = CONFIGURATION.agileUrls+'api/account/register';
-        
+
+    registerUser(username: string, name: string, surname: string, password: string, confirmedPassword: string) {
+
+        let registerURL = CONFIGURATION.agileUrls.webApi+'register';
+
         let headers = new Headers({
-            'Accept': 'application/json', 
+            'Accept': 'application/json',
             'Content-Type': 'application/json'
         });
-        
-        let postRequestBody = JSON.stringify({ 
-			username: username, 
+
+        let postRequestBody = JSON.stringify({
+      			username: username,
             name: name,
+            surname: surname,
             password: password,
-			confirmPassword: confirmPassword
-		});
-        
+            confirmedPassword: confirmedPassword
+		    });
+
         let options = new RequestOptions({ headers: headers });
-        
+
         return this.http.post(registerURL, postRequestBody, options)
-            .map((response: Response) => {
-                //console.log('Register Server Response: ', response);
-            })
+            .map((response: Response) => response.json())
             .catch(res => {
                 console.log('CATCH: ', res.json());
                 throw(res.json());
             });
     }
- 
+
 }

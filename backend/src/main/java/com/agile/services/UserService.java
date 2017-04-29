@@ -1,9 +1,9 @@
 package com.agile.services;
 
+import com.agile.model.Role;
 import com.agile.model.User;
 import com.agile.repositories.UserRepository;
-import com.agile.resources.UserResource;
-import com.agile.resources.UserSaveData;
+import com.agile.resources.*;
 import com.agile.model.Wallet;
 import com.agile.repositories.*;
 import com.agile.services.api.UserServiceInterface;
@@ -20,6 +20,9 @@ public class UserService implements UserServiceInterface {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private WalletRepository walletRepo;
@@ -53,8 +56,21 @@ public class UserService implements UserServiceInterface {
 
     @Override
     @Transactional
-    public User getUserByUsernameAndPassword(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password);
+    public DummyLoginResponse getUserByUsernameAndPassword( CredentialsToLogin credentials) {
+
+        String username = credentials.getUsername();
+        String password = credentials.getPassword();
+
+        DummyLoginResponse response = new DummyLoginResponse(0);
+        User user = userRepository.findByUsername(username);
+
+        if(user != null){
+
+            if(passwordEncoder.matches(password,user.getPassword())){
+                response.setId(user.getId());
+            }
+        }
+        return response;
     }
 
     @Override
@@ -101,6 +117,7 @@ public class UserService implements UserServiceInterface {
     @Override
     @Transactional
     public User createUser(UserSaveData userData, Wallet wallet) {
+
         if (wallet == null){
             wallet = new Wallet();
             walletRepo.save(wallet);
@@ -112,7 +129,30 @@ public class UserService implements UserServiceInterface {
         if (userData.getAvatar() != null) {
             user.setAvatar(userData.getAvatar());
         }
+
         return userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public RegisterResponse registerUserFromRest(UserToRegister userToRegister){
+
+        RegisterResponse registerResponse = new RegisterResponse(false) ;
+
+        if(userToRegister.areBothPasswordsTheSame()){
+            if(userRepository.findByUsername(userToRegister.getUsername()) == null){ //if username does not exists
+
+                Wallet wallet = new Wallet();
+                walletRepo.save(wallet);
+
+                Role userRole = roleRepository.findByName("USER");
+                User user = new User(userToRegister.getName(),userToRegister.getSurname(), userToRegister.getUsername() , passwordEncoder.encode(userToRegister.getPassword()) ,userRole ,wallet);
+                userRepository.save(user);
+                registerResponse.setSuccess(true);
+                return registerResponse;
+            }
+        }
+        return registerResponse;
     }
 
     @Override

@@ -15,7 +15,7 @@
 		</div>
 		<div class="col-lg-4">
 		</div>
-		<div class="row" ><!--*ngIf="isRequestorThisUser"-->
+		<div class="row" *ngIf="isRequesterThisUser">
         <div class="col-lg-4">
             <ol class="breadcrumb editProfile">
                 <li>
@@ -38,7 +38,7 @@
 			<h3>{{user.name}} {{user.surname}}</h3>
 			<!--<p><i class="fa fa-registered"></i> Registered on: {{user.CreatedDateTime | date:'medium'}}</p>-->
 			<!--<span *ngIf="user.ShortBio"><p><i class="fa fa-comment-o"></i> {{user.ShortBio}}</p></span>-->
-			<p><i class="fa fa-envelope"></i> {{user.username}}</p>
+			<p><i class="fa fa-user"></i> {{user.username}}</p>
 		</div>
 	</div>
 

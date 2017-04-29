@@ -19,12 +19,11 @@ import {
 	RegistrationService,
 	UserService,
   GameService,
-  WalletService
+  WalletService,
+  HomeService
 } from './services/index';
 
-import { AuthGuard, AuthorizationGuard } from './guards/index';
-
-import { CurrentUserService } from './helpers/index';
+import { AuthGuard } from './guards/index';
 
 @NgModule({
 	imports: [
@@ -51,9 +50,8 @@ import { CurrentUserService } from './helpers/index';
 		UserService,
 		GameService,
 		AuthGuard,
-		AuthorizationGuard,
-		CurrentUserService,
-    WalletService
+    WalletService,
+    HomeService
 	],
 	bootstrap: [AppComponent]
 
