@@ -2,10 +2,10 @@ export class WonGameResponse {
 
   username : string;
 
-  gamename : string;
+  gameName : string;
 
   creditsWon : number;
 
-  dateTime : string;
+  date : string;
 
 }

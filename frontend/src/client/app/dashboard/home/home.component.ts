@@ -1,6 +1,6 @@
-import { Component, OnInit , OnDestroy } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 import { HomeService, AlertService } from '../../services/index';
-import { WonGameResponse } from '../../models/index';
+import { WonGameResponse,GenericGame } from '../../models/index';
 import { AuthGuard } from '../../guards/auth.guard';
 
   @Component({
@@ -9,9 +9,10 @@ import { AuthGuard } from '../../guards/auth.guard';
     templateUrl: 'home.component.html'
   })
 
-  export class HomeComponent implements OnInit, OnDestroy {
+  export class HomeComponent implements OnInit {
 
-    wonGames: WonGameResponse[] = null;
+    @Input() wonGames: WonGameResponse[] = [];
+    @Input() trendingGames: GenericGame[] = [];
     homeIntervals: Array<any> = [];
 
     constructor(
@@ -21,31 +22,57 @@ import { AuthGuard } from '../../guards/auth.guard';
     ) { }
 
     ngOnInit() {
+      //first get
+      this.homeService
+        .getLastTenWins()
+        .subscribe(
+          (data: WonGameResponse[]) => {
+            this.wonGames = data;
+            console.log('Last 10 won games', this.wonGames);
+          },
+          (err: any) => {
+            alert(err);
+          }
+        );
 
-      this.homeIntervals.push(
-        window.setInterval(function () {
-          this.homeService
-            .getLastTenWins()
-            .subscribe(
-              (data: WonGameResponse[]) => {
-                this.wonGames = data;
-                console.log('Last 10 won games', this.wonedGames);
-              },
-              (err: any) => {
-                alert(err);
-              }
-            );
-        }, 10000)
-      );
+      this.homeService
+        .getTopTwoTrendingGames()
+        .subscribe(
+          (data: GenericGame[]) => {
+            this.trendingGames = data;
+            console.log('Top two trending games', this.trendingGames);
+          },
+          (err: any) => {
+            alert(err);
+          }
+        );
+      // //set interval for auto refresh
+      // this.homeIntervals.push(
+      //   window.setInterval(function () {
+      //
+      //     this.homeService
+      //       .getLastTenWins()
+      //       .subscribe(
+      //         (data: WonGameResponse[]) => {
+      //           this.wonGames = data;
+      //           console.log('Last 10 won games', this.wonGames);
+      //         },
+      //         (err: any) => {
+      //           alert(err);
+      //         }
+      //       );
+      //
+      //   }, 3000)
+      // );
 
 
     }
 
-    ngOnDestroy() {
-        for (let i = 0; i < this.homeIntervals.length; i++) {
-          console.log('clear home interval no', i);
-          window.clearInterval(this.homeIntervals[i]);
-        }
-    }
+    // ngOnDestroy() {
+    //     for (let i = 0; i < this.homeIntervals.length; i++) {
+    //       console.log('clear home interval no', i);
+    //       window.clearInterval(this.homeIntervals[i]);
+    //     }
+    // }
 
   }
