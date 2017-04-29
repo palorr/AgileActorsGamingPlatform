@@ -46,11 +46,11 @@ public class GameService implements GameServiceInterface{
     @Transactional
     public void saveGame(Game game) {
         gameRepository.save(game);
-        User user = userService.getUser(1);
-
-		AdminGameOperation operation = new AdminGameOperation(user, game, OperationEnum.ADDED,
-				new Timestamp(System.currentTimeMillis()));
-		adminGameOperationRepository.save(operation);
+//        User user = userService.getUser(1);
+//
+//		AdminGameOperation operation = new AdminGameOperation(user, game, OperationEnum.ADDED,
+//				new Timestamp(System.currentTimeMillis()));
+//		adminGameOperationRepository.save(operation);
     }
 
     @Override
