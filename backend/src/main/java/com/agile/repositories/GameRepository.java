@@ -10,4 +10,6 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
     Game findByName(String name);
     List<Game> findByNameStartingWith(String searchTerm);
     Game findById(int id);
+    
+    List<Game> findByIdIn(List<Integer> ids);
 }
