@@ -1,0 +1,79 @@
+<div class="container-fluid" *ngIf="isRequesterThisUser && isRequesterLoggedIn">
+
+  <div class="row">
+    <h2 class="page-header">
+      Withdrawal
+    </h2>
+  </div>
+
+  <!--routing-path-->
+  <div class="col-lg-5">
+    <ol class="breadcrumb">
+      <li class="active">
+        <a href="Javascript:void(0)" routerLink="/dashboard/home"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
+      </li>
+      <li class="active">
+        <a href="Javascript:void(0)" [routerLink]="['/dashboard/users/view',id]"><i class="fa fa-fw fa-user" aria-hidden="true"></i> My Profile</a>
+      </li>
+      <li class="active">
+        <a href="Javascript:void(0)" [routerLink]="['/dashboard/wallet/view',id]"><i class="fa fa-fw fa-money" aria-hidden="true"></i> My Wallet</a>
+      </li>
+      <li class="active">
+        <i class="fa fa-edit"></i> Withdrawal
+      </li>
+    </ol>
+  </div>
+
+
+  <div class="row" >  <!--*ngIf="isRequestorThisUser"-->
+    <div class="col-lg-7 card card-block">
+
+      <form name="form" (ngSubmit)="withdraw()" role="form" #withdrawForm="ngForm" novalidate>
+
+        <fieldset class="form-group" [ngClass]="{ 'has-error': withdrawForm.submitted && !number.valid }">
+
+          <label for="number">IBAN Number (*)</label>
+
+          <input type="text" class="form-control input-underline input-lg"
+                 name="number" id="number" placeholder="Enter your coupon number here ..."
+                 maxlength="34"
+                 required [(ngModel)]="IBAN"
+                 #number="ngModel">
+
+          <div [hidden]="number.valid || number.pristine" class="error">
+            Coupon number is required !
+          </div>
+
+        </fieldset>
+
+        <fieldset class="form-group" [ngClass]="{ 'has-error': withdrawForm.submitted && !credits.valid }">
+
+          <label for="credits">Credits Amount (*)</label>
+
+          <input type="text" class="form-control input-underline input-lg"
+                 name="credits" id="credits" placeholder="Enter the amount of credits you want to insert here ..."
+                 maxlength="3"
+                 required [(ngModel)]="creditsToWithdraw"
+                 #credits="ngModel">
+
+          <div [hidden]="credits.valid || credits.pristine" class="error">
+            Amount of credits is required !
+          </div>
+
+        </fieldset>
+
+        <button *ngIf="!loading" class="btn btn-primary" type="submit" [disabled]= "!withdrawForm.form.valid"><i class="fa fa-user-plus"></i> Withdraw</button>
+
+
+        <span *ngIf="loading">
+					<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> We working on it, please wait...
+				</span>
+
+        <br/><br/>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>

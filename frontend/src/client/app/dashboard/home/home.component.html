@@ -1,0 +1,65 @@
+
+<div *ngIf="trendingGames && trendingGames.length == 2" class="col-lg-12 card card-default">
+  <br>
+  <div class="card-header">
+    <i class="fa fa-gamepad fa-fw"></i>
+    Top Trending Games
+  </div>
+  <br>
+  <div *ngFor="let game of trendingGames" >
+    <div class="col-lg-6 card card-default">
+      <h2>{{game.name}}</h2>
+      <img [src]="game.avatar" alt="AvatarImage" style="border-radius: 20%; width: 300px; display: block; margin-left: auto; margin-right: auto;">
+      <br/>
+      <p>{{game.description}}</p>
+
+      <p><i class="fa fa-money"></i> Credits to play: {{game.buyCredits}}</p>
+      <p><i class="fa fa-money"></i> Credits to win: {{game.winCredits}}</p>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div *ngIf="wonGames && wonGames.length > 0" class="chat-panel card card-default col-lg-6">
+  <!-- panel-heading -->
+  <br>
+  <div class="card-header">
+    <i class="fa fa-bell fa-fw"></i>
+    Last 10 wins
+  </div>
+  <!-- /.panel-heading -->
+  <div class="card-block">
+    <ul class="chat">
+      <li *ngFor="let game of wonGames;">
+
+        <div class="chat-body clearfix">
+          <div class="header">
+            <strong class="primary-font">
+              <a >
+                {{game.username}}
+              </a>
+              <i class="fa fa-caret-right" aria-hidden="true"></i>
+              <a>
+                {{game.gameName}}
+              </a>
+            </strong>
+            <small class="pull-right text-muted">
+              <i class="fa fa-clock-o fa-fw"></i> {{game.date* 1000 | date}}
+            </small>
+          </div>
+          <p>
+            Just won: {{game.creditsWon}}  <i class="fa fa-euro"></i>
+          </p>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="wonGames && wonGames.length > 0" class="card card-default col-lg-6" >
+  <img SRC="http://68.media.tumblr.com/tumblr_lzimcfB9Kj1r3gh8ro1_500.gif" alt="AvatarImage" style="border-radius: 2%; width: 100%" [routerLink]="['games/all']" [routerLinkActive]="['router-link-active']">
+
+</div>

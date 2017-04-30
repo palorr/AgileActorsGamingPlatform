@@ -1,0 +1,78 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">
+        Game Search Page
+      </h2>
+      <ol class="breadcrumb">
+        <li>
+          <a href="Javascript:void(0)" routerLink="/dashboard/home"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="active">
+          <i class="fa fa-search"></i> Game Search Page
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-lg-12">
+      <div class="card card-block" (click)="$event.preventDefault()">
+
+        <tabset>
+          <br/>
+          <tab heading="Search by Name">
+            <div class="form-group">
+              <input type="text" class="form-control input-underline input-lg" name="searchTerm" id="searchTerm" placeholder="Enter name to search game..."
+                     (keyup)="searchByName(searchTerm.value)" #searchTerm />
+            </div>
+          </tab>
+        </tabset>
+
+      </div>
+    </div>
+
+  </div>
+
+  <span *ngIf="games && games.length > 0">
+
+		<div class="col-lg-8 jumbotron card card-block " *ngFor="let game of games">
+
+			 <div class="row">
+
+        <h3><a [routerLink]="['/dashboard/games/view', game.id]">{{game.name}}</a></h3>
+
+        <hr/>
+
+        <div class="col-lg-6 list-project-desc">
+
+          <img  *ngIf="game.avatar" src="{{game.avatar}}" alt="Card image cap" />
+          <p>{{game.description| limitTo: 450}}</p>
+
+        </div>
+
+        <div class="col-lg-6 multi-columns">
+
+          <p><i class="fa fa-money"></i> Credits To Play: {{game.buyCredits}} <i class="fa fa-euro"></i></p>
+          <p><i class="fa fa-money"></i> Credits To Win: {{game.winCredits}} <i class="fa fa-euro"></i></p>
+
+        </div>
+
+      </div>
+
+	  </div>
+
+	</span>
+
+  <span *ngIf="games && games.length == 0">
+
+		<div class="alert alert-info">
+			I am sorry. No users were found to match your search criteria.
+		</div>
+
+	</span>
+
+</div>
